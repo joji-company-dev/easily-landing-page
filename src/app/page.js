@@ -5,7 +5,6 @@ import Hero from "./features/easilyMain/hero";
 import Service from "./features/easilyService/page";
 
 
-
 export default function Home() {
   return (
     <body>
@@ -13,9 +12,7 @@ export default function Home() {
       {/* Hero Section */}
       <section id="hero" className="min-h-screen flex items-center justify-center bg-gray-50">
         <Hero />
-      <EasilyPosts />
       </section>
-
       {/* Services Section */}
       <section id="service" className="min-h-screen flex items-center justify-center bg-white">
         <Service />
