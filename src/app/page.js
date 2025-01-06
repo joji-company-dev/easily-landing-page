@@ -1,7 +1,7 @@
 "use client";
 
 import Contact from "./features/easilyContact/page";
-import Hero from "./features/easilyMain/hero";
+import Hero from "./features/easilyMain/page";
 import Service from "./features/easilyService/page";
 
 
