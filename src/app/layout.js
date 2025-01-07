@@ -1,5 +1,5 @@
+import Navbar from "./features/easilyMain/nav";
 import "./globals.css";
-import Nav from "./features/easilyMain/nav";
 
 
 export const metadata = {
@@ -11,7 +11,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ko">
       <body>
-      <Nav/>
+      <Navbar/>
       {children}
       </body>
     </html>
