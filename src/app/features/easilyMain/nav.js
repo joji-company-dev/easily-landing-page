@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/app/_components/ui/accordion";
+import { NavigationMenu, NavigationMenuItem, NavigationMenuList, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink } from "@/app/_components/ui/navigation-menu";
 import { Button } from "@/app/_components/ui/button";
 
 export default function Nav() {
@@ -43,36 +43,37 @@ export default function Nav() {
         </Link>
 
         <div className="relative flex items-center gap-6">
-          <Accordion
-            type="single"
-            collapsible
-            className="flex items-center gap-6"
-          >
-            {Object.keys(menuItems).map((menu, index) => (
-              <AccordionItem key={index} value={menu} className="relative">
-                {/* 메인 항목 */}
-                <AccordionTrigger
-                  className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
-                  onClick={() => handleScrollToSection(`#${menu}`)}
-                >
-                  {menu.charAt(0).toUpperCase() + menu.slice(1)}
-                </AccordionTrigger>
+          <NavigationMenu>
+            <NavigationMenuList>
+              {Object.entries(menuItems).map(([menu, items]) => (
+                <NavigationMenuItem key={menu}>
+                  <NavigationMenuTrigger
+                    className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                    onClick={() => handleScrollToSection(`#${menu}`)}
+                  >
+                    {menu.charAt(0).toUpperCase() + menu.slice(1)}
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <ul className="bg-white shadow-md rounded-md p-2 min-w-[8rem]">
+                      {items.map((item, subIndex) => (
+                        <li key={subIndex} className="py-1 px-3">
+                          <NavigationMenuLink asChild>
+                            <Link
+                              href={item.href}
+                              className="block text-sm text-gray-700 hover:text-primary transition-colors whitespace-nowrap"
+                            >
+                              {item.label}
+                            </Link>
+                          </NavigationMenuLink>
+                        </li>
+                      ))}
+                    </ul>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+              ))}
+            </NavigationMenuList>
+          </NavigationMenu>
 
-                {/* 세부 항목 */}
-                <AccordionContent className="absolute top-full left-0 mt-2 flex gap-4 bg-white py-2 px-4 w-auto">
-                  {menuItems[menu].map((item, subIndex) => (
-                    <Link
-                      key={subIndex}
-                      href={item.href}
-                      className="text-sm text-gray-700 hover:text-primary transition-colors whitespace-nowrap"
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
           {/* 대시보드 버튼 */}
           <Button
             asChild
@@ -85,3 +86,4 @@ export default function Nav() {
     </nav>
   );
 }
+
