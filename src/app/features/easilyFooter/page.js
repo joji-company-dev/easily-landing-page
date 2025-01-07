@@ -1,5 +1,5 @@
-import { faInstagram, faYoutube } from "@fortawesome/free-brands-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Youtube } from "lucide-react";
+import { Instagram } from "lucide-react";
 
 export default function Footer() {
     return (
@@ -17,12 +17,14 @@ export default function Footer() {
         <a href="#" className="text-lg text-muted-foreground text-gray-400">
             개인정보 이용약관
         </a><br/>
-        <a href="https://www.youtube.com" className="text-lg text-muted-foreground pr-2">
-            <FontAwesomeIcon icon={faYoutube} size="2x"/>
-        </a>
-        <a href="https://www.instagram.com" className="text-lg text-muted-foreground">
-            <FontAwesomeIcon icon={faInstagram} size="2x"/>
-        </a>
+        <div className="flex space-x-2">
+            <a href="https://www.youtube.com" className="text-lg text-muted-foreground" >
+                <Youtube size={35}/>  
+            </a>
+            <a href="https://www.instagram.com" className="text-lg text-muted-foreground">
+                <Instagram size={35}/>
+            </a>
+        </div>
       </div>
     );
   }
