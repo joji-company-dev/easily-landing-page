@@ -17,12 +17,12 @@ export default function Footer() {
         <a href="#" className="text-lg text-muted-foreground text-gray-400">
             개인정보 이용약관
         </a><br/>
-        <div className="flex space-x-2">
+        <div className="flex space-x-2 mt-5">
             <a href="https://www.youtube.com" className="text-lg text-muted-foreground" >
-                <Youtube size={35}/>  
+                <Youtube size={25}/>  
             </a>
             <a href="https://www.instagram.com" className="text-lg text-muted-foreground">
-                <Instagram size={35}/>
+                <Instagram size={25}/>
             </a>
         </div>
       </div>
