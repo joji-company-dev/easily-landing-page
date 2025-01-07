@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/app/_components/ui/button";
 import { Card } from "@/app/_components/ui/card";
-import EasilyPosts from "@/app/_features/posts/EasilyPosts";
+import EasilyPosts from "@/app/_features/posts/easilyPosts";
 
 export default function Hero() {
   return (

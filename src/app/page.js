@@ -1,8 +1,8 @@
 "use client";
 
-import Contact from "./_features/section/contact";
-import Hero from "./_features/section/hero";
-import Service from "./_features/section/service";
+import Contact from "./_features/sections/contactSection";
+import Hero from "./_features/sections/heroSection";
+import Service from "./_features/sections/serviceSection";
 
 
 export default function Home() {
