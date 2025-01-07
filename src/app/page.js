@@ -1,13 +1,12 @@
 "use client";
 
-import Contact from "./features/easilyContact/page";
-import Hero from "./features/easilyMain/page";
-import Service from "./features/easilyService/page";
+import Contact from "./_features/section/contact";
+import Hero from "./_features/section/hero";
+import Service from "./_features/section/service";
 
 
 export default function Home() {
   return (
-    <body>
     <div>
       {/* Hero Section */}
       <section id="hero" className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -23,6 +22,5 @@ export default function Home() {
         <Contact />
       </section>
     </div>
-    </body>
   );
 }

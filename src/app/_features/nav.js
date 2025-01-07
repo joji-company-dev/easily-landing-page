@@ -3,13 +3,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 
-export default function Nav() {
+export default function NavBar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const menuItems = {
     home: [
-      { label: "소개", href: "#overview" },
-      { label: "Q&A", href: "#features" },
+      { label: "소개", href: "/#hero" },
+      { label: "서비스", href: "/#service" },
+      { label: "문의/구독", href:"/#contact"}
     ],
     service: [
       { label: "정책", href: "#plans" },
@@ -17,7 +18,7 @@ export default function Nav() {
     ],
     contact: [
       { label: "지원", href: "#email" },
-      { label: "고객센터", href: "#support" },
+      { label: "고객센터", href: "#support" },  
     ],
   };
 
