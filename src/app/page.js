@@ -24,7 +24,7 @@ export default function Home() {
       </section>
 
       {/* Footer Section */}
-      <section id="footer" className="min-h-screen flex items-center justify-center bg-gray-50">
+      <section id="footer" className="min-h-10 flex items-center justify-center bg-gray-50">
         <Footer />
       </section>
     </div>
