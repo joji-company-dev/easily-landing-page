@@ -1,7 +1,14 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { NavigationMenu, NavigationMenuItem, NavigationMenuList, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink } from "@/app/_components/ui/navigation-menu";
+import { 
+  NavigationMenu, 
+  NavigationMenuItem, 
+  NavigationMenuList, 
+  NavigationMenuTrigger, 
+  NavigationMenuContent, 
+  NavigationMenuLink 
+} from "@/app/_components/ui/navigation-menu";
 import { Button } from "@/app/_components/ui/button";
 
 export default function Nav() {
@@ -43,10 +50,10 @@ export default function Nav() {
         </Link>
 
         <div className="relative flex items-center gap-6">
-          <NavigationMenu>
-            <NavigationMenuList>
-              {Object.entries(menuItems).map(([menu, items]) => (
-                <NavigationMenuItem key={menu}>
+          {Object.entries(menuItems).map(([menu, items]) => (
+            <NavigationMenu key={menu}>
+              <NavigationMenuList>
+                <NavigationMenuItem key={menu} className="relative">
                   <NavigationMenuTrigger
                     className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
                     onClick={() => handleScrollToSection(`#${menu}`)}
@@ -70,9 +77,9 @@ export default function Nav() {
                     </ul>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
-              ))}
-            </NavigationMenuList>
-          </NavigationMenu>
+              </NavigationMenuList>
+            </NavigationMenu>
+          ))}
 
           {/* 대시보드 버튼 */}
           <Button
