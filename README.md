@@ -2,7 +2,51 @@
 
 Next.js 기반 이즐리 랜딩페이지 프로젝트입니다.
 
-## 브랜치 규칙
+## 프로젝트 설정
+
+- Node.js: v20.18.1
+- npm: v10.8.2
+- Next.js: v15.1.3
+
+## 로컬 개발 환경 설정
+
+### 1. Node.js 버전 설치
+
+해당 프로젝트에서 사용중인 Node.js 버전(현 `v20.18.1`)으로 로컬 환경을 설정해주세요.
+
+```
+nvm use
+```
+
+#### nvm 설치되지 않은 경우...
+
+**Mac** 사용자의 경우, 아래 명령어를 터미널에 입력해주세요.
+
+```
+brew install nvm
+```
+
+**Windows** 사용자의 경우, 아래 링크에 들어가 nvm-windows를 설치해주세요.
+
+1. https://github.com/coreybutler/nvm-windows?tab=readme-ov-file
+
+### 2. 의존성 설치
+
+프로젝트 루트 디렉토리에서 아래 명령어를 실행해주세요.
+
+```
+npm install
+```
+
+### 3. 로컬 서버 실행
+
+프로젝트 루트 디렉토리에서 아래 명령어를 실행해주세요.
+
+```
+npm run dev
+```
+
+## 브랜치 전략
 
 ![브랜치 규칙](./docs/branch-rule.png)
 
