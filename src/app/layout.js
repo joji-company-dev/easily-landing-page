@@ -1,5 +1,4 @@
-
-import NavBar from "./_features/nav";
+import NavBar from "./_features/navBar";
 import "./globals.css";
 
 

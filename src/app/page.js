@@ -1,8 +1,8 @@
 "use client";
 
-import Contact from "./_features/sections/contactSection";
-import Hero from "./_features/sections/heroSection";
-import Service from "./_features/sections/serviceSection";
+import { HeroSection } from "./_features/sections/heroSection";
+import { ContactSection } from "./_features/sections/contactSection";
+import { ServiceSection } from "./_features/sections/serviceSection";
 
 
 export default function Home() {
@@ -10,16 +10,16 @@ export default function Home() {
     <div>
       {/* Hero Section */}
       <section id="hero" className="min-h-screen flex items-center justify-center bg-gray-50">
-        <Hero />
+        <HeroSection />
       </section>
       {/* Services Section */}
       <section id="service" className="min-h-screen flex items-center justify-center bg-white">
-        <Service />
+        <ServiceSection />
       </section>
 
       {/* Contact Section */}
       <section id="contact" className="min-h-screen flex items-center justify-center bg-gray-100">
-        <Contact />
+        <ContactSection />
       </section>
     </div>
   );
