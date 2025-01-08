@@ -4,7 +4,6 @@ import { HeroSection } from "./_features/sections/heroSection";
 import { ContactSection } from "./_features/sections/contactSection";
 import { ServiceSection } from "./_features/sections/serviceSection";
 
-
 export default function Home() {
   return (
     <div>
