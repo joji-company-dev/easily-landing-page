@@ -1,4 +1,5 @@
 import Navbar from "./features/easilyMain/nav";
+import Footer from "./_components/footer";
 import "./globals.css";
 
 
@@ -13,6 +14,7 @@ export default function RootLayout({ children }) {
       <body>
       <Navbar/>
       {children}
+      <Footer/>
       </body>
     </html>
   );
