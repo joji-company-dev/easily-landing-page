@@ -1,4 +1,4 @@
-export default function Service() {
+export function ServiceSection() {
     return (
       <div className="max-w-7xl mx-auto px-6 py-24 text-center">
         <h2 className="text-3xl font-bold mb-6">서비스</h2>

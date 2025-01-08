@@ -4,9 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/app/_components/ui/button";
 import { Card } from "@/app/_components/ui/card";
-import EasilyPosts from "@/app/features/posts/EasilyPosts";
+import EasilyPosts from "@/app/_features/posts/easilyPosts";
 
-export default function Hero() {
+export function HeroSection() {
   return (
     <div className="max-w-7xl mx-auto px-6 py-16 sm:py-24">
       <div className="flex flex-col md:flex-row items-start justify-between gap-12">
