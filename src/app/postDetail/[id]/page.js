@@ -1,24 +1,31 @@
 "use client";
-import { useEffect, useState } from "react";
-import { Skeleton } from "@/app/_components/ui/skeleton";
-import { TypographyH2, TypographyP } from "@/app/_components/ui/typography";
-import { Button } from "@/app/_components/ui/button";
+import { use, useEffect, useState } from "react";
+import { CommunityPostEditor } from "@jojicompany-dev/easily-post-editor";
 import Link from "next/link";
-import { convertFromLexicalEditorState } from "@lexical/html"; // Lexical의 JSON을 HTML로 변환
 
-export default function PostDetailPage({ params }) {
-  const { id } = params;
-  const [post, setPost] = useState(null);
+export default function CommunityPostDetailPage({ params }) {
+  const { id } = use(params); // URL의 게시글 ID 
+  const [content, setContent] = useState();
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchPostDetail = async () => {
       try {
         const response = await fetch(`/api/posts/${id}`);
+        if (!response.ok) {
+          if (response.status === 404) {
+            setError("해당 게시글을 찾을 수 없습니다.");
+          } else {
+            setError("게시글 데이터를 가져오는 중 오류가 발생했습니다.");
+          }
+          return;
+        }
         const data = await response.json();
-        setPost(data);
-      } catch (error) {
-        console.error(error.message);
+        setContent(data.content);
+      } catch (err) {
+        console.error("Fetch Error:", err);
+        setError("데이터를 불러오는 중 문제가 발생했습니다.");
       } finally {
         setLoading(false);
       }
@@ -27,37 +34,24 @@ export default function PostDetailPage({ params }) {
     fetchPostDetail();
   }, [id]);
 
-  // Lexical JSON을 HTML로 변환하는 함수
-  const renderLexicalContent = (lexicalContent) => {
-    // lexicalContent는 Lexical JSON 형식의 데이터입니다.
-    try {
-      // 변환 로직
-      const htmlContent = convertFromLexicalEditorState(lexicalContent); // Lexical JSON -> HTML
-      return <div dangerouslySetInnerHTML={{ __html: htmlContent }} />;
-    } catch (error) {
-      console.error("Lexical JSON 변환 오류:", error);
-      return <TypographyP>콘텐츠를 렌더링할 수 없습니다.</TypographyP>;
-    }
-  };
-
   if (loading) {
     return (
       <div className="flex flex-col gap-4 mt-10">
-        <Skeleton className="h-8 w-full mb-4" />
-        <Skeleton className="h-6 w-5/6 mb-2" />
-        <Skeleton className="h-6 w-3/4" />
+        <div className="h-8 w-full bg-gray-200 rounded mb-4" />
+        <div className="h-6 w-5/6 bg-gray-200 rounded mb-2" />
+        <div className="h-6 w-3/4 bg-gray-200 rounded" />
       </div>
     );
   }
 
-  if (!post) {
+  if (!content) {
     return (
       <div className="text-center mt-10">
-        <TypographyH2 className="text-red-500">게시글을 찾을 수 없습니다.</TypographyH2>
+        <h2 className="text-2xl font-bold text-red-500">게시글을 찾을 수 없습니다.</h2>
         <Link href="/post">
-          <Button variant="outline" className="mt-4">
+          <button className="mt-4 px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-100">
             공지사항 목록으로 돌아가기
-          </Button>
+          </button>
         </Link>
       </div>
     );
@@ -65,31 +59,15 @@ export default function PostDetailPage({ params }) {
 
   return (
     <div className="bg-white rounded-lg shadow-md p-6 max-w-4xl mx-auto mt-8">
-      <TypographyH2 className="text-orange-600 mb-4">{post.title}</TypographyH2>
-      <TypographyP className="text-gray-500 mb-2">
-        <strong>작성자:</strong> {post.author.name}
-      </TypographyP>
-      <TypographyP className="text-gray-500 mb-2">
-        <strong>작성일:</strong> {post.createdAt}
-      </TypographyP>
-      <TypographyP className="text-gray-500 mb-2">
-        <strong>카테고리:</strong> {post.category}
-      </TypographyP>
-      <TypographyP className="text-gray-500 mb-2">
-        <strong>조회수:</strong> {post.views}
-      </TypographyP>
+      <h2 className="text-2xl font-bold text-orange-600 mb-4">게시글 상세보기</h2>
       <div className="mt-6">
-        {/* Lexical로 작성된 콘텐츠를 HTML로 변환하여 렌더링 */}
-        {renderLexicalContent(post.content)} 
+        <CommunityPostEditor initialContent={content} isReadOnly={true} />
       </div>
       <div className="flex justify-end mt-6">
         <Link href="/post">
-          <Button
-            variant="outline"
-            className="text-orange-500 border-orange-500 hover:bg-orange-500 hover:text-white"
-          >
+          <button className="px-4 py-2 border border-orange-500 text-orange-500 rounded hover:bg-orange-500 hover:text-white">
             목록으로 돌아가기
-          </Button>
+          </button>
         </Link>
       </div>
     </div>
