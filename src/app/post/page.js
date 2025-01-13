@@ -25,7 +25,7 @@ export default function PostPage() {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}api/posts`);
+      const response = await fetch(`/api/posts`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
