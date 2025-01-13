@@ -10,7 +10,7 @@ export default function CommunityPostDetailPage({ params }) {
 
   useEffect(() => {
     const fetchPostDetail = async () => {
-        const response = await fetch(`${[process.env.NEXT_PUBLIC_BASE_URL]}/posts/${id}`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts/${id}`);
         const data = await response.json();
         setContent(data.content);
         setLoading(false);
