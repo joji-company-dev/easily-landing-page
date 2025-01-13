@@ -1,6 +1,6 @@
 import NavBar from "./_features/navBar";
 import Footer from "./_features/sections/footer";
-import FAQ from "./_features/sections/faq";
+import FAQ from "./_features/sections/faq-temp";
 import "./globals.css";
 
 
