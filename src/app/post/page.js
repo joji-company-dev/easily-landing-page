@@ -7,7 +7,7 @@ import { Button } from "@/app/_components/ui/button";
 import { useRouter } from "next/navigation";
 
 //한페이지에 보여줄 게시물 수 입니다. 보여주길 원하는 게시물 갯수를 입력하면됩니다.
-const postSize = 5;
+const postSize = 1;
 
 export default function PostPage() {
   const [posts, setPosts] = useState([]);
@@ -43,12 +43,17 @@ export default function PostPage() {
     }
   };
 
+  // 이전 페이지 그룹으로 이동
   const handlePrev = () => {
-    setCurrentPage(Math.max(1, currentPage - 5)); // 5페이지씩 이동
+    const prevGroupStart = Math.max(Math.floor((currentPage - 1) / 5) * 5, 1);
+    setCurrentPage(prevGroupStart); 
   };
-
+  
+  // 다음 그룹으로 이동
   const handleNext = () => {
-    setCurrentPage(Math.min(totalPages, currentPage + 5)); // 5페이지씩 이동
+    const nextGroupStart = Math.min(
+      Math.floor((currentPage - 1) / 5) * 5 + 6, totalPages);
+    setCurrentPage(nextGroupStart); 
   };
 
   const getPageRange = () => {
