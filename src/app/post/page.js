@@ -18,13 +18,18 @@ import { useRouter } from "next/navigation";
  * @property {number} commentCount - 댓글 수
  */
 
+//한 페이지 내에서 보여줄 게시글의 개수 원하는대로 변경가능
+const postSize = 5;
+
 export default function PostPage() {
   const [posts, setPosts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1); 
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
     const fetchPosts = async () => {
+      setLoading(true);
       const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -36,6 +41,21 @@ export default function PostPage() {
 
     fetchPosts();
   }, []);
+
+  //전체 페이지 수 개산
+  const totalPages = Math.ceil(posts.length / postSize);
+
+  //현재 페이지에 해당하는 게시글 계산
+  const currentPosts = posts.slice(
+    (currentPage - 1) * postSize,
+    currentPage * postSize
+  );
+
+  const handlePageChange = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
 
   if (loading) {
     return (
@@ -53,7 +73,7 @@ export default function PostPage() {
         공지사항
       </TypographyH2>
       <div className="space-y-4">
-        {posts.map((post) => (
+        {currentPosts.map((post) => (
           <Card
             key={post.id}
             className="hover:shadow-lg border rounded-lg p-4 transition duration-200"
@@ -82,7 +102,7 @@ export default function PostPage() {
             </CardContent>
             <div className="flex justify-end mt-4">
               <Button
-                onClick={() =>  router.push(`/postDetail/${post.id}`)}
+                onClick={() => router.push(`/postDetail/${post.id}`)}
                 variant="outline"
                 className="text-orange-500 border-orange-500 hover:bg-orange-500 hover:text-white"
               >
@@ -92,7 +112,25 @@ export default function PostPage() {
           </Card>
         ))}
       </div>
+      <div className="flex justify-center items-center gap-4 mt-6">
+        <Button
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+          className="text-gray-500 disabled:opacity-50"
+        >
+          이전
+        </Button>
+        <div className="text-gray-600">
+          {currentPage} / {totalPages}
+        </div>
+        <Button
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className="text-gray-500 disabled:opacity-50"
+        >
+          다음
+        </Button>
+      </div>
     </div>
   );
 }
-  
