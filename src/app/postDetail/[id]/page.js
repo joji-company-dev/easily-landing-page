@@ -4,13 +4,13 @@ import { CommunityPostEditor } from "@jojicompany-dev/easily-post-editor";
 import Link from "next/link";
 
 export default function CommunityPostDetailPage({ params }) {
-  const { id } = use(params); // URL의 게시글 ID 
+  const { id } = use(params);
   const [content, setContent] = useState({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchPostDetail = async () => {
-        const response = await fetch(`/api/posts/${id}`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts/${id}`);
         const data = await response.json();
         setContent(data.content);
         setLoading(false);
