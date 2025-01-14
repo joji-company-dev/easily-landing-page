@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import { Card, CardContent } from "@/app/_components/ui/card";
 import { Skeleton } from "@/app/_components/ui/skeleton";
@@ -7,23 +6,12 @@ import { TypographyH2, TypographyP } from "@/app/_components/ui/typography";
 import { Button } from "@/app/_components/ui/button";
 import { useRouter } from "next/navigation";
 
-/**
- * @typedef {Object} Post
- * @property {number} id - 게시글 ID
- * @property {string} title - 게시글 제목
- * @property {string} author - 게시글 저자
- * @property {string} category - 카테고리
- * @property {string} createdAt - 작성일
- * @property {number} views - 조회수
- * @property {number} commentCount - 댓글 수
- */
-
-//한 페이지 내에서 보여줄 게시글의 개수 원하는대로 변경가능
+//한페이지에 보여줄 게시물 수 입니다. 보여주길 원하는 게시물 갯수를 입력하면됩니다.
 const postSize = 5;
 
 export default function PostPage() {
   const [posts, setPosts] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1); 
+  const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
@@ -42,10 +30,8 @@ export default function PostPage() {
     fetchPosts();
   }, []);
 
-  //전체 페이지 수 개산
   const totalPages = Math.ceil(posts.length / postSize);
 
-  //현재 페이지에 해당하는 게시글 계산
   const currentPosts = posts.slice(
     (currentPage - 1) * postSize,
     currentPage * postSize
@@ -55,6 +41,26 @@ export default function PostPage() {
     if (page >= 1 && page <= totalPages) {
       setCurrentPage(page);
     }
+  };
+
+  const handlePrev = () => {
+    setCurrentPage(Math.max(1, currentPage - 5)); // 5페이지씩 이동
+  };
+
+  const handleNext = () => {
+    setCurrentPage(Math.min(totalPages, currentPage + 5)); // 5페이지씩 이동
+  };
+
+  const getPageRange = () => {
+    const pages = [];
+    const rangeStart = Math.floor((currentPage - 1) / 5) * 5 + 1; // 5단위로 시작 페이지 계산
+    const rangeEnd = Math.min(rangeStart + 4, totalPages); // 끝 페이지는 totalPages를 넘지 않도록 설정
+
+    for (let i = rangeStart; i <= rangeEnd; i++) {
+      pages.push(i);
+    }
+
+    return pages;
   };
 
   if (loading) {
@@ -69,9 +75,7 @@ export default function PostPage() {
 
   return (
     <div className="bg-white rounded-lg shadow-md p-6 max-w-5xl mx-auto mt-8">
-      <TypographyH2 className="text-orange-600 mb-6 text-center">
-        공지사항
-      </TypographyH2>
+      <TypographyH2 className="text-orange-600 mb-6 text-center">공지사항</TypographyH2>
       <div className="space-y-4">
         {currentPosts.map((post) => (
           <Card
@@ -92,12 +96,8 @@ export default function PostPage() {
                 </TypographyP>
               </div>
               <div className="text-sm text-gray-500 md:text-right mt-4 md:mt-0">
-                <TypographyP className="text-gray-400">
-                  {post.createdAt}
-                </TypographyP>
-                <TypographyP className="text-gray-400">
-                  {post.category}
-                </TypographyP>
+                <TypographyP className="text-gray-400">{post.createdAt}</TypographyP>
+                <TypographyP className="text-gray-400">{post.category}</TypographyP>
               </div>
             </CardContent>
             <div className="flex justify-end mt-4">
@@ -112,23 +112,36 @@ export default function PostPage() {
           </Card>
         ))}
       </div>
-      <div className="flex justify-center items-center gap-4 mt-6">
+
+      <div className="flex justify-center items-center gap-2 mt-6">
         <Button
-          onClick={() => handlePageChange(currentPage - 1)}
+          onClick={handlePrev}
           disabled={currentPage === 1}
           className="text-gray-500 disabled:opacity-50"
         >
-          이전
+          &lt;
         </Button>
-        <div className="text-gray-600">
-          {currentPage} / {totalPages}
-        </div>
+
+        {getPageRange().map((page) => (
+          <Button
+            key={page}
+            onClick={() => handlePageChange(page)}
+            className={`${
+              page === currentPage
+                ? "bg-orange-500 text-white"
+                : "text-gray-600"
+            }`}
+          >
+            {page}
+          </Button>
+        ))}
+
         <Button
-          onClick={() => handlePageChange(currentPage + 1)}
+          onClick={handleNext}
           disabled={currentPage === totalPages}
           className="text-gray-500 disabled:opacity-50"
         >
-          다음
+          &gt;
         </Button>
       </div>
     </div>
