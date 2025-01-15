@@ -43,7 +43,7 @@ export default function NavBar() {
         {/* Left: Logo */}
         <Link href="/" className="flex items-center">
           <Image
-            src="/placeholder.svg?height=40&width=120"
+            src="/logo(2).svg"
             alt="Easily Beta Logo"
             width={120}
             height={40}
