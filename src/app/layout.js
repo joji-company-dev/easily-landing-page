@@ -1,4 +1,3 @@
-import { FileArchiveIcon, Link } from "lucide-react";
 import NavBar from "./_features/navBar";
 import Footer from "./_features/sections/footerSection";
 import "./globals.css";
