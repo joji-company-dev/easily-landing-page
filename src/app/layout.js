@@ -1,6 +1,5 @@
 import NavBar from "./_features/navBar";
-import Footer from "./_features/sections/footer";
-import FAQ from "./_features/sections/faq";
+import Footer from "./_features/sections/footerSection";
 import "./globals.css";
 
 
@@ -15,7 +14,6 @@ export default function RootLayout({ children }) {
       <body>
       <NavBar/>
       {children}
-      <FAQ/>
       <Footer/>
       </body>
     </html>

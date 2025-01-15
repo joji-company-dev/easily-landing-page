@@ -3,7 +3,7 @@
 import { HeroSection } from "./_features/sections/heroSection";
 import { ContactSection } from "./_features/sections/contactSection";
 import { ServiceSection } from "./_features/sections/serviceSection";
-import FAQSection from "./_features/sections/faqSection";
+import { FAQSection } from "./_features/sections/faqSection";
 
 
 export default function Home() {
