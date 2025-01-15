@@ -12,20 +12,28 @@ import {
   PaginationLink,
   PaginationPrevious,
   PaginationNext,
-  PaginationEllipsis,
 } from "@/app/_components/ui/pagination";
+import usePagination from "../_components/hooks/usePaigination";
 
 export default function NoticePage() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
   const router = useRouter();
+
+  const {
+    currentPage,
+    totalPages,
+    setTotalPages,
+    handlePageChange,
+    goToNextPage,
+    goToPreviousPage,
+    getPageRange,
+  } = usePagination(1, 1); // 초기 페이지와 총 페이지 수 설정
 
   const fetchPosts = async (page) => {
     setLoading(true);
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/posts?page=${page}&limit=8&categories=NOTICE`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/posts?page=${page}&limit=6&categories=NOTICE`
     );
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -39,12 +47,6 @@ export default function NoticePage() {
   useEffect(() => {
     fetchPosts(currentPage);
   }, [currentPage]);
-
-  const handlePageChange = (page) => {
-    if (page >= 1 && page <= totalPages) {
-      setCurrentPage(page);
-    }
-  };
 
   if (loading) {
     return (
@@ -105,21 +107,26 @@ export default function NoticePage() {
       <Pagination className="mt-6">
         <PaginationContent>
           <PaginationPrevious
-            onClick={() => handlePageChange(currentPage - 1)}
+            onClick={goToPreviousPage}
             disabled={currentPage === 1}
           />
-          {[...Array(totalPages)].map((_, index) => (
-            <PaginationItem key={index}>
+          {getPageRange().map((page) => (
+            <PaginationItem key={page}>
               <PaginationLink
-                isActive={currentPage === index + 1}
-                onClick={() => handlePageChange(index + 1)}
+                isActive={currentPage === page}
+                onClick={() => handlePageChange(page)}
               >
-                {index + 1}
+                {page}
               </PaginationLink>
             </PaginationItem>
           ))}
-          <PaginationNext 
-            onClick={() => handlePageChange(currentPage + 1)}
+          {totalPages > currentPage + 3 && (
+            <PaginationItem>
+              <PaginationLink disabled>...</PaginationLink>
+            </PaginationItem>
+          )}
+          <PaginationNext
+            onClick={goToNextPage}
             disabled={currentPage === totalPages}
           />
         </PaginationContent>
