@@ -105,10 +105,8 @@ export default function NoticePage() {
       <Pagination className="mt-6">
         <PaginationContent>
           <PaginationPrevious
-            as="button"
-            onClick={() => {
-              handlePageChange(currentPage - 1);
-            }}
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
           />
           {[...Array(totalPages)].map((_, index) => (
             <PaginationItem key={index}>
@@ -120,7 +118,10 @@ export default function NoticePage() {
               </PaginationLink>
             </PaginationItem>
           ))}
-          <PaginationNext onClick={() => handlePageChange(currentPage + 1)} />
+          <PaginationNext 
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          />
         </PaginationContent>
       </Pagination>
     </div>
