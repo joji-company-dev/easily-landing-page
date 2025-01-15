@@ -28,7 +28,7 @@ export default function NoticePage() {
     goToNextPage,
     goToPreviousPage,
     getPageRange,
-  } = usePagnation(1, 1); // 초기 페이지와 총 페이지 수 설정
+  } = usePagination(1, 1); // 초기 페이지와 총 페이지 수 설정
 
   const fetchPosts = async (page) => {
     setLoading(true);
