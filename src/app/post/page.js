@@ -13,7 +13,7 @@ import {
   PaginationPrevious,
   PaginationNext,
 } from "@/app/_components/ui/pagination";
-import usePagination from "../_components/hooks/usePaigination";
+import usePagination from "../_components/hooks/usePagination";
 
 export default function NoticePage() {
   const [posts, setPosts] = useState([]);
@@ -28,7 +28,7 @@ export default function NoticePage() {
     goToNextPage,
     goToPreviousPage,
     getPageRange,
-  } = usePagination(1, 1); // 초기 페이지와 총 페이지 수 설정
+  } = usePagnation(1, 1); // 초기 페이지와 총 페이지 수 설정
 
   const fetchPosts = async (page) => {
     setLoading(true);
