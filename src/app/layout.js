@@ -1,6 +1,7 @@
 import NavBar from "./_components/navBar";
 import Footer from "./_components/footer";
 import "./globals.css";
+import { Toaster } from "./_components/ui/toaster";
 
 
 export const metadata = {
@@ -14,6 +15,7 @@ export default function RootLayout({ children }) {
       <body>
       <NavBar/>
       {children}
+      <Toaster/>
       <Footer/>
       </body>
     </html>
