@@ -13,7 +13,7 @@ import {
   PaginationPrevious,
   PaginationNext,
 } from "@/app/_components/ui/pagination";
-import usePagination from "../_components/hooks/usePaigination";
+import usePagination from "../_components/hooks/usePagination";
 
 export default function NoticePage() {
   const [posts, setPosts] = useState([]);
