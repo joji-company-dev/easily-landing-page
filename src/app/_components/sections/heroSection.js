@@ -36,7 +36,7 @@ export function HeroSection() {
           {/* 이미지 콘텐츠 */}
           <Card className="relative w-full h-64 sm:h-80 mx-auto md:mx-0">
             <Image
-              src="/placeholder.svg?height=300&width=50c"
+              src="/logo(1).svg"
               alt="Easily Beta"
               fill
               className="object-contain p-4"
