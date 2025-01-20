@@ -3,9 +3,27 @@
 import { useState } from "react";
 import { Input } from "@/app/_components/ui/input";
 import { Button } from "@/app/_components/ui/button";
+import { useToast } from "@/app/_components/hooks/use-toast";
 
 export function SubscribeSection() {
   const [email, setEmail] = useState("");
+  const { toast } = useToast(); // toast 사용 설정
+
+  const handleSubscribe = () => {
+    if (!email) {
+      toast({
+        title: "이메일을 입력해주세요.",
+        description: "구독을 위해 이메일 주소가 필요합니다.",
+        variant: "destructive", // 에러 메시지
+      });
+    } else {
+      toast({
+        title: "구독 완료!",
+        description: `감사합니다! ${email}로 최신 소식을 보내드리겠습니다.`,
+      });
+      setEmail(""); // 입력 필드 초기화
+    }
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-20 sm:py-28 text-center">
@@ -26,7 +44,7 @@ export function SubscribeSection() {
         <Button
           size="lg"
           className="w-full text-lg sm:text-xl bg-[#FF6B2B] text-white hover:bg-[#e55a1f] px-6 py-4"
-          onClick={() => console.log("구독 버튼 클릭")}
+          onClick={handleSubscribe} // 구독 처리 함수
         >
           구독
         </Button>
