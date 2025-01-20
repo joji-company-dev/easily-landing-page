@@ -15,13 +15,13 @@ export default function Home() {
       <section id="service" className="min-h-screen flex items-center justify-center bg-white">
         <ServiceSection />
       </section>
-      <section id="contact" className="min-h-screen flex items-center justify-center bg-gray-100">
+      <section id="faq" className="min-h-screen flex items-center justify-center bg-gray-100">
         <FAQSection />
       </section>
-      <section id="faq" className="min-h-screen flex items-center justify-center bg-white">
+      <section id="subscribe" className="min-h-screen flex items-center justify-center bg-white">
         <SubscribeSection />
       </section>
-      <section id="subscribe" className="min-h-screen flex items-center justify-center bg-gray-100">
+      <section id="contact" className="min-h-screen flex items-center justify-center bg-gray-100">
         <ContactSection />
       </section>
     </div>
