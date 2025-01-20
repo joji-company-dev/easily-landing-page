@@ -1,5 +1,5 @@
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/app/_components/ui/accordion"
-import { FAQList } from "./faqList";
+import { FAQList } from "../faqList"
 
 export function FAQSection() {
     return(
