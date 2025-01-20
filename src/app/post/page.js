@@ -1,41 +1,52 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import { Card, CardContent } from "@/app/_components/ui/card";
 import { Skeleton } from "@/app/_components/ui/skeleton";
 import { TypographyH2, TypographyP } from "@/app/_components/ui/typography";
 import { Button } from "@/app/_components/ui/button";
 import { useRouter } from "next/navigation";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationPrevious,
+  PaginationNext,
+} from "@/app/_components/ui/pagination";
+import usePagination from "../_components/hooks/usePagination";
 
-/**
- * @typedef {Object} Post
- * @property {number} id - 게시글 ID
- * @property {string} title - 게시글 제목
- * @property {string} author - 게시글 저자
- * @property {string} category - 카테고리
- * @property {string} createdAt - 작성일
- * @property {number} views - 조회수
- * @property {number} commentCount - 댓글 수
- */
-
-export default function PostPage() {
+export default function NoticePage() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts`);
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const json = await response.json();
-      setPosts(json.data);
-      setLoading(false);
-    };
+  const {
+    currentPage,
+    totalPages,
+    setTotalPages,
+    handlePageChange,
+    goToNextPage,
+    goToPreviousPage,
+    getPageRange,
+  } = usePagination(1, 1); // 초기 페이지와 총 페이지 수 설정
 
-    fetchPosts();
-  }, []);
+  const fetchPosts = async (page) => {
+    setLoading(true);
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/posts?page=${page}&limit=6&categories=NOTICE`
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const notice = await response.json();
+    setPosts(notice.data);
+    setTotalPages(notice.meta.totalPages);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchPosts(currentPage);
+  }, [currentPage]);
 
   if (loading) {
     return (
@@ -82,7 +93,7 @@ export default function PostPage() {
             </CardContent>
             <div className="flex justify-end mt-4">
               <Button
-                onClick={() =>  router.push(`/postDetail/${post.id}`)}
+                onClick={() => router.push(`/postDetail/${post.id}`)}
                 variant="outline"
                 className="text-orange-500 border-orange-500 hover:bg-orange-500 hover:text-white"
               >
@@ -92,7 +103,34 @@ export default function PostPage() {
           </Card>
         ))}
       </div>
+
+      <Pagination className="mt-6">
+        <PaginationContent>
+          <PaginationPrevious
+            onClick={goToPreviousPage}
+            disabled={currentPage === 1}
+          />
+          {getPageRange().map((page) => (
+            <PaginationItem key={page}>
+              <PaginationLink
+                isActive={currentPage === page}
+                onClick={() => handlePageChange(page)}
+              >
+                {page}
+              </PaginationLink>
+            </PaginationItem>
+          ))}
+          {totalPages > currentPage + 3 && (
+            <PaginationItem>
+              <PaginationLink disabled>...</PaginationLink>
+            </PaginationItem>
+          )}
+          <PaginationNext
+            onClick={goToNextPage}
+            disabled={currentPage === totalPages}
+          />
+        </PaginationContent>
+      </Pagination>
     </div>
   );
 }
-  
