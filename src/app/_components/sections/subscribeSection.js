@@ -7,21 +7,59 @@ import { useToast } from "@/app/_components/hooks/use-toast";
 
 export function SubscribeSection() {
   const [email, setEmail] = useState("");
-  const { toast } = useToast(); // toast 사용 설정
+  const { toast } = useToast();
 
-  const handleSubscribe = () => {
+  const validateEmail = (email) => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(email);
+  };
+
+  const handleSubscribe = async () => {
     if (!email) {
       toast({
         title: "이메일을 입력해주세요.",
         description: "구독을 위해 이메일 주소가 필요합니다.",
-        variant: "destructive", // 에러 메시지
+        variant: "destructive",
       });
-    } else {
+      return;
+    }
+
+    if (!validateEmail(email)){
+        toast({
+            title: "유효하지 않은 이메일 주소입니다.",
+            description: "올바른 이메일 주소를 입력해주세요.",
+            variant: "destructive",
+        });
+        return;
+    }
+
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/email-subscription/subscribe`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          isSubscribed: true,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("서버 오류가 발생했습니다.");
+      }
+
       toast({
         title: "구독 완료!",
         description: `감사합니다! ${email}로 최신 소식을 보내드리겠습니다.`,
       });
-      setEmail(""); // 입력 필드 초기화
+      setEmail("");
+    } catch (error) {
+      toast({
+        title: "구독 실패",
+        description: "구독 처리 중 오류가 발생했습니다. 다시 시도해주세요.",
+        variant: "destructive",
+      });
     }
   };
 
@@ -44,7 +82,7 @@ export function SubscribeSection() {
         <Button
           size="lg"
           className="w-full text-lg sm:text-xl bg-[#FF6B2B] text-white hover:bg-[#e55a1f] px-6 py-4"
-          onClick={handleSubscribe} // 구독 처리 함수
+          onClick={handleSubscribe}
         >
           구독
         </Button>
