@@ -34,6 +34,23 @@ const usePagination = (initialPage = 1, totalPages = 1, visiblePageCount=5) => {
     return range;
   };
 
+  //이하 그룹이동 코드
+     const goToNextGroup = () => {
+      const nextGroupStart = Math.min(
+     Math.floor((currentPage - 1) / pageGroupSize) * pageGroupSize + pageGroupSize + 1,
+       total
+      );
+      setCurrentPage(nextGroupStart);
+    };
+    
+    const goToPreviousGroup = () => {
+      const prevGroupEnd = Math.max(
+        Math.floor((currentPage - 1) / pageGroupSize) * pageGroupSize - pageGroupSize + 1,
+        1
+      );
+      setCurrentPage(prevGroupEnd);
+    };
+
   return {
     currentPage,
     totalPages: total,
@@ -42,6 +59,9 @@ const usePagination = (initialPage = 1, totalPages = 1, visiblePageCount=5) => {
     goToNextPage,
     goToPreviousPage,
     getPageRange,
+    //그룹이동 함수 사용시 호출
+    goToNextGroup,
+    goToPreviousGroup,
   };
 };
 
