@@ -1,6 +1,10 @@
 import { useState } from "react";
 
-const usePagination = (initialPage = 1, totalPages = 1, visiblePageCount=5) => {
+const usePagination = (
+  initialPage = 1,
+  totalPages = 1,
+  visiblePageCount = 5
+) => {
   const [currentPage, setCurrentPage] = useState(initialPage);
   const [total, setTotalPages] = useState(totalPages);
 
@@ -35,21 +39,26 @@ const usePagination = (initialPage = 1, totalPages = 1, visiblePageCount=5) => {
   };
 
   //이하 그룹이동 코드
-     const goToNextGroup = () => {
-      const nextGroupStart = Math.min(
-     Math.floor((currentPage - 1) / pageGroupSize) * pageGroupSize + pageGroupSize + 1,
-       total
-      );
-      setCurrentPage(nextGroupStart);
-    };
-    
-    const goToPreviousGroup = () => {
-      const prevGroupEnd = Math.max(
-        Math.floor((currentPage - 1) / pageGroupSize) * pageGroupSize - pageGroupSize + 1,
-        1
-      );
-      setCurrentPage(prevGroupEnd);
-    };
+  const pageGroupSize = 5;
+  const goToNextGroup = () => {
+    const nextGroupStart = Math.min(
+      Math.floor((currentPage - 1) / pageGroupSize) * pageGroupSize +
+        pageGroupSize +
+        1,
+      total
+    );
+    setCurrentPage(nextGroupStart);
+  };
+
+  const goToPreviousGroup = () => {
+    const prevGroupEnd = Math.max(
+      Math.floor((currentPage - 1) / pageGroupSize) * pageGroupSize -
+        pageGroupSize +
+        1,
+      1
+    );
+    setCurrentPage(prevGroupEnd);
+  };
 
   return {
     currentPage,
