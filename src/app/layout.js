@@ -1,5 +1,5 @@
-import NavBar from "./_features/navBar";
-import Footer from "./_features/sections/footerSection";
+import NavBar from "./_components/navBar";
+import Footer from "./_components/footer";
 import "./globals.css";
 
 
