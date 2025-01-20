@@ -6,7 +6,7 @@ export default function Footer() {
     return (
       <div className="w-full p-10 h-auto bg-black text-white">
         <h2 className="text-2xl font-bold mb-6">{COMPANY_INFO.Name}</h2>
-        <p className="text-lg text-muted-foreground text-gray-150">
+        <p className="text-lg text-muted-foreground text-gray-50">
             대표자: {COMPANY_INFO.Representative}<br/>
             주소 :  {COMPANY_INFO.Address}<br/>
             contact mail : {COMPANY_INFO.Email}<br/>
