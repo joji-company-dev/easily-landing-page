@@ -25,14 +25,14 @@ export function SubscribeSection() {
       return;
     }
 
-    if (!email) {
+    if (!validateEmail(email)){
       toast({
-        title: "유효하지 않은 이메일 주소입니다.",
-        description: "올바른 이메일 주소를 입력해주세요.",
-        variant: "destructive",
+          title: "유효하지 않은 이메일 주소입니다.",
+          description: "올바른 이메일 주소를 입력해주세요.",
+          variant: "destructive",
       });
       return;
-    }
+  }
 
     try {
       const response = await fetch(
