@@ -4,12 +4,13 @@ import { HeroSection } from "./_components/sections/heroSection";
 import { ContactSection } from "./_components/sections/contactSection";
 import { ServiceSection } from "./_components/sections/serviceSection";
 import { FAQSection } from "./_components/sections/faqSection";
+import { SubscribeSection } from "./_components/sections/subscribeSection";
 
 export default function Home() {
   return (
     <div>
       {/* Hero Section */}
-      <section id="hero" className="min-h-screen flex items-center justify-center bg-gray-50">
+      <section id="hero" className="min-h-screen flex items-center justify-center bg-gray-100">
         <HeroSection />
       </section>
       {/* Services Section */}
@@ -18,11 +19,14 @@ export default function Home() {
       </section>
       {/* Contact Section */}
       <section id="contact" className="min-h-screen flex items-center justify-center bg-gray-100">
-        <ContactSection />
+        <FAQSection />
       </section>
       {/* FAQ Section */}
-      <section id="faq" className="min-h-screen flex items-center justify-center bg-gray-100">
-        <FAQSection />
+      <section id="faq" className="min-h-screen flex items-center justify-center bg-white">
+        <SubscribeSection />
+      </section>
+      <section id="subscribe" className="min-h-screen flex items-center justify-center bg-gray-100">
+        <ContactSection />
       </section>
     </div>
   );
