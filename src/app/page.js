@@ -9,19 +9,15 @@ import { SubscribeSection } from "./_components/sections/subscribeSection";
 export default function Home() {
   return (
     <div>
-      {/* Hero Section */}
       <section id="hero" className="min-h-screen flex items-center justify-center bg-gray-100">
         <HeroSection />
       </section>
-      {/* Services Section */}
       <section id="service" className="min-h-screen flex items-center justify-center bg-white">
         <ServiceSection />
       </section>
-      {/* Contact Section */}
       <section id="contact" className="min-h-screen flex items-center justify-center bg-gray-100">
         <FAQSection />
       </section>
-      {/* FAQ Section */}
       <section id="faq" className="min-h-screen flex items-center justify-center bg-white">
         <SubscribeSection />
       </section>
