@@ -5,6 +5,8 @@ import { useState } from "react";
 
 export default function NavBar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태 관리
+  const [userName, setUserName] = useState("지현수"); // 가상의 사용자 이름
 
   const menuItems = [
     {
@@ -13,7 +15,9 @@ export default function NavBar() {
       children: [
         { label: "소개", href: "#hero" },
         { label: "서비스", href: "#service" },
-        { label: "문의/구독", href: "#contact" },
+        { label: "FAQ", href: "#faq" },
+        { label: "구독", href: "#subscribe" },
+        { label: "문의", href: "#contact" },
       ],
     },
     {
@@ -21,7 +25,7 @@ export default function NavBar() {
       baseUrl: "/",
       children: [
         { label: "정책", href: "#policy" },
-        { label: "결제", href: "#purcahse" },
+        { label: "결제", href: "#purchase" },
       ],
     },
     {
@@ -34,13 +38,22 @@ export default function NavBar() {
     },
   ];
 
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setIsDropdownOpen(false);
+  };
+
   return (
     <nav
       className="border-b sticky bg-white top-0 z-50"
       onMouseLeave={() => setIsDropdownOpen(false)}
     >
       <div className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
-        {/* Left: Logo */}
+        {/* 로고 */}
         <Link href="/" className="flex items-center">
           <Image
             src="/logo(2).svg"
@@ -51,9 +64,8 @@ export default function NavBar() {
           />
         </Link>
 
-        {/* Center: Menu Items */}
         <div
-          className="relative flex items-center gap-28"
+          className="relative flex items-center gap-28 flex-1 justify-center"
           onMouseEnter={() => setIsDropdownOpen(true)}
         >
           {menuItems.map((menu, index) => (
@@ -66,7 +78,6 @@ export default function NavBar() {
             </div>
           ))}
 
-          {/* 드롭다운 전체 메뉴 */}
           {isDropdownOpen && (
             <div
               className="absolute top-10 left-1/2 transform -translate-x-1/2 bg-white shadow-md rounded-b-lg p-4 w-[550px] mt-2"
@@ -92,18 +103,52 @@ export default function NavBar() {
           )}
         </div>
 
-        {/* Right: Dashboard and Login Buttons */}
         <div className="flex items-center gap-4">
-          <Link href="/dashboard">
+          <Link href="https://easily-dashboard.jojicompany.com/dashboard/proposal/create">
             <button className="bg-[#FF6B2B] text-white py-2 px-4 rounded-md hover:bg-[#e55a1f]">
               대시보드
             </button>
           </Link>
-          <Link href="/login">
-            <button className="bg-gray-300 text-black py-2 px-4 rounded-md hover:bg-gray-400">
-              로그인
-            </button>
-          </Link>
+
+          {/* 로그인 여부에 따른 사용자 정보 */}
+          <div className="relative w-40">
+            {isLoggedIn ? (
+              <div>
+                <button
+                  className="text-sm font-semibold text-muted-foreground"
+                  onMouseEnter={() => setIsDropdownOpen((prev) => !prev)}
+                >
+                  환영합니다! {userName}님
+                </button>
+                {isDropdownOpen && (
+                  <div
+                    className="absolute right-0 mt-2 bg-white shadow-md rounded-lg py-2 w-40"
+                    onMouseLeave={() => setIsDropdownOpen(false)}
+                  >
+                    <Link
+                      href="/myinfo"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      내 정보
+                    </Link>
+                    <button
+                      onClick={handleLogout}
+                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      로그아웃
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <button
+                onClick={handleLogin}
+                className="bg-gray-300 text-black py-2 px-4 rounded-md hover:bg-gray-400"
+              >
+                로그인
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </nav>
