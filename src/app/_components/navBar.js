@@ -4,7 +4,8 @@ import Image from "next/image";
 import { useState } from "react";
 
 export default function NavBar() {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMenuDropdownOpen, setIsMenuDropdownOpen] = useState(false); // 메뉴 드롭다운 상태
+  const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false); // 사용자 드롭다운 상태
   const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태 관리
   const [userName, setUserName] = useState("지현수"); // 가상의 사용자 이름
 
@@ -44,13 +45,13 @@ export default function NavBar() {
 
   const handleLogout = () => {
     setIsLoggedIn(false);
-    setIsDropdownOpen(false);
+    setIsUserDropdownOpen(false);
   };
 
   return (
     <nav
       className="border-b sticky bg-white top-0 z-50"
-      onMouseLeave={() => setIsDropdownOpen(false)}
+      onMouseLeave={() => setIsMenuDropdownOpen(false)}
     >
       <div className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
         {/* 로고 */}
@@ -66,7 +67,7 @@ export default function NavBar() {
 
         <div
           className="relative flex items-center gap-28 flex-1 justify-center"
-          onMouseEnter={() => setIsDropdownOpen(true)}
+          onMouseEnter={() => setIsMenuDropdownOpen(true)} // 메뉴 드롭다운 열기
         >
           {menuItems.map((menu, index) => (
             <div key={index} className="relative">
@@ -78,11 +79,11 @@ export default function NavBar() {
             </div>
           ))}
 
-          {isDropdownOpen && (
+          {isMenuDropdownOpen && (
             <div
               className="absolute top-10 left-1/2 transform -translate-x-1/2 bg-white shadow-md rounded-b-lg p-4 w-[550px] mt-2"
-              onMouseEnter={() => setIsDropdownOpen(true)}
-              onMouseLeave={() => setIsDropdownOpen(false)}
+              onMouseEnter={() => setIsMenuDropdownOpen(true)}
+              onMouseLeave={() => setIsMenuDropdownOpen(false)}
             >
               <div className="flex justify-around gap-2">
                 {menuItems.map((menu, index) => (
@@ -116,14 +117,14 @@ export default function NavBar() {
               <div>
                 <button
                   className="text-sm font-semibold text-muted-foreground"
-                  onMouseEnter={() => setIsDropdownOpen((prev) => !prev)}
+                  onMouseEnter={() => setIsUserDropdownOpen((prev) => !prev)}
                 >
                   환영합니다! {userName}님
                 </button>
-                {isDropdownOpen && (
+                {isUserDropdownOpen && (
                   <div
                     className="absolute right-0 mt-2 bg-white shadow-md rounded-lg py-2 w-40"
-                    onMouseLeave={() => setIsDropdownOpen(false)}
+                    onMouseLeave={() => setIsUserDropdownOpen(false)}
                   >
                     <Link
                       href="/myinfo"
