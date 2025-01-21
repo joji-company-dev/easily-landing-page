@@ -1,11 +1,12 @@
 //import { Card, CardContent } from "@/app/_components/ui/card";
-import { Separator } from "@/app/_components/ui/separator";
+//import { Separator } from "@/app/_components/ui/separator";
 import { MemberList } from "./memberList";
+import { Skeleton } from "../ui/skeleton";
 
 export function MemberSection() {
     return (
         // <div className="w-full">
-        //     <h1 className="font-black text-center text-3xl m-5 font-sans">많은 고객에게 사랑받고있어요</h1>
+        //     <h1 className="font-black text-center text-3xl m-5 font-sans">많은 고객에게 사랑받고 있어요</h1>
         //     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 m-10 items-center">
         //         {MemberList.map((MemberList) => (
         //             <Card key={MemberList.id} className="w-[18rem] h-[18rem] text-center border-orange-300">
@@ -15,18 +16,29 @@ export function MemberSection() {
         //         ))}
         //     </div>
         // </div>
+        // <div className="w-full">
+        //     <h1 className="font-black text-center text-3xl m-5 font-sans">많은 고객에게 사랑받고 있어요</h1>
+        //     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 m-10 items-center">
+        //         {MemberList.map((MemberList) => (
+        //             <div key={MemberList.id} className="w-[18rem] h-[18rem] text-center border-orange-300">
+        //                 <div className="space-y-1">
+        //                     <div className="font-bold p-10 text-base rounded-t-lg shadow-sm font-sans w-[18rem] h-[230px]">{MemberList.content}</div>
+        //                 </div>
+        //                 <Separator className="my-4" />
+        //                 <div className="flex h-5 items-center space-x-4 text-sm">
+        //                     <div className="font-extrabold p-5 text-sm rounded-b-lg shadow-md font-sans w-[18rem] h-[70px]">{MemberList.member}</div>
+        //                 </div>
+        //             </div>
+        //         ))}
+        //     </div>
+        // </div>
         <div className="w-full">
             <h1 className="font-black text-center text-3xl m-5 font-sans">많은 고객에게 사랑받고 있어요</h1>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 m-10 items-center">
+            <div className="gap-4 m-10 items-center">
                 {MemberList.map((MemberList) => (
                     <div key={MemberList.id} className="w-[18rem] h-[18rem] text-center border-orange-300">
-                        <div className="space-y-1">
-                            <div className="font-bold p-10 text-base rounded-t-lg shadow-sm font-sans w-[18rem] h-[230px]">{MemberList.content}</div>
-                        </div>
-                        <Separator className="my-4" />
-                        <div className="flex h-5 items-center space-x-4 text-sm">
-                            <div className="font-extrabold p-5 text-sm rounded-b-lg shadow-md font-sans w-[18rem] h-[70px]">{MemberList.member}</div>
-                        </div>
+                        <Skeleton className="h-4 w-[250px]">{MemberList.content}</Skeleton>
+                        <Skeleton className="h-4 w-[200px]">{MemberList.member}</Skeleton>
                     </div>
                 ))}
             </div>
