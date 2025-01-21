@@ -1,7 +1,10 @@
 //import { Card, CardContent } from "@/app/_components/ui/card";
 //import { Separator } from "@/app/_components/ui/separator";
+//import { Skeleton } from "../ui/skeleton";
+//import { ScrollArea } from "../ui/scroll-area";
 import { MemberList } from "./memberList";
-import { Skeleton } from "../ui/skeleton";
+//import { ScrollAreaScrollbar } from "@radix-ui/react-scroll-area";
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "../ui/resizable";
 
 export function MemberSection() {
     return (
@@ -32,16 +35,40 @@ export function MemberSection() {
         //         ))}
         //     </div>
         // </div>
-        <div className="w-full">
+        // <div className="w-full">
+        //     <h1 className="font-black text-center text-3xl m-5 font-sans">많은 고객에게 사랑받고 있어요</h1>
+        //     <div className="gap-4 m-10 items-center">
+        //         {MemberList.map((MemberList) => (
+        //             <div key={MemberList.id} className="w-[18rem] h-[18rem] text-center border-orange-300">
+        //                 <Skeleton className="h-4 w-[250px]">{MemberList.content}</Skeleton>
+        //                 <Skeleton className="h-4 w-[200px]">{MemberList.member}</Skeleton>
+        //             </div>
+        //         ))}
+        //     </div>
+        // </div>
+        <div>
             <h1 className="font-black text-center text-3xl m-5 font-sans">많은 고객에게 사랑받고 있어요</h1>
-            <div className="gap-4 m-10 items-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 m-10 items-center">
                 {MemberList.map((MemberList) => (
-                    <div key={MemberList.id} className="w-[18rem] h-[18rem] text-center border-orange-300">
-                        <Skeleton className="h-4 w-[250px]">{MemberList.content}</Skeleton>
-                        <Skeleton className="h-4 w-[200px]">{MemberList.member}</Skeleton>
-                    </div>
+                    <ResizablePanelGroup
+                    direction="vertical"
+                    className="min-h-[350px] max-w-md rounded-lg border md:min-w-[300px] border-orange-400 text-center"
+                    key={MemberList.id}
+                    >
+                    <ResizablePanel defaultSize={100}>
+                        <div className="flex h-full items-center justify-center p-6">
+                        <span className="font-semibold">{MemberList.content}</span>
+                        </div>
+                    </ResizablePanel>
+                    <ResizableHandle />
+                    <ResizablePanel defaultSize={50}>
+                        <div className="flex h-full items-center justify-center p-6">
+                        <span className="font-semibold">{MemberList.member}</span>
+                        </div>
+                    </ResizablePanel>
+                    </ResizablePanelGroup>
                 ))}
             </div>
-        </div>
+        </div>   
     )
-}
+};
