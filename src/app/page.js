@@ -4,7 +4,7 @@ import { HeroSection } from "./_components/sections/heroSection";
 import { ContactSection } from "./_components/sections/contactSection";
 import { ServiceSection } from "./_components/sections/serviceSection";
 import { FAQSection } from "./_components/sections/faqSection";
-import { MemberSection } from "./_components/sections/memberSection";
+import { ReviewSection } from "./_components/sections/reviewSection";
 
 export default function Home() {
   return (
@@ -21,9 +21,9 @@ export default function Home() {
       <section id="contact" className="min-h-screen flex items-center justify-center bg-gray-100">
         <ContactSection />
       </section>
-      {/* Member Section */}
-      <section id="member" className="h-1/2 flex items-center justify-center bg-gray-100">
-        <MemberSection/>
+      {/* Review Section */}
+      <section id="review" className="h-1/2 flex items-center justify-center bg-gray-100">
+        <ReviewSection/>
       </section>
       {/* FAQ Section */}
       <section id="faq" className="h-1/2 flex items-center justify-center bg-gray-100">
