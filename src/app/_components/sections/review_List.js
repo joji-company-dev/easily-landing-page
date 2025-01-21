@@ -1,4 +1,4 @@
-export const REVIEW_LIST = [
+export const review = [
     {
         id:1,
         content:"저희는 촬영과 편집에 강한 프로덕션입니다. 매번 위드로 번거로운 수정이 많았는데, 이즐리가 그때 너무 유용했습니다",

@@ -3,7 +3,7 @@
 //import { Skeleton } from "../ui/skeleton";
 //import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "../ui/resizable";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
-import { REVIEW_LIST } from "./review_List";
+import { review } from "./review_list";
 
 export function ReviewSection() {
     return (
@@ -81,10 +81,10 @@ export function ReviewSection() {
         <div>
             <h1 className="font-black text-center text-3xl m-5 font-sans">많은 고객에게 사랑받고 있어요</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 m-10 items-center">
-                {REVIEW_LIST.map((REVIEW_LIST) => (
-                    <Alert key={REVIEW_LIST.id} className="w-[18rem] h-[18rem] text-center border-orange-300">
-                        <AlertTitle className="font-bold p-10 text-base rounded-t-lg shadow-sm font-sans w-[18rem] h-[230px]">{REVIEW_LIST.content}</AlertTitle>
-                        <AlertDescription class>{REVIEW_LIST.member}</AlertDescription>
+                {review.map((review) => (
+                    <Alert key={review.id} className="w-[18rem] h-[18rem] text-center border-orange-300">
+                        <AlertTitle className="font-bold p-10 text-base rounded-t-lg shadow-sm font-sans w-[18rem] h-[230px]">{review.content}</AlertTitle>
+                        <AlertDescription class>{review.member}</AlertDescription>
                     </Alert>
                 ))}
             </div>

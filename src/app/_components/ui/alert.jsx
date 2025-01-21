@@ -1,5 +1,6 @@
 import * as React from "react"
 import { cva } from "class-variance-authority";
+import PropTypes from 'prop-types'
 
 import { cn } from "@/lib/utils"
 
@@ -23,10 +24,15 @@ const Alert = React.forwardRef(({ className, variant, ...props }, ref) => (
   <div
     ref={ref}
     role="alert"
+    aria-live="polite"
     className={cn(alertVariants({ variant }), className)}
     {...props} />
 ))
 Alert.displayName = "Alert"
+Alert.propTypes = {
+  className: PropTypes.string,
+  variant: PropTypes.oneOf(['default', 'destructive'])
+}
 
 const AlertTitle = React.forwardRef(({ className, ...props }, ref) => (
   <h5
