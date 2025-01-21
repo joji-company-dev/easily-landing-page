@@ -22,11 +22,11 @@ export default function Home() {
         <ContactSection />
       </section>
       {/* Member Section */}
-      <section id="member" className="max-h-full flex items-center justify-center bg-gray-100">
+      <section id="member" className="h-[500px] flex items-center justify-center bg-gray-100">
         <MemberSection/>
       </section>
       {/* FAQ Section */}
-      <section id="faq" className="max-h-full flex items-center justify-center bg-gray-100">
+      <section id="faq" className="h-[500px] flex items-center justify-center bg-gray-100">
         <FAQSection />
       </section>
     </div>
