@@ -1,13 +1,47 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function NavBar() {
   const [isMenuDropdownOpen, setIsMenuDropdownOpen] = useState(false); // 메뉴 드롭다운 상태
-  const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false); // 사용자 드롭다운 상태
+  const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false); // 사용자메뉴 드롭다운 상태
   const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태 관리
-  const [userName, setUserName] = useState("지현수"); // 가상의 사용자 이름
+  const [userName, setUserName] = useState(""); // 사용자 이름
+
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/profile`, {
+      method: "GET",
+      credentials: "include",
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        } else if (response.status === 401) {
+          throw new Error("Unauthorized");
+        } else {
+          throw new Error("Unexpected error");
+        }
+      })
+      .then((data) => {
+        setIsLoggedIn(true);
+        setUserName(data.name);
+      })
+      .catch((error) => {
+        if (error.message === "Unauthorized") {
+          setIsLoggedIn(false);
+        }
+      });
+  }, []);
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setIsUserDropdownOpen(false);
+  };
+
+  const redirectToLogin = () => {
+    window.location.href = `https://easily-dashboard.jojicompany.com/login?fallback=${window.location.href}`; // 로그인 페이지로 리디렉션
+  };
 
   const menuItems = [
     {
@@ -39,15 +73,6 @@ export default function NavBar() {
     },
   ];
 
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
-
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    setIsUserDropdownOpen(false);
-  };
-
   return (
     <nav
       className="border-b sticky bg-white top-0 z-50"
@@ -65,9 +90,10 @@ export default function NavBar() {
           />
         </Link>
 
+        {/* 메뉴 */}
         <div
           className="relative flex items-center gap-28 flex-1 justify-center"
-          onMouseEnter={() => setIsMenuDropdownOpen(true)} // 메뉴 드롭다운 열기
+          onMouseEnter={() => setIsMenuDropdownOpen(true)}
         >
           {menuItems.map((menu, index) => (
             <div key={index} className="relative">
@@ -79,6 +105,7 @@ export default function NavBar() {
             </div>
           ))}
 
+          {/* 드롭다운 전체 메뉴 */}
           {isMenuDropdownOpen && (
             <div
               className="absolute top-10 left-1/2 transform -translate-x-1/2 bg-white shadow-md rounded-b-lg p-4 w-[550px] mt-2"
@@ -143,8 +170,8 @@ export default function NavBar() {
               </div>
             ) : (
               <button
-                onClick={handleLogin}
                 className="bg-gray-300 text-black py-2 px-4 rounded-md hover:bg-gray-400"
+                onClick={redirectToLogin}
               >
                 로그인
               </button>
