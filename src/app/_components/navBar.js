@@ -6,7 +6,8 @@ import { useState, useEffect } from "react";
 export default function NavBar() {
   const [isMenuDropdownOpen, setIsMenuDropdownOpen] = useState(false); // 메뉴 드롭다운 상태
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false); // 사용자메뉴 드롭다운 상태
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태 관리
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 여부 상태
+  const [isLoading, setIsLoading] = useState(true); //로그인 시도중인 상태
   const [userName, setUserName] = useState(""); // 사용자 이름
 
   useEffect(() => {
@@ -31,16 +32,29 @@ export default function NavBar() {
         if (error.message === "Unauthorized") {
           setIsLoggedIn(false);
         }
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, []);
 
+  //로그아웃 기능 미완성
   const handleLogout = () => {
-    setIsLoggedIn(false);
-    setIsUserDropdownOpen(false);
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/logout`, {
+      method: "POST",
+      credentials: "include",
+    }).then((response) => {
+      if (response.status === 201) {
+        setIsLoggedIn(false);
+        setIsUserDropdownOpen(false);
+      } else {
+        console.error("Failed to logout.");
+      }
+    });
   };
 
   const redirectToLogin = () => {
-    window.location.href = `https://easily-dashboard.jojicompany.com/login?fallback=${window.location.href}`; // 로그인 페이지로 리디렉션
+    window.location.href = `https://easily-dashboard.jojicompany.com/login?fallback=${window.location.href}`;
   };
 
   const menuItems = [
@@ -132,7 +146,7 @@ export default function NavBar() {
         </div>
 
         <div className="flex items-center gap-4">
-          <Link href="https://easily-dashboard.jojicompany.com/dashboard/proposal/create">
+          <Link href="https://easily-dashboard.jojicompany.com">
             <button className="bg-[#FF6B2B] text-white py-2 px-4 rounded-md hover:bg-[#e55a1f]">
               대시보드
             </button>
@@ -140,7 +154,7 @@ export default function NavBar() {
 
           {/* 로그인 여부에 따른 사용자 정보 */}
           <div className="relative w-40">
-            {isLoggedIn ? (
+            {isLoading ? null : isLoggedIn ? (
               <div>
                 <button
                   className="text-sm font-semibold text-muted-foreground"
