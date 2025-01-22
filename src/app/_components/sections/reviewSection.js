@@ -27,7 +27,7 @@ export function ReviewSection() {
         //         {MemberList.map((MemberList) => (
         //             <div key={MemberList.id} className="w-[18rem] h-[18rem] text-center border-orange-300">
         //                 <div className="space-y-1">
-        //                     <div className="font-bold p-10 text-base rounded-t-lg shadow-sm font-sans w-[18rem] h-[230px]">{MemberList.content}</div>
+        //                     <div className="font-bold p-10 text-base rounded-t-lg shadow-sm font-sans w-[18rem] h-[230px]">{MemberList.content}</div> */}
         //                 </div>
         //                 <Separator className="my-4" />
         //                 <div className="flex h-5 items-center space-x-4 text-sm">
@@ -84,7 +84,7 @@ export function ReviewSection() {
                 {review.map((review) => (
                     <Alert key={review.id} className="w-[18rem] h-[18rem] text-center border-orange-300">
                         <AlertTitle className="font-bold p-10 text-base rounded-t-lg shadow-sm font-sans w-[18rem] h-[230px]">{review.content}</AlertTitle>
-                        <AlertDescription class>{review.member}</AlertDescription>
+                        <AlertDescription className="font-extrabold p-5 text-sm rounded-b-lg shadow-md font-sans w-[18rem] h-[70px]">{review.member}</AlertDescription>
                     </Alert>
                 ))}
             </div>
