@@ -23,7 +23,9 @@ export default function EasilyPosts() {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await fetch("/api/posts?categories=NOTICE");
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/posts?categories=NOTICE`
+      );
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
