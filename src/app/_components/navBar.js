@@ -3,6 +3,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 
+//네비게이션 바 높이 설정
+const NAVBAR_HEIGHT = 76;
+
+//드롭다운 메뉴 높이 설정
+const DROPDOWN_BAR_HEIGHT = 256;
+
+//메뉴 버튼 높이 설정
+const MENU_BUTTON_HEIGHT = 20;
+
 export default function NavBar() {
   const [isMenuDropdownOpen, setIsMenuDropdownOpen] = useState(false); // 메뉴 드롭다운 상태
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false); // 사용자메뉴 드롭다운 상태
@@ -71,7 +80,7 @@ export default function NavBar() {
     },
     {
       label: "가격",
-      baseUrl: "/price",
+      baseUrl: "/",
       children: [
         { label: "정책", href: "#policy" },
         { label: "결제", href: "#purchase" },
@@ -79,7 +88,7 @@ export default function NavBar() {
     },
     {
       label: "공지사항",
-      baseUrl: "/post",
+      baseUrl: "/",
       children: [
         { label: "공지사항", href: "#announcement" },
         { label: "게시판", href: "#board" },
@@ -89,10 +98,24 @@ export default function NavBar() {
 
   return (
     <nav
-      className="border-b sticky bg-white top-0 z-50"
+      className={`border-b sticky bg-white top-0 z-50 w-full flex items-center`}
+      style={{
+        height: `${NAVBAR_HEIGHT}px`,
+      }}
       onMouseLeave={() => setIsMenuDropdownOpen(false)}
     >
-      <div className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
+      <div
+        className={`fixed left-0 bg-white shadow-md rounded-b-lg p-5 w-full
+          transition-all duration-300 ease-in-out`}
+        style={{
+          top: `${NAVBAR_HEIGHT}px`,
+          height: isMenuDropdownOpen ? `${DROPDOWN_BAR_HEIGHT}px` : "0px",
+          padding: isMenuDropdownOpen ? "1.25rem" : "0px",
+        }}
+        onMouseEnter={() => setIsMenuDropdownOpen(true)}
+      ></div>
+
+      <div className="flex items-center justify-between px-6 w-full">
         {/* 로고 */}
         <Link href="/" className="flex items-center">
           <Image
@@ -106,43 +129,47 @@ export default function NavBar() {
 
         {/* 메뉴 */}
         <div
-          className="relative flex items-center gap-28 flex-1 justify-center"
+          className={`absolute flex items-start gap-28 flex-1 justify-center left-1/2 -translate-x-1/2 w-full`}
+          style={{ top: `${NAVBAR_HEIGHT / 2 - MENU_BUTTON_HEIGHT / 2}px` }}
           onMouseEnter={() => setIsMenuDropdownOpen(true)}
         >
           {menuItems.map((menu, index) => (
-            <div key={index} className="relative">
-              <button className="text-sm font-semibold text-muted-foreground hover:text-primary transition-colors">
+            <div
+              key={index}
+              className={`relative flex flex-col w-14`}
+              style={{
+                gap: `${NAVBAR_HEIGHT / 2 - MENU_BUTTON_HEIGHT / 2}px`,
+              }}
+            >
+              <button
+                className={`text-sm font-semibold text-muted-foreground hover:text-primary transition-colors`}
+                style={{
+                  height: `${MENU_BUTTON_HEIGHT}px`,
+                }}
+              >
                 <Link href={menu.baseUrl} className="text-left">
                   {menu.label}
                 </Link>
               </button>
-            </div>
-          ))}
 
-          {/* 드롭다운 전체 메뉴 */}
-          {isMenuDropdownOpen && (
-            <div
-              className="absolute top-10 left-1/2 transform -translate-x-1/2 bg-white shadow-md rounded-b-lg p-4 w-[550px] mt-2"
-              onMouseEnter={() => setIsMenuDropdownOpen(true)}
-              onMouseLeave={() => setIsMenuDropdownOpen(false)}
-            >
-              <div className="flex justify-around gap-2">
-                {menuItems.map((menu, index) => (
-                  <div key={index} className="space-y-2">
-                    {menu.children.map((child, subIndex) => (
-                      <Link
-                        key={subIndex}
-                        href={`${menu.baseUrl}${child.href}`}
-                        className="block text-sm text-gray-700 hover:text-primary transition-colors text-left"
-                      >
-                        {child.label}
-                      </Link>
-                    ))}
-                  </div>
+              <div
+                key={index}
+                className={`space-y-2 flex flex-col items-center gap-3 transition-opacity duration-200 ease-in-out pt-4
+                      ${isMenuDropdownOpen ? "opacity-100" : "opacity-0"}
+                    `}
+              >
+                {menu.children.map((child, subIndex) => (
+                  <Link
+                    key={subIndex}
+                    href={`${menu.baseUrl}${child.href}`}
+                    className="block text-sm text-gray-700 hover:text-primary transition-colors text-left text-nowrap"
+                  >
+                    {child.label}
+                  </Link>
                 ))}
               </div>
             </div>
-          )}
+          ))}
         </div>
 
         <div className="flex items-center gap-4">
