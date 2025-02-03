@@ -71,7 +71,7 @@ export default function NavBar() {
     },
     {
       label: "가격",
-      baseUrl: "/",
+      baseUrl: "/price",
       children: [
         { label: "정책", href: "#policy" },
         { label: "결제", href: "#purchase" },
@@ -79,7 +79,7 @@ export default function NavBar() {
     },
     {
       label: "공지사항",
-      baseUrl: "/",
+      baseUrl: "/post",
       children: [
         { label: "공지사항", href: "#announcement" },
         { label: "게시판", href: "#board" },
