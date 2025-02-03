@@ -3,13 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 
-//네비게이션 바 높이 설정
-const NAVBAR_HEIGHT = 76;
-
-//드롭다운 메뉴 높이 설정
+const NAVBAR_HEIGHT = 72;
 const DROPDOWN_BAR_HEIGHT = 256;
-
-//메뉴 버튼 높이 설정
 const MENU_BUTTON_HEIGHT = 20;
 
 export default function NavBar() {
@@ -98,11 +93,10 @@ export default function NavBar() {
 
   return (
     <nav
-      className={`border-b sticky bg-white top-0 z-50 w-full flex items-center`}
+      className={` sticky bg-white top-0 z-50 w-full flex items-center shadow-sm`}
       style={{
         height: `${NAVBAR_HEIGHT}px`,
       }}
-      onMouseLeave={() => setIsMenuDropdownOpen(false)}
     >
       <div
         className={`fixed left-0 bg-white shadow-md rounded-b-lg p-5 w-full
@@ -112,7 +106,6 @@ export default function NavBar() {
           height: isMenuDropdownOpen ? `${DROPDOWN_BAR_HEIGHT}px` : "0px",
           padding: isMenuDropdownOpen ? "1.25rem" : "0px",
         }}
-        onMouseEnter={() => setIsMenuDropdownOpen(true)}
       ></div>
 
       <div className="flex items-center justify-between px-6 w-full">
@@ -131,10 +124,11 @@ export default function NavBar() {
         <div
           className={`absolute flex items-start gap-28 flex-1 justify-center left-1/2 -translate-x-1/2 w-full`}
           style={{ top: `${NAVBAR_HEIGHT / 2 - MENU_BUTTON_HEIGHT / 2}px` }}
-          onMouseEnter={() => setIsMenuDropdownOpen(true)}
+          onMouseLeave={() => setIsMenuDropdownOpen(false)}
         >
           {menuItems.map((menu, index) => (
             <div
+              onMouseEnter={() => setIsMenuDropdownOpen(true)}
               key={index}
               className={`relative flex flex-col w-14`}
               style={{
@@ -172,7 +166,7 @@ export default function NavBar() {
           ))}
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 z-10">
           <Link href="https://easily-dashboard.jojicompany.com">
             <button className="bg-[#FF6B2B] text-white py-2 px-4 rounded-md hover:bg-[#e55a1f]">
               대시보드
