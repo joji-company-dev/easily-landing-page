@@ -12,6 +12,9 @@ import { TypographyH2 } from "@/app/_components/ui/typography";
  */
 
 export default function EasilyPosts() {
+  /**
+   * @type {[Post[], (posts: Post[]) => void]}
+   */
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const MAX_POST = 3;

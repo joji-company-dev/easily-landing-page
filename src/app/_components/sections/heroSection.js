@@ -16,7 +16,7 @@ export function HeroSection() {
             <h1 className="sm:text-8xl font-bold leading-tight mb-6 tracking-tight">
               세상 쉬운 영상기획
               <br />
-              이젠 <span className="text-[#FF6B2B]">이즐리</span>로 하세요
+              이젠 <span className="text-primary">이즐리</span>로 하세요
             </h1>
             <p className="text-lg sm:text-xl text-muted-foreground mb-8">
               이즐리는 영상기획툴을 제공합니다
@@ -24,7 +24,7 @@ export function HeroSection() {
             <Button
               asChild
               size="lg"
-              className="bg-[#FF6B2B] text-white hover:bg-[#e55a1f] px-8 py-4 text-lg sm:text-xl"
+              className="bg-primary text-white hover:bg-[#e55a1f] px-8 py-4 text-lg sm:text-xl"
             >
               <Link href="https://easily-dashboard.jojicompany.com/dashboard/proposal/create">
                 기획안 만들기
@@ -38,7 +38,7 @@ export function HeroSection() {
 
         {/* 오른쪽 콘텐츠*/}
         <div className="w-full flex justify-center">
-          <Card className="relative w-72 h-72 sm:w-96 sm:h-96">
+          <Card className="relative w-96 h-96 sm:w-[30rem] sm:h-[30rem]">
             <Image
               src="/logo(1).svg"
               alt="Easily Beta"
