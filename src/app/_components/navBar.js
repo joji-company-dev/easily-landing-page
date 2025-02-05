@@ -181,10 +181,10 @@ export default function NavBar() {
             </div>
 
             {/* 모바일 메뉴 */}
-            {isMobile && isMobileMenuOpen && (
+            {isMobileMenuOpen && (
               <>
                 <div
-                  className={`absolute left-0 w-full bg-white z-50 flex flex-col items-center p-6 shadow-lg`}
+                  className={`absolute left-0 w-full bg-white z-50 flex flex-col items-center p-6 shadow-lg transition-all duration-300 ease-in-out`}
                   style={{
                     top: `${NAVBAR_HEIGHT}px`,
                     transform: isMobileMenuOpen
@@ -243,16 +243,18 @@ export default function NavBar() {
               </>
             )}
           </nav>
+
           {/* 오버레이 배경 */}
           {isMobileMenuOpen && (
             <div
-              className="fixed inset-0 bg-black opacity-30 z-40"
-              onClick={() => setIsMobileMenuOpen(false)} // 오버레이 클릭 시 메뉴 닫기
+              className="fixed inset-0 bg-black opacity-30 z-40 transition-opacity duration-300 ease-in-out"
+              onClick={() => setIsMobileMenuOpen(false)}
             ></div>
           )}
         </>
       )}
 
+      {/*데스크톱*/}
       {!isMobile && (
         <nav
           className="sticky bg-white top-0 z-50 w-full flex items-center shadow-sm"
