@@ -1,6 +1,14 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+  DropdownMenuGroup,
+} from "@/app/_components/ui/dropdown-menu";
 import { useState, useEffect } from "react";
 
 const NAVBAR_HEIGHT = 72;
@@ -48,10 +56,9 @@ export default function NavBar() {
       method: "POST",
       credentials: "include",
     }).then((response) => {
-      if (response.status === 201) {
-        setIsLoggedIn(false);
-        setIsUserDropdownOpen(false);
-      } else {
+      setIsLoggedIn(false);
+      setIsUserDropdownOpen(false);
+      if (response.status !== 201) {
         console.error("Failed to logout.");
       }
     });
@@ -165,46 +172,38 @@ export default function NavBar() {
             </div>
           ))}
         </div>
-
         <div className="flex items-center gap-4 z-10">
           <Link href="https://easily-dashboard.jojicompany.com">
             <button className="bg-[#FF6B2B] text-white py-2 px-4 rounded-md hover:bg-[#e55a1f]">
               대시보드
             </button>
           </Link>
-
           {/* 로그인 여부에 따른 사용자 정보 */}
-          <div className="relative w-40">
+          <div>
             {isLoading ? null : isLoggedIn ? (
-              <div
-                className="absolute -top-[10px]"
-                onMouseEnter={() => setIsUserDropdownOpen(true)}
-                onMouseLeave={() => setIsUserDropdownOpen(false)}
-              >
-                <button className="text-sm font-semibold text-muted-foreground">
+              <DropdownMenu>
+                <DropdownMenuTrigger className="text-sm font-semibold text-muted-foreground">
                   환영합니다! {userName}님
-                </button>
-                {isUserDropdownOpen && (
-                  <div className="mt-2 bg-white shadow-md rounded-lg py-2 w-40">
-                    <Link
-                      href="/myinfo"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      내 정보
-                    </Link>
-                    <button
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="mt-2 bg-white shadow-md rounded-lg py-2 w-40">
+                  <DropdownMenuGroup>
+                    <DropdownMenuItem className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                      <Link href="/myinfo">네 정보</Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem
                       onClick={handleLogout}
                       className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     >
                       로그아웃
-                    </button>
-                  </div>
-                )}
-              </div>
+                    </DropdownMenuItem>
+                  </DropdownMenuGroup>
+                </DropdownMenuContent>
+              </DropdownMenu>
             ) : (
               <button
-                className="bg-gray-300 text-black py-2 px-4 rounded-md hover:bg-gray-400"
                 onClick={redirectToLogin}
+                className="bg-gray-300 text-black py-2 px-4 rounded-md hover:bg-gray-400"
               >
                 로그인
               </button>

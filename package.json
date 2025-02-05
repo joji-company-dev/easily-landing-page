@@ -7,7 +7,7 @@
   },
   "engineStrict": true,
   "scripts": {
-    "dev": "next dev --turbopack --port=80",
+    "dev": "next dev --experimental-https --turbopack --port=443",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -17,6 +17,7 @@
   "dependencies": {
     "@jojicompany-dev/easily-post-editor": "^0.1.1",
     "@radix-ui/react-accordion": "^1.2.2",
+    "@radix-ui/react-dropdown-menu": "^2.1.5",
     "@radix-ui/react-navigation-menu": "^1.2.3",
     "@radix-ui/react-scroll-area": "^1.2.2",
     "@radix-ui/react-separator": "^1.1.1",
