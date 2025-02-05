@@ -2,6 +2,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { FaBars, FaTimes } from "react-icons/fa";
+import { useMediaQuery } from "react-responsive";
+import { ExpandMore, ExpandLess } from "@mui/icons-material";
 
 const NAVBAR_HEIGHT = 72;
 const DROPDOWN_BAR_HEIGHT = 256;
@@ -13,6 +16,10 @@ export default function NavBar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 여부 상태
   const [isLoading, setIsLoading] = useState(true); //로그인 시도중인 상태
   const [userName, setUserName] = useState(""); // 사용자 이름
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState(null);
+
+  const isMobile = useMediaQuery({ maxWidth: 768 });
 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/profile`, {
@@ -91,13 +98,102 @@ export default function NavBar() {
     },
   ];
 
+  const toggleMenu = (menuLabel) => {
+    setOpenMenu(openMenu === menuLabel ? null : menuLabel);
+  };
+
   return (
     <nav
-      className={` sticky bg-white top-0 z-50 w-full flex items-center shadow-sm`}
+      className={`sticky bg-white top-0 z-50 w-full flex items-center shadow-sm`}
       style={{
         height: `${NAVBAR_HEIGHT}px`,
       }}
     >
+      {/* 모바일 네비게이션 */}
+      {isMobile && (
+        <div className="flex items-center justify-between w-full px-4">
+          {/* 로고 */}
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/logo(2).svg"
+              alt="Easily Beta Logo"
+              width={120}
+              height={40}
+              className="h-10"
+            />
+          </Link>
+
+          {/* 오른쪽 영역: 로그인 버튼 + 햄버거 메뉴 */}
+          <div className="flex items-center gap-4">
+            {/* 로그인 버튼 */}
+            <button
+              className="bg-gray-300 text-black py-2 px-4 rounded-md hover:bg-gray-400"
+              onClick={redirectToLogin}
+            >
+              로그인
+            </button>
+
+            {/* 햄버거 메뉴 버튼 */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="text-2xl"
+            >
+              {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
+            </button>
+          </div>
+        </div>
+      )}
+      {/* 모바일 메뉴 */}
+      {isMobile && isMobileMenuOpen && (
+        <div
+          className={`absolute left-0 w-full bg-white z-50 flex flex-col items-center p-6 shadow-lg`}
+          style={{
+            top: `${NAVBAR_HEIGHT}px`,
+            transform: isMobileMenuOpen ? "translateY(0)" : "translateY(-100%)",
+            opacity: isMobileMenuOpen ? 1 : 0,
+          }}
+        >
+          {menuItems.map((item) => (
+            <div key={item.label} className="w-full items-center">
+              {/* 메인 메뉴 버튼 */}
+              <button
+                onClick={() => toggleMenu(item.label)}
+                className="text-lg font-semibold py-2 w-full"
+              >
+                {item.label}
+                {openMenu === item.label ? (
+                  <ExpandLess className="ml-2" />
+                ) : (
+                  <ExpandMore className="ml-2" />
+                )}
+              </button>
+
+              {openMenu === item.label && (
+                <div className="flex flex-col items-center w-full py-2">
+                  {item.children.map((child) => (
+                    <Link
+                      key={child.href}
+                      href={child.href}
+                      className="py-1 text-gray-700"
+                    >
+                      {child.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+
+          {/* 대시보드 버튼 */}
+          <Link
+            href="https://easily-dashboard.jojicompany.com"
+            className="bg-[#FF6B2B] text-white py-2 px-4 rounded-md hover:bg-[#e55a1f] mt-2"
+          >
+            대시보드
+          </Link>
+        </div>
+      )}
+
       <div
         className={`fixed left-0 bg-white shadow-md rounded-b-lg p-5 w-full
           transition-all duration-300 ease-in-out`}
@@ -107,113 +203,113 @@ export default function NavBar() {
           padding: isMenuDropdownOpen ? "1.25rem" : "0px",
         }}
       ></div>
-
-      <div className="flex items-center justify-between px-6 w-full">
-        {/* 로고 */}
-        <Link href="/" className="flex items-center">
-          <Image
-            src="/logo(2).svg"
-            alt="Easily Beta Logo"
-            width={120}
-            height={40}
-            className="h-10"
-          />
-        </Link>
-
-        {/* 메뉴 */}
-        <div
-          className={`absolute flex items-start gap-28 flex-1 justify-center left-1/2 -translate-x-1/2 w-full`}
-          style={{ top: `${NAVBAR_HEIGHT / 2 - MENU_BUTTON_HEIGHT / 2}px` }}
-          onMouseLeave={() => setIsMenuDropdownOpen(false)}
-        >
-          {menuItems.map((menu, index) => (
-            <div
-              onMouseEnter={() => setIsMenuDropdownOpen(true)}
-              key={index}
-              className={`relative flex flex-col w-14`}
-              style={{
-                gap: `${NAVBAR_HEIGHT / 2 - MENU_BUTTON_HEIGHT / 2}px`,
-              }}
-            >
-              <button
-                className={`text-sm font-semibold text-muted-foreground hover:text-primary transition-colors`}
+      {!isMobile && (
+        <div className="flex items-center justify-between px-6 w-full">
+          {/* 로고 */}
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/logo(2).svg"
+              alt="Easily Beta Logo"
+              width={120}
+              height={40}
+              className="h-10"
+            />
+          </Link>
+          {/* 메뉴 */}
+          <div
+            className={`absolute flex items-start gap-28 flex-1 justify-center left-1/2 -translate-x-1/2 w-full`}
+            style={{ top: `${NAVBAR_HEIGHT / 2 - MENU_BUTTON_HEIGHT / 2}px` }}
+            onMouseLeave={() => setIsMenuDropdownOpen(false)}
+          >
+            {menuItems.map((menu, index) => (
+              <div
+                onMouseEnter={() => setIsMenuDropdownOpen(true)}
+                key={index}
+                className={`relative flex flex-col w-14`}
                 style={{
-                  height: `${MENU_BUTTON_HEIGHT}px`,
+                  gap: `${NAVBAR_HEIGHT / 2 - MENU_BUTTON_HEIGHT / 2}px`,
                 }}
               >
-                <Link href={menu.baseUrl} className="text-left">
-                  {menu.label}
-                </Link>
-              </button>
+                <button
+                  className={`text-sm font-semibold text-muted-foreground hover:text-primary transition-colors`}
+                  style={{
+                    height: `${MENU_BUTTON_HEIGHT}px`,
+                  }}
+                >
+                  <Link href={menu.baseUrl} className="text-left">
+                    {menu.label}
+                  </Link>
+                </button>
 
-              <div
-                key={index}
-                className={`space-y-2 flex flex-col items-center gap-3 transition-opacity duration-200 ease-in-out pt-4
+                <div
+                  key={index}
+                  className={`space-y-2 flex flex-col items-center gap-3 transition-opacity duration-200 ease-in-out pt-4
                       ${isMenuDropdownOpen ? "opacity-100" : "opacity-0"}
                     `}
-              >
-                {menu.children.map((child, subIndex) => (
-                  <Link
-                    key={subIndex}
-                    href={`${menu.baseUrl}${child.href}`}
-                    className="block text-sm text-gray-700 hover:text-primary transition-colors text-left text-nowrap"
-                  >
-                    {child.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="flex items-center gap-4 z-10">
-          <Link href="https://easily-dashboard.jojicompany.com">
-            <button className="bg-[#FF6B2B] text-white py-2 px-4 rounded-md hover:bg-[#e55a1f]">
-              대시보드
-            </button>
-          </Link>
-
-          {/* 로그인 여부에 따른 사용자 정보 */}
-          <div className="relative w-40">
-            {isLoading ? null : isLoggedIn ? (
-              <div>
-                <button
-                  className="text-sm font-semibold text-muted-foreground"
-                  onMouseEnter={() => setIsUserDropdownOpen((prev) => !prev)}
                 >
-                  환영합니다! {userName}님
-                </button>
-                {isUserDropdownOpen && (
-                  <div
-                    className="absolute right-0 mt-2 bg-white shadow-md rounded-lg py-2 w-40"
-                    onMouseLeave={() => setIsUserDropdownOpen(false)}
-                  >
+                  {menu.children.map((child, subIndex) => (
                     <Link
-                      href="/myinfo"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      key={subIndex}
+                      href={`${menu.baseUrl}${child.href}`}
+                      className="block text-sm text-gray-700 hover:text-primary transition-colors text-left text-nowrap"
                     >
-                      내 정보
+                      {child.label}
                     </Link>
-                    <button
-                      onClick={handleLogout}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      로그아웃
-                    </button>
-                  </div>
-                )}
+                  ))}
+                </div>
               </div>
-            ) : (
-              <button
-                className="bg-gray-300 text-black py-2 px-4 rounded-md hover:bg-gray-400"
-                onClick={redirectToLogin}
-              >
-                로그인
+            ))}
+          </div>
+
+          <div className="flex items-center gap-4 z-10">
+            <Link href="https://easily-dashboard.jojicompany.com">
+              <button className="bg-[#FF6B2B] text-white py-2 px-4 rounded-md hover:bg-[#e55a1f]">
+                대시보드
               </button>
-            )}
+            </Link>
+
+            {/* 로그인 여부에 따른 사용자 정보 */}
+            <div className="relative w-40">
+              {isLoading ? null : isLoggedIn ? (
+                <div>
+                  <button
+                    className="text-sm font-semibold text-muted-foreground"
+                    onMouseEnter={() => setIsUserDropdownOpen((prev) => !prev)}
+                  >
+                    환영합니다! {userName}님
+                  </button>
+                  {isUserDropdownOpen && (
+                    <div
+                      className="absolute right-0 mt-2 bg-white shadow-md rounded-lg py-2 w-40"
+                      onMouseLeave={() => setIsUserDropdownOpen(false)}
+                    >
+                      <Link
+                        href="/myinfo"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        내 정보
+                      </Link>
+                      <button
+                        onClick={handleLogout}
+                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        로그아웃
+                      </button>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <button
+                  className="bg-gray-300 text-black py-2 px-4 rounded-md hover:bg-gray-400"
+                  onClick={redirectToLogin}
+                >
+                  로그인
+                </button>
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </nav>
   );
 }
