@@ -179,25 +179,23 @@ export default function NavBar() {
             </button>
           </Link>
           {/* 로그인 여부에 따른 사용자 정보 */}
-          <div>
+          <div className="relative w-40">
             {isLoading ? null : isLoggedIn ? (
               <DropdownMenu>
-                <DropdownMenuTrigger className="text-sm font-semibold text-muted-foreground">
+                <DropdownMenuTrigger className="text-sm font-semibold text-muted-foreground focus:outline-none focus:ring-0">
                   환영합니다! {userName}님
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="mt-2 bg-white shadow-md rounded-lg py-2 w-40">
-                  <DropdownMenuGroup>
-                    <DropdownMenuItem className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                      <Link href="/myinfo">네 정보</Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem
-                      onClick={handleLogout}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      로그아웃
-                    </DropdownMenuItem>
-                  </DropdownMenuGroup>
+                  <DropdownMenuItem className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    <Link href="/myinfo">내 정보</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem
+                    onClick={handleLogout}
+                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    로그아웃
+                  </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
