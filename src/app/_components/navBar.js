@@ -176,18 +176,16 @@ export default function NavBar() {
           {/* 로그인 여부에 따른 사용자 정보 */}
           <div className="relative w-40">
             {isLoading ? null : isLoggedIn ? (
-              <div>
-                <button
-                  className="text-sm font-semibold text-muted-foreground"
-                  onMouseEnter={() => setIsUserDropdownOpen((prev) => !prev)}
-                >
+              <div
+                className="absolute -top-[10px]"
+                onMouseEnter={() => setIsUserDropdownOpen(true)}
+                onMouseLeave={() => setIsUserDropdownOpen(false)}
+              >
+                <button className="text-sm font-semibold text-muted-foreground">
                   환영합니다! {userName}님
                 </button>
                 {isUserDropdownOpen && (
-                  <div
-                    className="absolute right-0 mt-2 bg-white shadow-md rounded-lg py-2 w-40"
-                    onMouseLeave={() => setIsUserDropdownOpen(false)}
-                  >
+                  <div className="mt-2 bg-white shadow-md rounded-lg py-2 w-40">
                     <Link
                       href="/myinfo"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
