@@ -9,13 +9,12 @@ import { FAQList } from "../../_consts/faqList";
 export function FAQSection() {
   return (
     <div className="w-full">
-      <h1 className="font-black text-center text-3xl m-5 font-sans">
+      <h1 className="font-black text-center text-4xl m-5 font-sans">
         자주 묻는 질문
       </h1>
       <Accordion
-        type="single"
+        type="multiple"
         className="item-center m-6 flex flex-col gap-4"
-        collapsible
       >
         {FAQList.map((FAQList) => (
           <AccordionItem key={FAQList.id} value={FAQList.id}>

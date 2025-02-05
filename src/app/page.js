@@ -1,7 +1,6 @@
 "use client";
 
 import { HeroSection } from "./_components/sections/heroSection";
-import { ContactSection } from "./_components/sections/contactSection";
 import { ServiceSection } from "./_components/sections/serviceSection";
 import { FAQSection } from "./_components/sections/faqSection";
 import { ReviewSection } from "./_components/sections/reviewSection";
