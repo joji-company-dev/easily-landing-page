@@ -182,65 +182,63 @@ export default function NavBar() {
 
             {/* 모바일 메뉴 */}
             {isMobileMenuOpen && (
-              <>
-                <div
-                  className={`absolute left-0 w-full bg-white z-50 flex flex-col items-center p-6 shadow-lg transition-all duration-300 ease-in-out`}
-                  style={{
-                    top: `${NAVBAR_HEIGHT}px`,
-                    transform: isMobileMenuOpen
-                      ? "translateY(0)"
-                      : "translateY(-100%)",
-                    opacity: isMobileMenuOpen ? 1 : 0,
-                  }}
-                >
-                  {mobileMenuItems.map((item) => (
-                    <div key={item.label} className="w-full items-center">
-                      {/* 메인 메뉴 버튼 */}
-                      <button
-                        onClick={() => toggleMenu(item.label)}
-                        className="text-lg font-semibold py-2 w-full"
-                      >
-                        {item.label}
-                        {openMenu === item.label ? (
-                          <ExpandLess className="ml-2" />
-                        ) : (
-                          <ExpandMore className="ml-2" />
-                        )}
-                      </button>
-
-                      {openMenu === item.label && (
-                        <div className="flex flex-col items-center w-full py-2">
-                          {item.children.map((child) => (
-                            <Link
-                              key={child.href}
-                              href={child.href}
-                              className="py-1 text-gray-700"
-                            >
-                              {child.label}
-                            </Link>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  ))}
-
-                  {/* 대시보드 버튼 */}
-                  <Link
-                    href="https://easily-dashboard.jojicompany.com"
-                    className="bg-[#FF6B2B] text-white py-2 px-4 rounded-md hover:bg-[#e55a1f] mt-2"
-                  >
-                    대시보드
-                  </Link>
-                  {isLoggedIn && (
+              <div
+                className={`absolute left-0 w-full bg-white z-50 flex flex-col items-center p-6 shadow-lg transition-all duration-300 ease-in-out`}
+                style={{
+                  top: `${NAVBAR_HEIGHT}px`,
+                  transform: isMobileMenuOpen
+                    ? "translateY(0)"
+                    : "translateY(-100%)",
+                  opacity: isMobileMenuOpen ? 1 : 0,
+                }}
+              >
+                {mobileMenuItems.map((item) => (
+                  <div key={item.label} className="w-full items-center">
+                    {/* 메인 메뉴 버튼 */}
                     <button
-                      onClick={handleLogout}
-                      className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 mt-2"
+                      onClick={() => toggleMenu(item.label)}
+                      className="text-lg font-semibold py-2 w-full"
                     >
-                      로그아웃
+                      {item.label}
+                      {openMenu === item.label ? (
+                        <ExpandLess className="ml-2" />
+                      ) : (
+                        <ExpandMore className="ml-2" />
+                      )}
                     </button>
-                  )}
-                </div>
-              </>
+
+                    {openMenu === item.label && (
+                      <div className="flex flex-col items-center w-full py-2">
+                        {item.children.map((child) => (
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            className="py-1 text-gray-700"
+                          >
+                            {child.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+
+                {/* 대시보드 버튼 */}
+                <Link
+                  href="https://easily-dashboard.jojicompany.com"
+                  className="bg-[#FF6B2B] text-white py-2 px-4 rounded-md hover:bg-[#e55a1f] mt-2"
+                >
+                  대시보드
+                </Link>
+                {isLoggedIn && (
+                  <button
+                    onClick={handleLogout}
+                    className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 mt-2"
+                  >
+                    로그아웃
+                  </button>
+                )}
+              </div>
             )}
           </nav>
 
