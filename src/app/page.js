@@ -22,16 +22,18 @@ export default function Home() {
       >
         <ServiceSection />
       </section>
-      {/* Contact Section */}
-      <section id="contact" className="min-h-screen flex items-center justify-center bg-gray-100">
-        <ContactSection />
-      </section>
       {/* Review Section */}
-      <section id="review" className="h-1/2 flex items-center justify-center bg-gray-100">
-        <ReviewSection/>
+      <section
+        id="review"
+        className="h-1/2 flex items-center justify-center bg-gray-100"
+      >
+        <ReviewSection />
       </section>
       {/* FAQ Section */}
-      <section id="faq" className="h-1/2 flex items-center justify-center bg-gray-100">
+      <section
+        id="faq"
+        className="h-1/2 flex items-center justify-center bg-gray-100"
+      >
         <FAQSection />
       </section>
       <section

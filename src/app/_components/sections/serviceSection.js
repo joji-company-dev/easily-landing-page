@@ -24,15 +24,15 @@ export function ServiceSection() {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-24 text-center bg-gradient-to-b text-primary">
-      <h2 className="text-5xl font-extrabold mb-12">✨ 이즐리 서비스 ✨</h2>
+    <div className="max-w-7xl mx-auto px-6 py-24 text-center bg-gradient-to-b text-black">
+      <h2 className="text-5xl font-extrabold mb-12">✨ 이즐리 ✨</h2>
       {serviceItem.map((item) => (
         <div
           key={item.id}
-          className="relative bg-opacity-90 rounded-2xl shadow-2xl p-10 mb-16 max-w-6xl mx-auto transition-transform duration-300 hover:scale-105"
+          className="relative bg-opacity-90 rounded-2xl shadow-sm p-10 mb-16 max-w-6xl mx-auto transition-transform duration-300 hover:scale-105"
         >
           <h2 className="text-4xl font-bold mb-4">{item.title}</h2>
-          <p className="text-lg text-primary mb-6">{item.subtitle}</p>
+          <p className="text-lg text-black mb-6">{item.subtitle}</p>
           <div className="relative w-full aspect-video overflow-hidden rounded-lg shadow-lg">
             <video
               className="w-full h-full object-cover"
