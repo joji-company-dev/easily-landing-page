@@ -108,7 +108,6 @@ export default function NavBar() {
         { label: "서비스", href: "#service" },
         { label: "FAQ", href: "#faq" },
         { label: "구독", href: "#subscribe" },
-        { label: "문의", href: "#contact" },
       ],
     },
     {

@@ -42,12 +42,6 @@ export default function Home() {
       >
         <SubscribeSection />
       </section>
-      <section
-        id="contact"
-        className="min-h-screen flex items-center justify-center bg-gray-100"
-      >
-        <ContactSection />
-      </section>
     </div>
   );
 }
