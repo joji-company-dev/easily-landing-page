@@ -92,7 +92,7 @@ export default function NavBar() {
       label: "공지사항",
       baseUrl: "/post",
       children: [
-        { label: "공지사항", href: "/post" },
+        { label: "공지사항", href: "/" },
         { label: "게시판", href: "#board" },
       ],
     },
