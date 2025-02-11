@@ -14,6 +14,7 @@ import {
   PaginationNext,
 } from "@/app/_components/ui/pagination";
 import usePagination from "../_components/hooks/usePagination";
+import { useFormatDate } from "../_components/hooks/useFormatDate";
 
 export default function NoticePage() {
   const [posts, setPosts] = useState([]);
@@ -42,11 +43,6 @@ export default function NoticePage() {
     setPosts(notice.data);
     setTotalPages(notice.meta.totalPages);
     setLoading(false);
-  };
-
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toISOString().split("T")[0];
   };
 
   useEffect(() => {
@@ -89,7 +85,7 @@ export default function NoticePage() {
               </div>
               <div className="text-sm text-gray-500 md:text-right md:mt-0">
                 <TypographyP className="text-gray-400">
-                  {formatDate(post.createdAt)}
+                  {useFormatDate(post.createdAt)}
                 </TypographyP>
               </div>
             </CardContent>
