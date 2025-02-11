@@ -2,63 +2,16 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { X, TableOfContents, ChevronDown, ChevronUp } from "lucide-react";
+import useAuth from "./hooks/useAuth";
 
 const NAVBAR_HEIGHT = 72;
 
 export default function MobileNavbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 여부 상태
-  const [isLoading, setIsLoading] = useState(true); //로그인 시도중인 상태
-  const [userName, setUserName] = useState(""); // 사용자 이름
 
-  useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/profile`, {
-      method: "GET",
-      credentials: "include",
-    })
-      .then((response) => {
-        if (response.status === 200) {
-          return response.json();
-        } else if (response.status === 401) {
-          throw new Error("Unauthorized");
-        } else {
-          throw new Error("Unexpected error");
-        }
-      })
-      .then((data) => {
-        setIsLoggedIn(true);
-        setUserName(data.name);
-      })
-      .catch((error) => {
-        if (error.message === "Unauthorized") {
-          setIsLoggedIn(false);
-        }
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, []);
-
-  const redirectToLogin = () => {
-    window.location.href =
-      "https://easily-dashboard.jojicompany.com/login?fallback=" +
-      window.location.href;
-  };
-
-  const handleLogout = () => {
-    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/logout`, {
-      method: "POST",
-      credentials: "include",
-    }).then((response) => {
-      if (response.status === 201) {
-        setIsLoggedIn(false);
-        setIsUserDropdownOpen(false);
-      } else {
-        console.error("Failed to logout.");
-      }
-    });
-  };
+  const { isLoggedIn, isLoading, userName, redirectToLogin, handleLogout } =
+    useAuth();
 
   const toggleMenu = (menu) => {
     setOpenMenu(openMenu === menu ? null : menu);
