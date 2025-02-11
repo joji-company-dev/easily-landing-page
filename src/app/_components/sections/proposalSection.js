@@ -38,8 +38,8 @@ export function ProposalSection() {
 
   useEffect(() => {
     if (isVisible) {
-      const targetNum = 5000;
-      const duration = 6000;
+      const targetNum = 10000000;
+      const duration = 9000;
       const increment = targetNum / (duration / 30);
 
       let currentNum = 0;
@@ -57,6 +57,20 @@ export function ProposalSection() {
     }
   }, [isVisible]);
 
+  const renderDigits = (num) => {
+    return num
+      .toString()
+      .split("")
+      .map((digit, index) => (
+        <Card
+          key={index}
+          className="w-12 h-16 m-1 flex items-center justify-center"
+        >
+          <CardContent className="text-4xl font-bold">{digit}</CardContent>
+        </Card>
+      ));
+  };
+
   return (
     <div ref={sectionRef}>
       <h1 className="font-black text-center text-6xl m-10 font-serif">
@@ -68,8 +82,12 @@ export function ProposalSection() {
             <CarouselItem key={proposal.id}>
               <div className="p-1">
                 <Card>
-                  <CardContent className="flex aspect-square items-center justify-center">
-                    <img src={proposal.image} alt={`${proposal.id}번 이미지`} />
+                  <CardContent className="flex aspect-auto items-center justify-center">
+                    <img
+                      src={proposal.image}
+                      alt={`${proposal.id}번 이미지`}
+                      className="items-center w-1/2 h-1/2"
+                    />
                   </CardContent>
                 </Card>
               </div>
@@ -83,9 +101,9 @@ export function ProposalSection() {
         <h1 className="font-black text-center text-6xl m-10 font-sans">
           생성된 기획안 수
         </h1>
-        <p className="font-black text-center text-5xl m-10 font-serif">
-          {count.toLocaleString()}+
-        </p>
+        <div className="flex justify-center text-center">
+          {renderDigits(count)}
+        </div>
       </div>
     </div>
   );
