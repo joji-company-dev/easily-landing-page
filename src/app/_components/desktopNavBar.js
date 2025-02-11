@@ -24,6 +24,7 @@ const DesktopNavbar = ({
       children: [
         { label: "소개", href: "#hero" },
         { label: "서비스", href: "#service" },
+        { label: "예시", href: "#proposal" },
         { label: "FAQ", href: "#faq" },
         { label: "구독", href: "#subscribe" },
       ],
