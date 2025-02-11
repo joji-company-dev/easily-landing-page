@@ -2,9 +2,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
 import { useMediaQuery } from "react-responsive";
-import { ExpandMore, ExpandLess } from "@mui/icons-material";
+import { ChevronDown, ChevronUp, TableOfContents, X } from "lucide-react";
 
 const NAVBAR_HEIGHT = 72;
 const DROPDOWN_BAR_HEIGHT = 256;
@@ -177,7 +176,7 @@ export default function NavBar() {
                   }}
                   className="text-2xl test"
                 >
-                  {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
+                  {isMobileMenuOpen ? <X /> : <TableOfContents />}
                 </button>
               </div>
             </div>
@@ -198,13 +197,13 @@ export default function NavBar() {
                   {/* 메인 메뉴 버튼 */}
                   <button
                     onClick={() => toggleMenu(item.label)}
-                    className="text-lg font-semibold py-2 w-full"
+                    className="text-lg font-semibold py-2 w-full flex justify-center items-center"
                   >
                     {item.label}
                     {openMenu === item.label ? (
-                      <ExpandLess className="ml-2" />
+                      <ChevronDown className="ml-2" />
                     ) : (
-                      <ExpandMore className="ml-2" />
+                      <ChevronUp className="ml-2" />
                     )}
                   </button>
 
