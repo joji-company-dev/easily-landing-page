@@ -14,7 +14,7 @@ import {
   PaginationNext,
 } from "@/app/_components/ui/pagination";
 import usePagination from "../_components/hooks/usePagination";
-import { useFormatDate } from "../_components/hooks/useFormatDate";
+import { formatDate } from "../_utils/formatDate";
 
 export default function NoticePage() {
   const [posts, setPosts] = useState([]);
@@ -85,7 +85,7 @@ export default function NoticePage() {
               </div>
               <div className="text-sm text-gray-500 md:text-right md:mt-0">
                 <TypographyP className="text-gray-400">
-                  {useFormatDate(post.createdAt)}
+                  {formatDate(post.createdAt)}
                 </TypographyP>
               </div>
             </CardContent>
