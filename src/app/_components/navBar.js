@@ -77,7 +77,6 @@ export default function NavBar() {
         { label: "서비스", href: "#service" },
         { label: "FAQ", href: "#faq" },
         { label: "구독", href: "#subscribe" },
-        { label: "문의", href: "#contact" },
       ],
     },
     {
@@ -92,7 +91,7 @@ export default function NavBar() {
       label: "공지사항",
       baseUrl: "/post",
       children: [
-        { label: "공지사항", href: "/post" },
+        { label: "공지사항", href: "/" },
         { label: "게시판", href: "#board" },
       ],
     },
@@ -108,7 +107,6 @@ export default function NavBar() {
         { label: "서비스", href: "#service" },
         { label: "FAQ", href: "#faq" },
         { label: "구독", href: "#subscribe" },
-        { label: "문의", href: "#contact" },
       ],
     },
     {
@@ -142,7 +140,7 @@ export default function NavBar() {
             className="sticky bg-white top-0 z-50 w-full flex items-center shadow-sm"
             style={{ height: `${NAVBAR_HEIGHT}px` }}
           >
-            <div className="flex items-center justify-between w-full px-4">
+            <div className="flex items-center justify-between w-full px-4 z-50">
               {/* 로고 */}
               <Link href="/" className="flex items-center">
                 <Image
@@ -172,8 +170,12 @@ export default function NavBar() {
 
                 {/* 햄버거 메뉴 버튼 */}
                 <button
-                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                  className="text-2xl"
+                  onClick={() => {
+                    setIsMobileMenuOpen((prev) => {
+                      return !prev;
+                    });
+                  }}
+                  className="text-2xl test"
                 >
                   {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
                 </button>
@@ -181,65 +183,63 @@ export default function NavBar() {
             </div>
 
             {/* 모바일 메뉴 */}
-            {isMobileMenuOpen && (
-              <div
-                className={`absolute left-0 w-full bg-white z-50 flex flex-col items-center p-6 shadow-lg transition-all duration-300 ease-in-out`}
-                style={{
-                  top: `${NAVBAR_HEIGHT}px`,
-                  transform: isMobileMenuOpen
-                    ? "translateY(0)"
-                    : "translateY(-100%)",
-                  opacity: isMobileMenuOpen ? 1 : 0,
-                }}
-              >
-                {mobileMenuItems.map((item) => (
-                  <div key={item.label} className="w-full items-center">
-                    {/* 메인 메뉴 버튼 */}
-                    <button
-                      onClick={() => toggleMenu(item.label)}
-                      className="text-lg font-semibold py-2 w-full"
-                    >
-                      {item.label}
-                      {openMenu === item.label ? (
-                        <ExpandLess className="ml-2" />
-                      ) : (
-                        <ExpandMore className="ml-2" />
-                      )}
-                    </button>
 
-                    {openMenu === item.label && (
-                      <div className="flex flex-col items-center w-full py-2">
-                        {item.children.map((child) => (
-                          <Link
-                            key={child.href}
-                            href={child.href}
-                            className="py-1 text-gray-700"
-                          >
-                            {child.label}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ))}
-
-                {/* 대시보드 버튼 */}
-                <Link
-                  href="https://easily-dashboard.jojicompany.com"
-                  className="bg-[#FF6B2B] text-white py-2 px-4 rounded-md hover:bg-[#e55a1f] mt-2"
-                >
-                  대시보드
-                </Link>
-                {isLoggedIn && (
+            <div
+              className={`absolute left-0 w-full bg-white z-40 flex flex-col items-center p-6 shadow-lg 
+                 duration-300 ease-in-out ${
+                   isMobileMenuOpen
+                     ? "opacity-100 translate-y-0"
+                     : "opacity-0 -translate-y-full"
+                 }`}
+              style={{ top: `${NAVBAR_HEIGHT}px` }}
+            >
+              {mobileMenuItems.map((item) => (
+                <div key={item.label} className="w-full items-center">
+                  {/* 메인 메뉴 버튼 */}
                   <button
-                    onClick={handleLogout}
-                    className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 mt-2"
+                    onClick={() => toggleMenu(item.label)}
+                    className="text-lg font-semibold py-2 w-full"
                   >
-                    로그아웃
+                    {item.label}
+                    {openMenu === item.label ? (
+                      <ExpandLess className="ml-2" />
+                    ) : (
+                      <ExpandMore className="ml-2" />
+                    )}
                   </button>
-                )}
-              </div>
-            )}
+
+                  {openMenu === item.label && (
+                    <div className="flex flex-col items-center w-full py-2">
+                      {item.children.map((child) => (
+                        <Link
+                          key={child.href}
+                          href={child.href}
+                          className="py-1 text-gray-700"
+                        >
+                          {child.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+
+              {/* 대시보드 버튼 */}
+              <Link
+                href="https://easily-dashboard.jojicompany.com"
+                className="bg-[#FF6B2B] text-white py-2 px-4 rounded-md hover:bg-[#e55a1f] mt-2"
+              >
+                대시보드
+              </Link>
+              {isLoggedIn && (
+                <button
+                  onClick={handleLogout}
+                  className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 mt-2"
+                >
+                  로그아웃
+                </button>
+              )}
+            </div>
           </nav>
 
           {/* 오버레이 배경 */}
