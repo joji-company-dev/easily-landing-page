@@ -1,4 +1,5 @@
 "use client";
+
 import { useMediaQuery } from "react-responsive";
 import MobileNavbar from "./mobileNavBar";
 import DesktopNavbar from "./desktopNavBar";
@@ -31,5 +32,4 @@ export default function NavBar() {
         />
       )}
     </>
-  );
 }
