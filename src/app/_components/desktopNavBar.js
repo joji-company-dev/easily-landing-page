@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import useAuth from "./hooks/useAuth";
+import { usePathname } from "next/navigation";
 
 const NAVBAR_HEIGHT = 72;
 const DROPDOWN_BAR_HEIGHT = 256;
@@ -16,6 +16,7 @@ const DesktopNavbar = ({
 }) => {
   const [isMenuDropdownOpen, setIsMenuDropdownOpen] = useState(false);
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
+  const [selectedMenu, setSelectedMenu] = useState(null);
 
   const menuItems = [
     {
@@ -89,27 +90,32 @@ const DesktopNavbar = ({
               }}
             >
               <button
-                className={`text-sm font-semibold text-muted-foreground hover:text-primary transition-colors`}
-                style={{
-                  height: `${MENU_BUTTON_HEIGHT}px`,
-                }}
+                className={`text-sm font-semibold transition-colors ${
+                  selectedMenu === menu.label
+                    ? "text-primary font-bold"
+                    : "text-muted-foreground"
+                } hover:text-primary`}
+                style={{ height: `${MENU_BUTTON_HEIGHT}px` }}
+                onClick={() => setSelectedMenu(menu.label)}
               >
                 <Link href={menu.baseUrl} className="text-left">
                   {menu.label}
                 </Link>
               </button>
-
               <div
-                key={index}
                 className={`space-y-2 flex flex-col items-center gap-3 transition-opacity duration-200 ease-in-out pt-4
-                      ${isMenuDropdownOpen ? "opacity-100" : "opacity-0"}
-                    `}
+                      ${isMenuDropdownOpen ? "opacity-100" : "opacity-0"}`}
               >
                 {menu.children.map((child, subIndex) => (
                   <Link
                     key={subIndex}
                     href={`${menu.baseUrl}${child.href}`}
-                    className="block text-sm text-gray-700 hover:text-primary transition-colors text-left text-nowrap"
+                    className={`block text-sm text-gray-700 hover:text-primary transition-colors text-left text-nowrap ${
+                      selectedMenu === child.label
+                        ? "text-primary font-bold underline underline-offset-4"
+                        : "text-muted-foreground"
+                    } hover:text-primary`}
+                    onClick={() => setSelectedMenu(child.label)}
                   >
                     {child.label}
                   </Link>
