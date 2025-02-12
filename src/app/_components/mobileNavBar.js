@@ -6,12 +6,15 @@ import useAuth from "./hooks/useAuth";
 
 const NAVBAR_HEIGHT = 72;
 
-export default function MobileNavbar() {
+export default function MobileNavbar({
+  isLoggedIn,
+  isLoading,
+  userName,
+  redirectToLogin,
+  handleLogout,
+}) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState(null);
-
-  const { isLoggedIn, isLoading, userName, redirectToLogin, handleLogout } =
-    useAuth();
 
   const toggleMenu = (menu) => {
     setOpenMenu(openMenu === menu ? null : menu);

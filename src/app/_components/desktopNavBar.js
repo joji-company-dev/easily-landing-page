@@ -7,12 +7,15 @@ const NAVBAR_HEIGHT = 72;
 const DROPDOWN_BAR_HEIGHT = 256;
 const MENU_BUTTON_HEIGHT = 20;
 
-const DesktopNavbar = () => {
+const DesktopNavbar = ({
+  isLoggedIn,
+  isLoading,
+  userName,
+  redirectToLogin,
+  handleLogout,
+}) => {
   const [isMenuDropdownOpen, setIsMenuDropdownOpen] = useState(false);
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
-
-  const { isLoggedIn, isLoading, userName, redirectToLogin, handleLogout } =
-    useAuth();
 
   const menuItems = [
     {
