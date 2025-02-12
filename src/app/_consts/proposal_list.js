@@ -19,12 +19,4 @@ export const PROPOSAL_LIST = [
     id: 5,
     image: "https://picsum.photos/200/300/?blur",
   },
-  {
-    id: 6,
-    image: "https://picsum.photos/id/870/200/300?grayscale&blur=2",
-  },
-  {
-    id: 7,
-    image: "https://picsum.photos/200/300.jpg",
-  },
 ];
