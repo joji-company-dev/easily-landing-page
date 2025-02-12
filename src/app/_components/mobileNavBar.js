@@ -1,8 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { X, TableOfContents, ChevronDown, ChevronUp } from "lucide-react";
-import useAuth from "./hooks/useAuth";
 
 const NAVBAR_HEIGHT = 72;
 
@@ -15,6 +14,7 @@ export default function MobileNavbar({
 }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState(null);
+  const [selectedMenu, setSelectedMenu] = useState(null);
 
   const toggleMenu = (menu) => {
     setOpenMenu(openMenu === menu ? null : menu);
@@ -113,7 +113,9 @@ export default function MobileNavbar({
               {/* 메인 메뉴 버튼 */}
               <button
                 onClick={() => toggleMenu(item.label)}
-                className="text-lg font-semibold py-2 w-full flex justify-center items-center"
+                className={
+                  "text-lg font-semibold py-2 w-full flex justify-center items-center"
+                }
               >
                 {item.label}
                 {openMenu === item.label ? (
@@ -129,7 +131,8 @@ export default function MobileNavbar({
                     <Link
                       key={child.href}
                       href={child.href}
-                      className="py-1 text-gray-700"
+                      onClick={() => setSelectedMenu(child.label)}
+                      className={`py-1 text-gray-700 ${selectedMenu === child.label ? "text-primary" : "text-gray-900"}`}
                     >
                       {child.label}
                     </Link>
