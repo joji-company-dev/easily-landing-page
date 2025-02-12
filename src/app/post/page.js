@@ -14,6 +14,7 @@ import {
   PaginationNext,
 } from "@/app/_components/ui/pagination";
 import usePagination from "../_components/hooks/usePagination";
+import { formatDate } from "../_utils/formatDate";
 
 export default function NoticePage() {
   const [posts, setPosts] = useState([]);
@@ -82,16 +83,13 @@ export default function NoticePage() {
                   {post.commentCount}
                 </TypographyP>
               </div>
-              <div className="text-sm text-gray-500 md:text-right mt-4 md:mt-0">
+              <div className="text-sm text-gray-500 md:text-right md:mt-0">
                 <TypographyP className="text-gray-400">
-                  {post.createdAt}
-                </TypographyP>
-                <TypographyP className="text-gray-400">
-                  {post.category}
+                  {formatDate(post.createdAt)}
                 </TypographyP>
               </div>
             </CardContent>
-            <div className="flex justify-end mt-4">
+            <div className="flex justify-end">
               <Button
                 onClick={() => router.push(`/postDetail/${post.id}`)}
                 variant="outline"
