@@ -10,10 +10,26 @@ export default function NavBar() {
 
   return (
     <>
-      {isMobile && <MobileNavbar {...auth} />}
+      {isMobile && (
+        <MobileNavbar
+          isLoggedIn={auth.isLoggedIn}
+          isLoading={auth.isLoading}
+          userName={auth.userName}
+          onLoginButtonClick={auth.redirectToLogin}
+          onLogoutButtonClick={auth.handleLogout}
+        />
+      )}
 
       {/*데스크톱*/}
-      {!isMobile && <DesktopNavbar {...auth} />}
+      {!isMobile && (
+        <DesktopNavbar
+          isLoggedIn={auth.isLoggedIn}
+          isLoading={auth.isLoading}
+          userName={auth.userName}
+          onLoginButtonClick={auth.redirectToLogin}
+          onLogoutButtonClick={auth.handleLogout}
+        />
+      )}
     </>
   );
 }

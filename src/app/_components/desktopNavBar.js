@@ -11,8 +11,8 @@ const DesktopNavbar = ({
   isLoggedIn,
   isLoading,
   userName,
-  redirectToLogin,
-  handleLogout,
+  onLoginButtonClick,
+  onLogoutButtonClick,
 }) => {
   const [isMenuDropdownOpen, setIsMenuDropdownOpen] = useState(false);
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
@@ -148,7 +148,7 @@ const DesktopNavbar = ({
                       내 정보
                     </Link>
                     <button
-                      onClick={handleLogout}
+                      onClick={onLogoutButtonClick}
                       className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     >
                       로그아웃
@@ -161,7 +161,7 @@ const DesktopNavbar = ({
                 className="bg-gray-300 text-black py-2 px-4 rounded-md hover:bg-gray-400"
                 onClick={() => {
                   console.log("로그인 버튼 클릭됨");
-                  redirectToLogin();
+                  onLoginButtonClick();
                 }}
               >
                 로그인

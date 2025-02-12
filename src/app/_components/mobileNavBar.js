@@ -10,8 +10,8 @@ export default function MobileNavbar({
   isLoggedIn,
   isLoading,
   userName,
-  redirectToLogin,
-  handleLogout,
+  onLoginButtonClick,
+  onLogoutButtonClick,
 }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState(null);
@@ -78,7 +78,7 @@ export default function MobileNavbar({
             ) : (
               <button
                 className="bg-gray-300 text-black py-2 px-4 rounded-md hover:bg-gray-400"
-                onClick={redirectToLogin}
+                onClick={onLoginButtonClick}
               >
                 로그인
               </button>
@@ -148,7 +148,7 @@ export default function MobileNavbar({
           </Link>
           {isLoggedIn && (
             <button
-              onClick={handleLogout}
+              onClick={onLogoutButtonClick}
               className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 mt-2"
             >
               로그아웃
