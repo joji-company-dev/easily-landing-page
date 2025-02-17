@@ -23,13 +23,13 @@ export default function Home() {
       </section>
       <section
         id="proposal"
-        className="min-h-screen flex items-center justify-center bg-gray-100"
+        className="min-h-screen flex items-center justify-center bg-white"
       >
         <ProposalSection />
       </section>
       <section
         id="faq"
-        className="h-1/2 flex items-center justify-center bg-gray-100"
+        className="min-h-screen flex items-center justify-center bg-white"
       >
         <FAQSection />
       </section>
