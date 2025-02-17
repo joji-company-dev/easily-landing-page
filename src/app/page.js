@@ -21,14 +21,12 @@ export default function Home() {
       >
         <ServiceSection />
       </section>
-      {/* Review Section */}
       <section
         id="review"
         className="h-1/2 flex items-center justify-center bg-gray-100"
       >
         <ReviewSection />
       </section>
-      {/* FAQ Section */}
       <section
         id="faq"
         className="h-1/2 flex items-center justify-center bg-gray-100"
