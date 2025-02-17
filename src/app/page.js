@@ -3,7 +3,7 @@
 import { HeroSection } from "./_components/sections/heroSection";
 import { ServiceSection } from "./_components/sections/serviceSection";
 import { FAQSection } from "./_components/sections/faqSection";
-import { ReviewSection } from "./_components/sections/reviewSection";
+import { ProposalSection } from "./_components/sections/proposalSection";
 import { SubscribeSection } from "./_components/sections/subscribeSection";
 
 export default function Home() {
@@ -21,17 +21,15 @@ export default function Home() {
       >
         <ServiceSection />
       </section>
-      {/* Review Section */}
       <section
-        id="review"
-        className="h-1/2 flex items-center justify-center bg-gray-100"
+        id="proposal"
+        className="min-h-screen flex items-center justify-center bg-white"
       >
-        <ReviewSection />
+        <ProposalSection />
       </section>
-      {/* FAQ Section */}
       <section
         id="faq"
-        className="h-1/2 flex items-center justify-center bg-gray-100"
+        className="min-h-screen flex items-center justify-center bg-white"
       >
         <FAQSection />
       </section>
