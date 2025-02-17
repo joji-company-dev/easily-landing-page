@@ -17,7 +17,6 @@ const DesktopNavbar = ({
   const { activeSectionId } = useActiveSectionContext();
   const [isMenuDropdownOpen, setIsMenuDropdownOpen] = useState(false);
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
-  const [selectedMenu, setSelectedMenu] = useState(null);
 
   const menuItems = [
     {
@@ -92,13 +91,10 @@ const DesktopNavbar = ({
               }}
             >
               <button
-                className={`text-sm font-semibold transition-colors ${
-                  selectedMenu === menu.label
-                    ? "text-primary font-bold"
-                    : "text-muted-foreground"
-                } hover:text-primary`}
+                className={
+                  "text-sm font-semibold transition-colors text-muted-foreground hover:text-primary"
+                }
                 style={{ height: `${MENU_BUTTON_HEIGHT}px` }}
-                onClick={() => setSelectedMenu(menu.label)}
               >
                 <Link href={menu.baseUrl} className="text-left">
                   {menu.label}
