@@ -28,6 +28,7 @@ export default function MobileNavbar({
         { label: "홈", href: "/" },
         { label: "소개", href: "#hero" },
         { label: "서비스", href: "#service" },
+        { label: "이용후기", href: "#review" },
         { label: "FAQ", href: "#faq" },
         { label: "구독", href: "#subscribe" },
       ],
