@@ -3,7 +3,7 @@ import { REVIEW_LIST } from "../../_consts/review_list";
 
 export function ReviewSection() {
   return (
-    <section aria-label="사용자 후기" className="w-full">
+    <section aria-label="사용자 후기" className="w-full py-10 mt-10">
       <h1 className="font-black text-center text-3xl m-5 font-sans">
         많은 고객에게 사랑받고 있어요
       </h1>
