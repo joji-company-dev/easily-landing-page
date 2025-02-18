@@ -4,7 +4,7 @@ import Image from "next/image";
 import useAuth from "./hooks/useAuth";
 
 const NAVBAR_HEIGHT = 72;
-const DROPDOWN_BAR_HEIGHT = 250;
+const DROPDOWN_BAR_HEIGHT = 256;
 const MENU_BUTTON_HEIGHT = 20;
 
 const DesktopNavbar = ({
