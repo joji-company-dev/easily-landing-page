@@ -7,6 +7,9 @@ const ActiveSectionContext = createContext({
   setActiveSectionId: () => {},
 });
 
+const initialValue =
+  typeof window !== "undefined" ? window.location.hash.replace("#", "") : "";
+
 export const useActiveSectionContext = () => {
   const { activeSectionId, setActiveSectionId } =
     useContext(ActiveSectionContext);
@@ -14,9 +17,7 @@ export const useActiveSectionContext = () => {
 };
 
 export const ActiveSectionProvider = ({ children }) => {
-  const [activeSectionId, setActiveSectionId] = useState(
-    window.location.hash.replace("#", "")
-  );
+  const [activeSectionId, setActiveSectionId] = useState(initialValue);
 
   const handleSetActiveSectionId = (id) => {
     setActiveSectionId(id);
