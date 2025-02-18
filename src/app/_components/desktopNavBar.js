@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import useAuth from "./hooks/useAuth";
+import { useActiveSectionContext } from "./contexts/activeSectionContext";
 
 const NAVBAR_HEIGHT = 72;
 const DROPDOWN_BAR_HEIGHT = 256;
@@ -14,6 +14,7 @@ const DesktopNavbar = ({
   onLoginButtonClick,
   onLogoutButtonClick,
 }) => {
+  const { activeSectionId } = useActiveSectionContext();
   const [isMenuDropdownOpen, setIsMenuDropdownOpen] = useState(false);
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
 
@@ -41,7 +42,7 @@ const DesktopNavbar = ({
       label: "공지사항",
       baseUrl: "/post",
       children: [
-        { label: "공지사항", href: "/" },
+        { label: "공지사항", href: "#notice" },
         { label: "게시판", href: "#board" },
       ],
     },
@@ -53,8 +54,7 @@ const DesktopNavbar = ({
       style={{ height: `${NAVBAR_HEIGHT}px` }}
     >
       <div
-        className={`fixed left-0 bg-white shadow-md rounded-b-lg p-5 w-full
-          transition-all duration-300 ease-in-out`}
+        className={`fixed left-0 bg-white shadow-md rounded-b-lg p-5 w-full transition-all duration-300 ease-in-out`}
         style={{
           top: `${NAVBAR_HEIGHT}px`,
           height: isMenuDropdownOpen ? `${DROPDOWN_BAR_HEIGHT}px` : "0px",
@@ -72,6 +72,7 @@ const DesktopNavbar = ({
             className="h-10"
           />
         </Link>
+
         {/* 메뉴 */}
         <div
           className={`absolute flex items-start gap-28 flex-1 justify-center left-1/2 -translate-x-1/2 w-full`}
@@ -90,10 +91,10 @@ const DesktopNavbar = ({
               }}
             >
               <button
-                className={`text-sm font-semibold text-muted-foreground hover:text-primary transition-colors`}
-                style={{
-                  height: `${MENU_BUTTON_HEIGHT}px`,
-                }}
+                className={
+                  "text-sm font-semibold transition-colors text-muted-foreground hover:text-primary"
+                }
+                style={{ height: `${MENU_BUTTON_HEIGHT}px` }}
               >
                 <Link href={menu.baseUrl} className="text-left">
                   {menu.label}
@@ -103,14 +104,17 @@ const DesktopNavbar = ({
               <div
                 key={index}
                 className={`space-y-2 flex flex-col items-center gap-3 transition-opacity duration-200 ease-in-out pt-4
-                      ${isMenuDropdownOpen ? "opacity-100" : "opacity-0"}
-                    `}
+                      ${isMenuDropdownOpen ? "opacity-100" : "opacity-0"}`}
               >
                 {menu.children.map((child, subIndex) => (
                   <Link
                     key={subIndex}
-                    href={`${menu.baseUrl}${child.href}`}
-                    className="block text-sm text-gray-700 hover:text-primary transition-colors text-left text-nowrap"
+                    href={menu.baseUrl + child.href}
+                    className={`block text-sm text-gray-700 hover:text-primary transition-colors text-left text-nowrap ${
+                      activeSectionId === child.href.replace("#", "")
+                        ? "text-primary font-bold underline underline-offset-4"
+                        : "text-muted-foreground"
+                    } hover:text-primary`}
                   >
                     {child.label}
                   </Link>
@@ -160,10 +164,7 @@ const DesktopNavbar = ({
             ) : (
               <button
                 className="bg-gray-300 text-black py-2 px-4 rounded-md hover:bg-gray-400"
-                onClick={() => {
-                  console.log("로그인 버튼 클릭됨");
-                  onLoginButtonClick();
-                }}
+                onClick={onLoginButtonClick}
               >
                 로그인
               </button>

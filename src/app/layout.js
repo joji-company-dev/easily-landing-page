@@ -2,6 +2,7 @@ import NavBar from "./_components/navBar";
 import Footer from "./_components/footer";
 import "./globals.css";
 import { Toaster } from "./_components/ui/toaster";
+import { ActiveSectionProvider } from "./_components/contexts/activeSectionContext";
 
 export const metadata = {
   title: "이즐리 | 영상 기획안",
@@ -13,10 +14,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ko">
       <body>
-        <NavBar />
-        {children}
-        <Toaster />
-        <Footer />
+        <ActiveSectionProvider>
+          <NavBar />
+          {children}
+          <Toaster />
+          <Footer />
+        </ActiveSectionProvider>
       </body>
     </html>
   );
