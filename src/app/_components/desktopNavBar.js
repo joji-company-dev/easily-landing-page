@@ -63,7 +63,7 @@ const DesktopNavbar = ({
       ></div>
       <div className="flex items-center justify-between px-6 w-full">
         {/* 로고 */}
-        <Link href="/" className="flex items-center">
+        <Link href="/" className="flex items-center z-10">
           <Image
             src="/logo(2).svg"
             alt="Easily Beta Logo"
@@ -78,6 +78,8 @@ const DesktopNavbar = ({
           className={`absolute flex items-start gap-28 flex-1 justify-center left-1/2 -translate-x-1/2 w-full`}
           style={{
             top: `${NAVBAR_HEIGHT / 2 - MENU_BUTTON_HEIGHT / 2}px`,
+            overflow: isMenuDropdownOpen ? "visible" : "hidden",
+            bottom: isMenuDropdownOpen ? "auto" : "0px",
           }}
           onMouseLeave={() => setIsMenuDropdownOpen(false)}
         >
