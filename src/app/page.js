@@ -3,7 +3,7 @@
 import { HeroSection } from "./_components/sections/heroSection";
 import { ServiceSection } from "./_components/sections/serviceSection";
 import { FAQSection } from "./_components/sections/faqSection";
-import { ReviewSection } from "./_components/sections/reviewSection";
+import { ProposalSection } from "./_components/sections/proposalSection";
 import { SubscribeSection } from "./_components/sections/subscribeSection";
 
 import { useActiveSectionContext } from "./_components/contexts/activeSectionContext";
