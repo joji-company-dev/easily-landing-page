@@ -37,14 +37,14 @@ export default function Home() {
         </section>
       </Detector>
       <Detector
-        onIntersect={() => setActiveSectionId("review")}
+        onIntersect={() => setActiveSectionId("proposal")}
         options={{ rootMargin: "-50% 0px -60% 0px", threshold: 0 }}
       >
         <section
-          id="review"
+          id="proposal"
           className="h-1/2 flex items-center justify-center bg-gray-100"
         >
-          <ReviewSection />
+          <ProposalSection />
         </section>
       </Detector>
       {/* FAQ Section */}
