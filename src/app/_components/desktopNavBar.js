@@ -77,7 +77,8 @@ const DesktopNavbar = ({
           className={`absolute flex items-start gap-28 flex-1 justify-center left-1/2 -translate-x-1/2 w-full`}
           style={{
             top: `${NAVBAR_HEIGHT / 2 - MENU_BUTTON_HEIGHT / 2}px`,
-            bottom: `${NAVBAR_HEIGHT - MENU_BUTTON_HEIGHT}px`,
+            overflow: isMenuDropdownOpen ? "visible" : "hidden",
+            bottom: isMenuDropdownOpen ? "auto" : "0px",
           }}
           onMouseLeave={() => setIsMenuDropdownOpen(false)}
         >
