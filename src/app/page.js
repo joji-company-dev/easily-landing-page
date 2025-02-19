@@ -21,7 +21,7 @@ export default function Home() {
         <section
           id="hero"
           className="min-h-screen flex items-center justify-center transition-all 
-             bg-gradient-to-tr from-primary/30 to-yellow-100 
+             bg-gradient-to-tr from-primary to-yellow-300 
              bg-[length:200%_200%] animate-gradient"
         >
           <HeroSection />
