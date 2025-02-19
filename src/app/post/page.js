@@ -15,11 +15,14 @@ import {
 } from "@/app/_components/ui/pagination";
 import usePagination from "../_components/hooks/usePagination";
 import { formatDate } from "../_utils/formatDate";
+import { Detector } from "../_components/common/detector";
+import { useActiveSectionContext } from "../_components/contexts/activeSectionContext";
 
 export default function NoticePage() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const { setActiveSectionId } = useActiveSectionContext();
 
   const {
     currentPage,
@@ -60,75 +63,82 @@ export default function NoticePage() {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 max-w-5xl mx-auto mt-8">
-      <TypographyH2 className="text-orange-600 mb-6 text-center">
-        공지사항
-      </TypographyH2>
-      <div className="space-y-4">
-        {posts.map((post) => (
-          <Card
-            key={post.id}
-            className="hover:shadow-lg border rounded-lg p-4 transition duration-200"
-          >
-            <CardContent className="flex flex-col md:flex-row justify-between items-start md:items-center">
-              <div className="flex-1">
-                <TypographyH2 className="text-orange-600 text-lg font-semibold mb-2">
-                  {post.title}
-                </TypographyH2>
-                <TypographyP className="text-gray-500 text-sm mb-1">
-                  <strong>작성자:</strong> {post.author.name}
-                </TypographyP>
-                <TypographyP className="text-gray-500 text-sm">
-                  <strong>조회수:</strong> {post.views} | <strong>댓글:</strong>{" "}
-                  {post.commentCount}
-                </TypographyP>
-              </div>
-              <div className="text-sm text-gray-500 md:text-right md:mt-0">
-                <TypographyP className="text-gray-400">
-                  {formatDate(post.createdAt)}
-                </TypographyP>
-              </div>
-            </CardContent>
-            <div className="flex justify-end">
-              <Button
-                onClick={() => router.push(`/postDetail/${post.id}`)}
-                variant="outline"
-                className="text-orange-500 border-orange-500 hover:bg-orange-500 hover:text-white"
+    <div>
+      <Detector
+        onIntersect={() => setActiveSectionId("notice")}
+        options={{ rootMargin: "-50% 0px -60% 0px", threshold: 0 }}
+      >
+        <div className="bg-white rounded-lg shadow-md p-6 max-w-5xl mx-auto mt-8">
+          <TypographyH2 className="text-orange-600 mb-6 text-center">
+            공지사항
+          </TypographyH2>
+          <div className="space-y-4">
+            {posts.map((post) => (
+              <Card
+                key={post.id}
+                className="hover:shadow-lg border rounded-lg p-4 transition duration-200"
               >
-                자세히 보기
-              </Button>
-            </div>
-          </Card>
-        ))}
-      </div>
+                <CardContent className="flex flex-col md:flex-row justify-between items-start md:items-center">
+                  <div className="flex-1">
+                    <TypographyH2 className="text-orange-600 text-lg font-semibold mb-2">
+                      {post.title}
+                    </TypographyH2>
+                    <TypographyP className="text-gray-500 text-sm mb-1">
+                      <strong>작성자:</strong> {post.author.name}
+                    </TypographyP>
+                    <TypographyP className="text-gray-500 text-sm">
+                      <strong>조회수:</strong> {post.views} |{" "}
+                      <strong>댓글:</strong> {post.commentCount}
+                    </TypographyP>
+                  </div>
+                  <div className="text-sm text-gray-500 md:text-right md:mt-0">
+                    <TypographyP className="text-gray-400">
+                      {formatDate(post.createdAt)}
+                    </TypographyP>
+                  </div>
+                </CardContent>
+                <div className="flex justify-end">
+                  <Button
+                    onClick={() => router.push(`/postDetail/${post.id}`)}
+                    variant="outline"
+                    className="text-orange-500 border-orange-500 hover:bg-orange-500 hover:text-white"
+                  >
+                    자세히 보기
+                  </Button>
+                </div>
+              </Card>
+            ))}
+          </div>
 
-      <Pagination className="mt-6">
-        <PaginationContent>
-          <PaginationPrevious
-            onClick={goToPreviousPage}
-            disabled={currentPage === 1}
-          />
-          {getPageRange().map((page) => (
-            <PaginationItem key={page}>
-              <PaginationLink
-                isActive={currentPage === page}
-                onClick={() => handlePageChange(page)}
-              >
-                {page}
-              </PaginationLink>
-            </PaginationItem>
-          ))}
-          {totalPages > currentPage + 3 && (
-            <PaginationItem>
-              <PaginationLink disabled>...</PaginationLink>
-            </PaginationItem>
-          )}
-          <PaginationNext
-            onClick={goToNextPage}
-            disabled={currentPage === totalPages}
-          />
-        </PaginationContent>
-      </Pagination>
+          <Pagination className="mt-6">
+            <PaginationContent>
+              <PaginationPrevious
+                onClick={goToPreviousPage}
+                disabled={currentPage === 1}
+              />
+              {getPageRange().map((page) => (
+                <PaginationItem key={page}>
+                  <PaginationLink
+                    isActive={currentPage === page}
+                    onClick={() => handlePageChange(page)}
+                  >
+                    {page}
+                  </PaginationLink>
+                </PaginationItem>
+              ))}
+              {totalPages > currentPage + 3 && (
+                <PaginationItem>
+                  <PaginationLink disabled>...</PaginationLink>
+                </PaginationItem>
+              )}
+              <PaginationNext
+                onClick={goToNextPage}
+                disabled={currentPage === totalPages}
+              />
+            </PaginationContent>
+          </Pagination>
+        </div>
+      </Detector>
     </div>
   );
 }
