@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { TypingEffect } from "../ui/typingEffect";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
@@ -16,16 +15,27 @@ export function HeroSection() {
   return (
     <div className="w-full flex flex-col items-center text-center px-6 py-16 sm:py-24 md:py-32">
       <div className="flex flex-col gap-6 w-full">
-        <div className="text-white sm:text-6xl md:text-7xl font-extrabold tracking-tighter">
+        <motion.div
+          className="text-white sm:text-6xl md:text-7xl font-extrabold tracking-tighter drop-shadow-[0_5px_10px_rgba(255,255,255,0.3)]"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        >
           <TypingEffect text={"간편하게 만드는 영상 기획안"} />
-        </div>
+        </motion.div>
 
-        <p className=" mt-5 text-white text-lg sm:text-4xl md:text-4xl font-medium opacity-90">
+        <motion.p
+          className="mt-5 text-lg sm:text-4xl md:text-4xl font-medium opacity-90 text-white"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 0.5 }}
+        >
           창의적인 영상 기획을{" "}
-          <span className="text-point font-bold">
+          <span className="text-point font-bold drop-shadow-lg">
             쉽고, 빠르게, 효과적으로!
           </span>
-        </p>
+        </motion.p>
+
         <div className="flex sm:flex-row justify-center w-full gap-4 mt-6">
           <motion.a
             href="https://easily-dashboard.jojicompany.com/dashboard/proposal/create"
@@ -46,58 +56,31 @@ export function HeroSection() {
           </motion.a>
         </div>
       </div>
+
       <div className="relative flex justify-between mt-20">
-        <motion.div
-          className="p-2 text-4xl sm:text-5xl md:text-3xl text-white font-bold mt-4 flex items-center gap-2"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.5 }}
-        >
-          <motion.span
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.7 }}
+        {["AI사용", "고품질", "편리함"].map((text, index) => (
+          <motion.div
+            key={text}
+            className="p-2 text-4xl sm:text-5xl md:text-3xl text-white font-bold flex items-center gap-2 drop-shadow-md"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: index * 0.5 }}
           >
-            <IoMdCheckmarkCircleOutline className="text-point/50" />
-          </motion.span>
-          AI사용
-        </motion.div>
-
-        <motion.div
-          className="p-2 text-4xl sm:text-5xl md:text-3xl text-white font-bold mt-4 flex items-center gap-2"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1 }}
-        >
-          <motion.span
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 1.2 }}
-          >
-            <IoMdCheckmarkCircleOutline className="text-point/50" />
-          </motion.span>
-          고품질
-        </motion.div>
-
-        <motion.div
-          className="p-2 text-4xl sm:text-5xl md:text-3xl text-white font-bold mt-4 flex items-center gap-2"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.5 }}
-        >
-          <motion.span
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 1.7 }}
-          >
-            <IoMdCheckmarkCircleOutline className="text-point/50" />
-          </motion.span>
-          편리함
-        </motion.div>
+            <motion.span
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: index * 0.7 }}
+            >
+              <IoMdCheckmarkCircleOutline className="text-point/50" />
+            </motion.span>
+            {text}
+          </motion.div>
+        ))}
       </div>
+
       <div className="relative bottom-10 flex justify-center w-full mt-40">
         <motion.div
-          className="text-white text-4xl md:text-7xl cursor-pointer"
+          className="text-white text-4xl md:text-7xl cursor-pointer drop-shadow-[0_5px_10px_rgba(255,255,255,0.3)]"
           onClick={scrollToSection}
           whileHover={{ scale: 1.3 }}
           animate={{ y: [0, -10, 0] }}
