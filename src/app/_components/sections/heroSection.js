@@ -3,6 +3,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { TypingEffect } from "../ui/typingEffect";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
+import { MdOutlineKeyboardDoubleArrowDown } from "react-icons/md";
 
 export function HeroSection() {
   const scrollToSection = () => {
@@ -14,7 +15,7 @@ export function HeroSection() {
 
   return (
     <div className="w-full flex flex-col items-center text-center px-6 py-16 sm:py-24 md:py-32">
-      <div className="flex flex-col gap-6 w-full max-w-[1100px]">
+      <div className="flex flex-col gap-6 w-full">
         <div className="text-white sm:text-6xl md:text-7xl font-extrabold tracking-tighter">
           <TypingEffect text={"간편하게 만드는 영상 기획안"} />
         </div>
@@ -94,22 +95,20 @@ export function HeroSection() {
           편리함
         </motion.div>
       </div>
-      <div className="absolute flex justify-center bottom-0">
-        <motion.button
-          className="relative w-40 h-20 bg-gradient-to-b from-white to-white shadow-2xl flex items-center justify-center"
+      <div className="relative bottom-10 flex justify-center w-full mt-40">
+        <motion.div
+          className="text-white text-4xl md:text-7xl cursor-pointer"
           onClick={scrollToSection}
-          whileHover={{ scale: 1.3, y: -10 }}
+          whileHover={{ scale: 1.3 }}
           animate={{ y: [0, -10, 0] }}
           transition={{
             repeat: Infinity,
-            duration: 4,
+            duration: 2,
             ease: "easeInOut",
           }}
-          style={{
-            clipPath: "polygon(50% 100%, 0% 0%, 100% 0%)",
-            boxShadow: "0px 2px 15px rgba(0, 0, 0, 0.4)",
-          }}
-        ></motion.button>
+        >
+          <MdOutlineKeyboardDoubleArrowDown />
+        </motion.div>
       </div>
     </div>
   );
