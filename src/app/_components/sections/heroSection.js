@@ -57,7 +57,7 @@ export function HeroSection() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.7 }}
           >
-            <IoMdCheckmarkCircleOutline className="text-point" />
+            <IoMdCheckmarkCircleOutline className="text-point/50" />
           </motion.span>
           AI사용
         </motion.div>
@@ -73,7 +73,7 @@ export function HeroSection() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 1.2 }}
           >
-            <IoMdCheckmarkCircleOutline className="text-point" />
+            <IoMdCheckmarkCircleOutline className="text-point/50" />
           </motion.span>
           고품질
         </motion.div>
@@ -89,7 +89,7 @@ export function HeroSection() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 1.7 }}
           >
-            <IoMdCheckmarkCircleOutline className="text-point" />
+            <IoMdCheckmarkCircleOutline className="text-point/50" />
           </motion.span>
           편리함
         </motion.div>
