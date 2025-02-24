@@ -43,7 +43,7 @@ export function HeroSection() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
           >
-            🚀 에디터로 이동
+            🚀 이즐리 사용하기
           </motion.a>
 
           <motion.a
