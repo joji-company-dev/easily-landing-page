@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { X, TableOfContents, ChevronDown, ChevronUp } from "lucide-react";
 import { NAVBAR_HEIGHT } from "./desktopNavBar";
 import { Button } from "./ui/button";
 import { useActiveSectionContext } from "./contexts/activeSectionContext";
+import { useWindowScrollDirection } from "./hooks/useScrollDirection";
 
 export default function MobileNavbar({
   isLoggedIn,
@@ -12,6 +13,9 @@ export default function MobileNavbar({
   userName,
   onLoginButtonClick,
 }) {
+  const { direction } = useWindowScrollDirection();
+  const isNavBarHidden = useMemo(() => direction === "down", [direction]);
+
   const { activeSectionId } = useActiveSectionContext();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState(null);
@@ -54,8 +58,13 @@ export default function MobileNavbar({
   return (
     <>
       <nav
-        className="sticky bg-white top-0 z-50 w-full flex items-center shadow-sm"
-        style={{ height: `${NAVBAR_HEIGHT}px` }}
+        className="sticky bg-white top-0 z-50 w-full flex items-center shadow-sm transition-transform"
+        style={{
+          height: `${NAVBAR_HEIGHT}px`,
+          ...(isNavBarHidden
+            ? { transform: "translateY(-100%)" }
+            : { transform: "translateY(0)" }),
+        }}
       >
         <div className="flex items-center justify-between w-full px-4 z-50">
           {/* 로고 */}
