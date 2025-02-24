@@ -2,8 +2,15 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useActiveSectionContext } from "./contexts/activeSectionContext";
+import { Button } from "./ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
 
-const NAVBAR_HEIGHT = 72;
+export const NAVBAR_HEIGHT = 64;
 const DROPDOWN_BAR_HEIGHT = 256;
 const MENU_BUTTON_HEIGHT = 20;
 
@@ -50,11 +57,21 @@ const DesktopNavbar = ({
 
   return (
     <nav
-      className="sticky bg-white top-0 z-50 w-full flex items-center shadow-sm"
-      style={{ height: `${NAVBAR_HEIGHT}px` }}
+      className="fixed top-4 md:top-8 bg-slate-50 z-50 w-[calc(100%-4rem)] translate-x-[2rem] flex items-center shadow-md rounded-2xl transition-[border-radius] duration-100 ease-in-out lg:px-10"
+      style={{
+        height: `${NAVBAR_HEIGHT}px`,
+        ...(isMenuDropdownOpen
+          ? {
+              borderBottomLeftRadius: "0px",
+              borderBottomRightRadius: "0px",
+            }
+          : {
+              transitionDelay: "0.2s",
+            }),
+      }}
     >
       <div
-        className={`fixed left-0 bg-white shadow-md rounded-b-lg p-5 w-full transition-all duration-300 ease-in-out`}
+        className={`fixed left-0 bg-slate-50 shadow-md rounded-b-lg p-5 w-full transition-all duration-300 ease-in-out`}
         style={{
           top: `${NAVBAR_HEIGHT}px`,
           height: isMenuDropdownOpen ? `${DROPDOWN_BAR_HEIGHT}px` : "0px",
@@ -128,48 +145,41 @@ const DesktopNavbar = ({
 
         <div className="flex items-center gap-4 z-10">
           <Link href="https://easily-dashboard.jojicompany.com">
-            <button className="bg-[#FF6B2B] text-white py-2 px-4 rounded-md hover:bg-[#e55a1f]">
-              대시보드
-            </button>
+            <Button variant="link">대시보드</Button>
           </Link>
 
           {/* 로그인 여부에 따른 사용자 정보 */}
-          <div className="relative w-40">
+          <div className="relative">
             {isLoading ? null : isLoggedIn ? (
               <div>
-                <button
-                  className="text-sm font-semibold text-muted-foreground"
-                  onMouseEnter={() => setIsUserDropdownOpen((prev) => !prev)}
-                >
-                  환영합니다! {userName}님
-                </button>
-                {isUserDropdownOpen && (
-                  <div
-                    className="absolute right-0 mt-2 bg-white shadow-md rounded-lg py-2 w-40"
-                    onMouseLeave={() => setIsUserDropdownOpen(false)}
-                  >
-                    <Link
-                      href="/myinfo"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      내 정보
-                    </Link>
-                    <button
-                      onClick={onLogoutButtonClick}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      로그아웃
-                    </button>
-                  </div>
-                )}
+                <DropdownMenu>
+                  <DropdownMenuTrigger className="text-sm font-semibold text-muted-foreground">
+                    환영합니다 {userName}!
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuItem asChild>
+                      <Link
+                        href="/myinfo"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        내 정보
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link
+                        href="/myinfo"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        로그아웃
+                      </Link>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </div>
             ) : (
-              <button
-                className="bg-gray-300 text-black py-2 px-4 rounded-md hover:bg-gray-400"
-                onClick={onLoginButtonClick}
-              >
+              <Button variant="secondary" onClick={onLoginButtonClick}>
                 로그인
-              </button>
+              </Button>
             )}
           </div>
         </div>

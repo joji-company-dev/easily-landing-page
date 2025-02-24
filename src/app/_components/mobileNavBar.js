@@ -2,8 +2,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { X, TableOfContents, ChevronDown, ChevronUp } from "lucide-react";
-
-const NAVBAR_HEIGHT = 72;
+import { NAVBAR_HEIGHT } from "./desktopNavBar";
 
 export default function MobileNavbar({
   isLoggedIn,
