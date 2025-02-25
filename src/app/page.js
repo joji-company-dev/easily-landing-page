@@ -8,6 +8,7 @@ import { SubscribeSection } from "./_components/sections/subscribeSection";
 
 import { useActiveSectionContext } from "./_components/contexts/activeSectionContext";
 import { Detector } from "./_components/common/detector";
+import { BackgroundGradientAnimation } from "./_components/ui/background-gradient-animation";
 
 export default function Home() {
   const { setActiveSectionId } = useActiveSectionContext();
@@ -18,14 +19,14 @@ export default function Home() {
         onIntersect={() => setActiveSectionId("hero")}
         options={{ rootMargin: "-50% 0px -60% 0px", threshold: 0 }}
       >
-        <section
-          id="hero"
-          className="min-h-screen flex items-center justify-center transition-all 
-             bg-gradient-to-tr from-primary to-yellow-300 
-             bg-[length:200%_200%] animate-gradient"
-        >
-          <HeroSection />
-        </section>
+        <BackgroundGradientAnimation>
+          <section
+            id="hero"
+            className="min-h-screen absolute z-10 inset-0 flex items-center justify-center "
+          >
+            <HeroSection />
+          </section>
+        </BackgroundGradientAnimation>
       </Detector>
       <Detector
         onIntersect={() => setActiveSectionId("service")}

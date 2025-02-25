@@ -16,7 +16,7 @@ export function HeroSection() {
     <div className="w-full flex flex-col items-center text-center px-6 py-16 sm:py-24 md:py-32">
       <div className="flex flex-col gap-6 w-full">
         <motion.div
-          className="text-white sm:text-6xl md:text-7xl font-extrabold tracking-tighter drop-shadow-[0_5px_10px_rgba(255,255,255,0.3)]"
+          className="text-white sm:text-6xl md:text-7xl font-extrabold tracking-tighter drop-shadow-lg"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
@@ -25,21 +25,21 @@ export function HeroSection() {
         </motion.div>
 
         <motion.p
-          className="mt-5 text-lg sm:text-4xl md:text-4xl font-medium opacity-90 text-white"
+          className="mt-5 text-lg sm:text-4xl md:text-4xl font-medium opacity-90 text-white drop-shadow-md"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.5 }}
         >
           창의적인 영상 기획을{" "}
-          <span className="text-point font-bold drop-shadow-lg">
+          <span className="text-primary font-bold drop-shadow-lg">
             쉽고, 빠르게, 효과적으로!
           </span>
         </motion.p>
 
-        <div className="flex sm:flex-row justify-center w-full gap-4 mt-6">
+        <div className="flex flex-col  items-center justify-center w-full gap-4 mt-6">
           <motion.a
-            href="https://easily-dashboard.jojicompany.com/dashboard/proposal/create"
-            className="w-72 h-14 px-6 py-3 text-white bg-point rounded-lg shadow-lg text-xl font-semibold flex items-center justify-center"
+            href="https://easily-da shboard.jojicompany.com/dashboard/proposal/create"
+            className="w-72 h-14 px-6 py-3 text-white bg-primary rounded-lg shadow-lg text-xl font-semibold flex items-center justify-center"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
           >
