@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useActiveSectionContext } from "./contexts/activeSectionContext";
@@ -23,7 +23,6 @@ const DesktopNavbar = ({
 }) => {
   const { activeSectionId } = useActiveSectionContext();
   const [isMenuDropdownOpen, setIsMenuDropdownOpen] = useState(false);
-  const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
 
   const menuItems = [
     {
@@ -92,7 +91,7 @@ const DesktopNavbar = ({
 
         {/* 메뉴 */}
         <div
-          className={`absolute flex items-start gap-28 flex-1 justify-center left-1/2 -translate-x-1/2 w-full`}
+          className={`absolute flex items-start gap-24 flex-1 justify-center left-1/2 -translate-x-1/2 w-full`}
           style={{
             top: `${NAVBAR_HEIGHT / 2 - MENU_BUTTON_HEIGHT / 2}px`,
             overflow: isMenuDropdownOpen ? "visible" : "hidden",
@@ -153,25 +152,18 @@ const DesktopNavbar = ({
             {isLoading ? null : isLoggedIn ? (
               <div>
                 <DropdownMenu>
-                  <DropdownMenuTrigger className="text-sm font-semibold text-muted-foreground">
-                    환영합니다 {userName}!
+                  <DropdownMenuTrigger
+                    className="text-sm font-semibold text-muted-foreground"
+                    asChild
+                  >
+                    <Button variant="outline">환영합니다 {userName}!</Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent>
+                  <DropdownMenuContent className="translate-y-0 rounded-b-xl border-none shadow-md bg-slate-50">
                     <DropdownMenuItem asChild>
-                      <Link
-                        href="/myinfo"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      >
-                        내 정보
-                      </Link>
+                      <Link href="/myinfo">내 정보</Link>
                     </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
-                      <Link
-                        href="/myinfo"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      >
-                        로그아웃
-                      </Link>
+                    <DropdownMenuItem onClick={onLogoutButtonClick}>
+                      로그아웃
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
