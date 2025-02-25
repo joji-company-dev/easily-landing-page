@@ -2,9 +2,12 @@
 
 import { motion } from "framer-motion";
 import { TypingEffect } from "../ui/typingEffect";
-import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { SectionLayout } from "../layouts/sectionLayout";
 import { useMediaQuery } from "react-responsive";
+import { CheckIcon, ChevronsDownIcon, LayoutDashboardIcon } from "lucide-react";
+import { Button } from "../ui/button";
+import { HeroLogo } from "../common/heroLogo";
+// import logoSrc from '../../../../public/l'
 
 export function HeroSection({ ...props }) {
   const isMobile = useMediaQuery({ maxWidth: 1024 });
@@ -17,8 +20,11 @@ export function HeroSection({ ...props }) {
 
   return (
     <SectionLayout className="relative" {...props}>
-      <div className="w-full flex flex-col items-center text-center px-6 py-16 sm:py-24 md:py-32">
-        <div className="flex flex-col gap-6 w-full max-w-[1100px]">
+      <div className="w-full flex flex-col items-center text-center self-start md:self-auto px-6 py-0 sm:py-24 md:py-32">
+        <div className="md:hidden mb-10  p-4 rounded-lg">
+          <HeroLogo className="h-40" />
+        </div>
+        <div className="flex flex-col items-center gap-6 w-full max-w-[1100px]">
           <div className="text-white sm:text-6xl md:text-7xl font-extrabold tracking-tighter">
             {isMobile ? (
               <TypingEffect
@@ -35,82 +41,24 @@ export function HeroSection({ ...props }) {
 
           <p className=" mt-5 text-white text-lg sm:text-4xl md:text-4xl font-medium opacity-90">
             창의적인 영상 기획을{" "}
-            <span className="text-point font-bold">
+            <span className="text-primary font-bold">
               쉽고, 빠르게, 효과적으로!
             </span>
           </p>
-          <div className="flex sm:flex-row justify-center w-full gap-4 mt-6">
-            <motion.a
-              href="https://easily-dashboard.jojicompany.com/dashboard/proposal/create"
-              className="w-72 h-14 px-6 py-3 text-white bg-point rounded-lg shadow-lg text-xl font-semibold flex items-center justify-center"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              🚀 에디터로 이동
-            </motion.a>
-
-            <motion.a
-              href="/post"
-              className="w-72 h-14 px-6 py-3 text-white border-2 border-white rounded-lg text-xl font-semibold flex items-center justify-center"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              🔍 공지사항
-            </motion.a>
+          <div className="flex flex-col md:flex-row md:justify-center w-full md:w-4/5 gap-4 mt-6">
+            <CTALink href="https://easily-dashboard.jojicompany.com/dashboard/proposal/create">
+              <LayoutDashboardIcon size={32} />
+              기획안 생성하기
+            </CTALink>
           </div>
         </div>
-        <div className="relative flex justify-between mt-20">
-          <motion.div
-            className="p-2 text-4xl sm:text-5xl md:text-3xl text-white font-bold mt-4 flex items-center gap-2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.5 }}
-          >
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.7 }}
-            >
-              <IoMdCheckmarkCircleOutline className="text-point/50" />
-            </motion.span>
-            AI사용
-          </motion.div>
-
-          <motion.div
-            className="p-2 text-4xl sm:text-5xl md:text-3xl text-white font-bold mt-4 flex items-center gap-2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1 }}
-          >
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 1.2 }}
-            >
-              <IoMdCheckmarkCircleOutline className="text-point/50" />
-            </motion.span>
-            고품질
-          </motion.div>
-
-          <motion.div
-            className="p-2 text-4xl sm:text-5xl md:text-3xl text-white font-bold mt-4 flex items-center gap-2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1.5 }}
-          >
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 1.7 }}
-            >
-              <IoMdCheckmarkCircleOutline className="text-point/50" />
-            </motion.span>
-            편리함
-          </motion.div>
+        <div className="relative flex flex-col gap-4 mt-20">
+          <VerifiedText>Powered by OpenAI</VerifiedText>
+          <VerifiedText>Powered by Flux 1.0</VerifiedText>
         </div>
-        <div className="absolute flex justify-center bottom-0">
+        <div className="absolute flex justify-center bottom-4">
           <motion.button
-            className="relative w-40 h-20 bg-gradient-to-b from-white to-white shadow-2xl flex items-center justify-center"
+            className="relative drop-shadow-lg  flex items-center justify-center"
             onClick={scrollToSection}
             whileHover={{ scale: 1.3, y: -10 }}
             animate={{ y: [0, -10, 0] }}
@@ -119,13 +67,55 @@ export function HeroSection({ ...props }) {
               duration: 4,
               ease: "easeInOut",
             }}
-            style={{
-              clipPath: "polygon(50% 100%, 0% 0%, 100% 0%)",
-              boxShadow: "0px 2px 15px rgba(0, 0, 0, 0.4)",
-            }}
-          ></motion.button>
+          >
+            <ChevronsDownIcon color="white" className="w-16 h-16" />
+          </motion.button>
         </div>
       </div>
     </SectionLayout>
+  );
+}
+
+export function VerifiedText({ children, className = "" }) {
+  return (
+    <motion.div
+      className=" md:text-2xl text-white font-bold flex items-center gap-2"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1, delay: 0.5 }}
+    >
+      <motion.span
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.7 }}
+      >
+        <CheckIcon strokeWidth={3} className="text-point" />
+      </motion.span>
+      {children}
+    </motion.div>
+  );
+}
+
+export function CTALink({
+  children,
+  className = "",
+  href,
+  variant = "default",
+  ...props
+}) {
+  return (
+    <Button
+      asChild
+      variant={variant}
+      className="px-6 py-4 md:py-6 shadow-lg font-semibold flex items-center justify-center flex-1 "
+    >
+      <motion.a
+        href={href}
+        whileHover={{ scale: 1.01 }}
+        whileTap={{ scale: 0.99 }}
+      >
+        {children}
+      </motion.a>
+    </Button>
   );
 }
