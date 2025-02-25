@@ -9,8 +9,9 @@ import {
 import { PROPOSAL_LIST } from "@/app/_consts/proposal_list";
 import { useEffect, useRef, useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
+import { SectionLayout } from "../layouts/sectionLayout";
 
-export function ProposalSection() {
+export function ProposalSection({ ...props }) {
   const [count, setCount] = useState(0);
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -59,40 +60,42 @@ export function ProposalSection() {
   const plugin = useRef(Autoplay({ delay: 5000, stopOnInteraction: true }));
 
   return (
-    <div ref={sectionRef}>
-      <h1 className="font-black text-center text-6xl mt-10 font-serif">
-        Heading
-      </h1>
-      <Carousel
-        plugins={[plugin.current]}
-        className="w-full max-w-screen-sm p-5"
-        onMouseEnter={plugin.current.stop}
-        onMouseLeave={plugin.current.play}
-      >
-        <CarouselContent>
-          {PROPOSAL_LIST.map((proposal) => (
-            <CarouselItem key={proposal.id}>
-              <div className="p-1">
-                <Card>
-                  <CardContent className="flex aspect-square items-center justify-center">
-                    <img
-                      src={proposal.image}
-                      alt={`${proposal.id}번 프로토절: ${proposal.title || "제목 없음"}`}
-                    />
-                  </CardContent>
-                </Card>
-              </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselPrevious className="w-20 h-20 -ml-5" />
-        <CarouselNext className="w-20 h-20 -mr-5" />
-      </Carousel>
-      <div className="w-full max-w-screen-sm">
-        <h1 className="font-black text-center text-4xl m-10 font-sans">
-          생성한 기획안 수 {count.toLocaleString()}
+    <SectionLayout {...props}>
+      <div ref={sectionRef}>
+        <h1 className="font-black text-center text-6xl mt-10 font-serif">
+          Heading
         </h1>
+        <Carousel
+          plugins={[plugin.current]}
+          className="w-full max-w-screen-sm p-5"
+          onMouseEnter={plugin.current.stop}
+          onMouseLeave={plugin.current.play}
+        >
+          <CarouselContent>
+            {PROPOSAL_LIST.map((proposal) => (
+              <CarouselItem key={proposal.id}>
+                <div className="p-1">
+                  <Card>
+                    <CardContent className="flex aspect-square items-center justify-center">
+                      <img
+                        src={proposal.image}
+                        alt={`${proposal.id}번 프로토절: ${proposal.title || "제목 없음"}`}
+                      />
+                    </CardContent>
+                  </Card>
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="w-20 h-20 -ml-5" />
+          <CarouselNext className="w-20 h-20 -mr-5" />
+        </Carousel>
+        <div className="w-full max-w-screen-sm">
+          <h1 className="font-black text-center text-4xl m-10 font-sans">
+            생성한 기획안 수 {count.toLocaleString()}
+          </h1>
+        </div>
       </div>
-    </div>
+    </SectionLayout>
   );
 }

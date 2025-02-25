@@ -4,8 +4,9 @@ import { useState } from "react";
 import { Input } from "@/app/_components/ui/input";
 import { Button } from "@/app/_components/ui/button";
 import { useToast } from "@/app/_components/hooks/use-toast";
+import { SectionLayout } from "../layouts/sectionLayout";
 
-export function SubscribeSection() {
+export function SubscribeSection({ ...props }) {
   const [email, setEmail] = useState("");
   const { toast } = useToast();
 
@@ -25,14 +26,14 @@ export function SubscribeSection() {
       return;
     }
 
-    if (!validateEmail(email)){
+    if (!validateEmail(email)) {
       toast({
-          title: "유효하지 않은 이메일 주소입니다.",
-          description: "올바른 이메일 주소를 입력해주세요.",
-          variant: "destructive",
+        title: "유효하지 않은 이메일 주소입니다.",
+        description: "올바른 이메일 주소를 입력해주세요.",
+        variant: "destructive",
       });
       return;
-  }
+    }
 
     try {
       const response = await fetch(
@@ -68,31 +69,33 @@ export function SubscribeSection() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-20 sm:py-28 text-center">
-      <h2 className="text-4xl sm:text-5xl font-bold mb-8">
-        업데이트 소식을 알려드립니다.
-      </h2>
-      <p className="text-lg sm:text-xl text-muted-foreground mb-14">
-        최신 소식을 받고 싶으신가요? 이메일을 등록하세요!
-      </p>
-      <div className="w-full max-w-2xl mx-auto">
-        <form onSubmit={handleSubscribe}>
-          <Input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="이메일 주소 입력"
-            className="w-full text-lg sm:text-xl px-6 py-4 border rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 mb-4"
-          />
-          <Button
-            type="submit"
-            size="lg"
-            className="w-full text-lg sm:text-xl bg-[#FF6B2B] text-white hover:bg-[#e55afL1f] px-6 py-4"
-          >
-            구독
-          </Button>
-        </form>
+    <SectionLayout {...props}>
+      <div className="max-w-7xl mx-auto px-6 py-20 sm:py-28 text-center">
+        <h2 className="text-4xl sm:text-5xl font-bold mb-8">
+          업데이트 소식을 알려드립니다.
+        </h2>
+        <p className="text-lg sm:text-xl text-muted-foreground mb-14">
+          최신 소식을 받고 싶으신가요? 이메일을 등록하세요!
+        </p>
+        <div className="w-full max-w-2xl mx-auto">
+          <form onSubmit={handleSubscribe}>
+            <Input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="이메일 주소 입력"
+              className="w-full text-lg sm:text-xl px-6 py-4 border rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 mb-4"
+            />
+            <Button
+              type="submit"
+              size="lg"
+              className="w-full text-lg sm:text-xl bg-[#FF6B2B] text-white hover:bg-[#e55afL1f] px-6 py-4"
+            >
+              구독
+            </Button>
+          </form>
+        </div>
       </div>
-    </div>
+    </SectionLayout>
   );
 }
