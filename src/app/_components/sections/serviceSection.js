@@ -1,18 +1,17 @@
-import { serviceItem } from "@/app/_consts/serviceItem";
+import { SERVICE_INFOS } from "@/app/_consts/service_info";
 import { SectionLayout } from "../layouts/sectionLayout";
+import { TypographyH2, TypographyP } from "../ui/typography";
 
 export function ServiceSection({ ...props }) {
   return (
     <SectionLayout {...props}>
       <div className="max-w-7xl mx-auto px-6 py-24 text-center bg-white rounded-2xl shadow-xl">
-        <h2 className="text-5xl font-extrabold mb-12">✨ 이즐리 ✨</h2>
-        {serviceItem.map((item) => (
+        {SERVICE_INFOS.map((item) => (
           <div
             key={item.id}
-            className="relative bg-opacity-90 rounded-2xl shadow-sm p-10 mb-16 max-w-6xl mx-auto transition-transform duration-300 hover:scale-105"
+            className="relative p-10 mb-16 max-w-6xl mx-auto flex flex-col gap-4"
           >
-            <h2 className="text-4xl font-bold mb-4">{item.title}</h2>
-            <p className="text-lg text-black mb-6">{item.subtitle}</p>
+            <TypographyH2>{item.title}</TypographyH2>
             <div className="relative w-full aspect-video overflow-hidden rounded-lg shadow-lg">
               <video
                 className="w-full h-full object-cover"
@@ -23,6 +22,10 @@ export function ServiceSection({ ...props }) {
                 playsInline
               />
             </div>
+            <TypographyP
+              className="whitespace-pre-line"
+              dangerouslySetInnerHTML={{ __html: item.subtitle }}
+            />
           </div>
         ))}
       </div>

@@ -6,12 +6,12 @@ export function GradientBackground({ children }) {
   return (
     <div className="relative">
       <BackgroundGradientAnimation containerClassName="absolute -z-10" />
-      {children}
       <div
         className="absolute inset-x-0 bottom-0 h-[512px] bg-gradient-to-b from-transparent to-white
         before:bg-gradient-to-bl before:from-transparent before:via-white before:via-50% before:to-transparent before:to-95%
       "
       />
+      {children}
     </div>
   );
 }
