@@ -21,8 +21,8 @@ export function HeroSection({ ...props }) {
   return (
     <SectionLayout className="relative" {...props}>
       <div className="w-full flex flex-col items-center text-center self-start md:self-auto px-6 py-0 sm:py-24 md:py-32">
-        <div className="md:hidden mb-10  p-4 rounded-lg">
-          <HeroLogo className="h-40" />
+        <div className="md:hidden mb-10  p-4 rounded-lg w-full">
+          <HeroLogo className="h-40 w-full" />
         </div>
         <div className="flex flex-col items-center gap-6 w-full max-w-[1100px]">
           <div className="text-white sm:text-6xl md:text-7xl font-extrabold tracking-tighter">
