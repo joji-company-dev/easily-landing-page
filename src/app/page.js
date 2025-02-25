@@ -9,6 +9,9 @@ import { SubscribeSection } from "./_components/sections/subscribeSection";
 import { useActiveSectionContext } from "./_components/contexts/activeSectionContext";
 import { Detector } from "./_components/common/detector";
 import { GradientBackground } from "./_components/common/gradientBackground";
+import { SectionLayout } from "./_components/layouts/sectionLayout";
+import { ContainerScroll } from "./_components/ui/container-scroll";
+import { TypographyH1, TypographyP } from "./_components/ui/typography";
 
 export default function Home() {
   const { setActiveSectionId } = useActiveSectionContext();
