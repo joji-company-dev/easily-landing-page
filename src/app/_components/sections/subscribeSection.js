@@ -86,11 +86,7 @@ export function SubscribeSection({ ...props }) {
               placeholder="이메일 주소 입력"
               className="w-full text-lg sm:text-xl px-6 py-4 border rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 mb-4"
             />
-            <Button
-              type="submit"
-              size="lg"
-              className="w-full text-lg sm:text-xl bg-[#FF6B2B] text-white hover:bg-[#e55afL1f] px-6 py-4"
-            >
+            <Button type="submit" size="lg" className="w-full">
               구독
             </Button>
           </form>
