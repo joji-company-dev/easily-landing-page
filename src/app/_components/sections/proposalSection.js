@@ -1,17 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
-import { Card, CardContent } from "../ui/card";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "../ui/carousel";
+import { Carousel, CarouselContent, CarouselItem } from "../ui/carousel";
 import { PROPOSAL_EXAMPLES } from "@/app/_consts/proposal_list";
 import { SectionLayout } from "../layouts/sectionLayout";
 import Image from "next/image";
 import { TypographyH1 } from "../ui/typography";
+import { ContainerScroll } from "../ui/container-scroll";
+
+const PROPOSAL_COUNT = 500;
 
 export function ProposalSection({ ...props }) {
   const [count, setCount] = useState(0);
@@ -32,6 +28,7 @@ export function ProposalSection({ ...props }) {
       { threshold: 0.1 }
     );
 
+    observer.observe(sectionEl);
     return () => {
       observer.unobserve(sectionEl);
     };
@@ -39,7 +36,7 @@ export function ProposalSection({ ...props }) {
 
   useEffect(() => {
     if (isVisible) {
-      const targetNum = 10000;
+      const targetNum = PROPOSAL_COUNT;
       const duration = 2000;
       const increment = targetNum / (duration / 10);
       let currentNum = 0;
@@ -60,36 +57,44 @@ export function ProposalSection({ ...props }) {
 
   return (
     <SectionLayout {...props}>
-      <div ref={sectionRef}>
-        <TypographyH1 className="text-center">기획안 예시</TypographyH1>
-        <Carousel
-          plugins={[plugin.current]}
-          className="w-full max-w-screen-sm p-5"
-          onMouseEnter={plugin.current.stop}
-          onMouseLeave={plugin.current.play}
+      <div className="h-full pt-24">
+        <ContainerScroll
+          titleComponent={
+            <div ref={sectionRef}>
+              <TypographyH1 className="text-6xl mb-0">이즐리로</TypographyH1>
+              <TypographyH1 className="text-5xl mt-0 mb-0 text-primary">
+                {count.toLocaleString()}개
+              </TypographyH1>
+              <TypographyH1>이상의 기획안이 생성되고 있습니다.</TypographyH1>
+            </div>
+          }
         >
-          <CarouselContent>
-            {PROPOSAL_EXAMPLES.map((proposal) => (
-              <CarouselItem key={proposal.id}>
-                <div className="p-1">
-                  <Image
-                    src={proposal.image}
-                    width={1920}
-                    height={1080}
-                    alt={`${proposal.id}번 프로토절: ${proposal.title || "제목 없음"}`}
-                  />
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious className="w-20 h-20 -ml-5" />
-          <CarouselNext className="w-20 h-20 -mr-5" />
-        </Carousel>
-        <div className="w-full max-w-screen-sm">
-          <h1 className="font-black text-center text-4xl m-10 font-sans">
-            생성한 기획안 수 {count.toLocaleString()}
-          </h1>
-        </div>
+          <Carousel
+            plugins={[plugin.current]}
+            opts={{
+              loop: true,
+            }}
+            className="w-full h-full"
+            onMouseEnter={plugin.current.stop}
+            onMouseLeave={plugin.current.play}
+          >
+            <CarouselContent className="h-full">
+              {PROPOSAL_EXAMPLES.map((proposal) => (
+                <CarouselItem key={proposal.id}>
+                  <div className="h-full">
+                    <Image
+                      className="w-full h-full object-fill"
+                      src={proposal.image}
+                      width={1920}
+                      height={1080}
+                      alt={`${proposal.title} 기획안`}
+                    />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+        </ContainerScroll>
       </div>
     </SectionLayout>
   );
