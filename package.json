@@ -19,7 +19,7 @@
     "@jojicompany-dev/easily-post-editor": "^0.1.1",
     "@mui/icons-material": "^6.4.3",
     "@radix-ui/react-accordion": "^1.2.2",
-    "@radix-ui/react-dropdown-menu": "^2.1.5",
+    "@radix-ui/react-dropdown-menu": "^2.1.6",
     "@radix-ui/react-navigation-menu": "^1.2.3",
     "@radix-ui/react-scroll-area": "^1.2.2",
     "@radix-ui/react-separator": "^1.1.1",

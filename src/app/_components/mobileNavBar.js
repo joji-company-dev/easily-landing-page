@@ -1,20 +1,24 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { X, TableOfContents, ChevronDown, ChevronUp } from "lucide-react";
-
-const NAVBAR_HEIGHT = 72;
+import { NAVBAR_HEIGHT } from "./desktopNavBar";
+import { Button } from "./ui/button";
+import { useActiveSectionContext } from "./contexts/activeSectionContext";
+import { useWindowScrollDirection } from "./hooks/useScrollDirection";
 
 export default function MobileNavbar({
   isLoggedIn,
   isLoading,
   userName,
   onLoginButtonClick,
-  onLogoutButtonClick,
 }) {
+  const { direction } = useWindowScrollDirection();
+  const isNavBarHidden = useMemo(() => direction === "down", [direction]);
+
+  const { activeSectionId } = useActiveSectionContext();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState(null);
-  const [selectedMenu, setSelectedMenu] = useState(null);
 
   const toggleMenu = (menu) => {
     setOpenMenu(openMenu === menu ? null : menu);
@@ -25,7 +29,6 @@ export default function MobileNavbar({
       label: "홈",
       baseUrl: "/",
       children: [
-        { label: "홈", href: "/" },
         { label: "소개", href: "#hero" },
         { label: "서비스", href: "#service" },
         { label: "예시", href: "#proposal" },
@@ -55,8 +58,13 @@ export default function MobileNavbar({
   return (
     <>
       <nav
-        className="sticky bg-white top-0 z-50 w-full flex items-center shadow-sm"
-        style={{ height: `${NAVBAR_HEIGHT}px` }}
+        className="sticky bg-white top-0 z-50 w-full flex items-center shadow-sm transition-transform"
+        style={{
+          height: `${NAVBAR_HEIGHT}px`,
+          ...(isNavBarHidden
+            ? { transform: "translateY(-100%)" }
+            : { transform: "translateY(0)" }),
+        }}
       >
         <div className="flex items-center justify-between w-full px-4 z-50">
           {/* 로고 */}
@@ -71,37 +79,23 @@ export default function MobileNavbar({
           </Link>
 
           <div className="flex items-center gap-4">
-            {/* 로그인 버튼 */}
-            {isLoading ? null : isLoggedIn ? (
-              <span className="text-lg font-semibold">
-                환영합니다 {userName}님
-              </span>
-            ) : (
-              <button
-                className="bg-gray-300 text-black py-2 px-4 rounded-md hover:bg-gray-400"
-                onClick={onLoginButtonClick}
-              >
-                로그인
-              </button>
-            )}
-
-            <button
+            <Button
+              variant="ghost"
               onClick={() => {
                 setIsMobileMenuOpen((prev) => {
                   return !prev;
                 });
               }}
-              className="text-2xl test"
             >
               {isMobileMenuOpen ? <X /> : <TableOfContents />}
-            </button>
+            </Button>
           </div>
         </div>
 
         {/* 모바일 메뉴 */}
 
         <div
-          className={`absolute left-0 w-full bg-white z-40 flex flex-col items-center p-6 shadow-lg 
+          className={`absolute left-0 w-full bg-white z-40 flex flex-col gap-4 p-6 shadow-lg 
                  duration-300 ease-in-out ${
                    isMobileMenuOpen
                      ? "opacity-100 translate-y-0"
@@ -109,55 +103,61 @@ export default function MobileNavbar({
                  }`}
           style={{ top: `${NAVBAR_HEIGHT}px` }}
         >
-          {mobileMenuItems.map((item) => (
-            <div key={item.label} className="w-full items-center">
-              {/* 메인 메뉴 버튼 */}
-              <button
-                onClick={() => toggleMenu(item.label)}
-                className={
-                  "text-lg font-semibold py-2 w-full flex justify-center items-center"
-                }
-              >
-                {item.label}
-                {openMenu === item.label ? (
-                  <ChevronDown className="ml-2" />
-                ) : (
-                  <ChevronUp className="ml-2" />
-                )}
-              </button>
+          <div className="flex flex-col gap-2">
+            <div className="flex flex-col">
+              {mobileMenuItems.map((item) => (
+                <div key={item.label} className="">
+                  {/* 메인 메뉴 버튼 */}
+                  <Button
+                    variant="ghost"
+                    onClick={() => toggleMenu(item.label)}
+                    className={"font-semibold py-2 flex items-center"}
+                  >
+                    <div className=" flex items-center justify-between">
+                      <span>{item.label}</span>
+                      <span className="text-muted-foreground">
+                        {openMenu === item.label ? (
+                          <ChevronUp className="ml-2" size={16} />
+                        ) : (
+                          <ChevronDown className="ml-2" size={16} />
+                        )}
+                      </span>
+                    </div>
+                  </Button>
 
-              {openMenu === item.label && (
-                <div className="flex flex-col items-center w-full py-2">
-                  {item.children.map((child) => (
-                    <Link
-                      key={child.href}
-                      href={child.href}
-                      onClick={() => setSelectedMenu(child.label)}
-                      className={`py-1 text-gray-700 ${selectedMenu === child.label ? "text-primary" : "text-gray-900"}`}
-                    >
-                      {child.label}
-                    </Link>
-                  ))}
+                  {openMenu === item.label && (
+                    <div className="flex flex-col gap-1 pl-8 w-full py-2 transition-all overflow-hidden">
+                      {item.children.map((child) => (
+                        <Link
+                          key={child.href}
+                          href={`${item.baseUrl}${child.href}`}
+                          className={`transition-colors text-sm py-1 text-gray-700 ${activeSectionId === child.href.replace("#", "") ? "text-primary" : "text-gray-900"}`}
+                        >
+                          {child.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
                 </div>
-              )}
+              ))}
             </div>
-          ))}
 
-          {/* 대시보드 버튼 */}
-          <Link
-            href="https://easily-dashboard.jojicompany.com"
-            className="bg-[#FF6B2B] text-white py-2 px-4 rounded-md hover:bg-[#e55a1f] mt-2"
-          >
-            대시보드
-          </Link>
-          {isLoggedIn && (
-            <button
-              onClick={onLogoutButtonClick}
-              className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 mt-2"
-            >
-              로그아웃
-            </button>
-          )}
+            <Button asChild>
+              <Link href="https://easily-dashboard.jojicompany.com">
+                대시보드
+              </Link>
+            </Button>
+            {/* 로그인 버튼 */}
+            {isLoading ? null : isLoggedIn ? (
+              <span className="text-muted-foreground  font-semibold">
+                환영합니다 {userName}!
+              </span>
+            ) : (
+              <Button variant="secondary" onClick={onLoginButtonClick}>
+                로그인
+              </Button>
+            )}
+          </div>
         </div>
       </nav>
 
