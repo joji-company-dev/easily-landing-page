@@ -6,7 +6,7 @@ import DesktopNavbar from "./desktopNavBar";
 import useAuth from "./hooks/useAuth";
 
 export default function NavBar() {
-  const isMobile = useMediaQuery({ maxWidth: 768 });
+  const isMobile = useMediaQuery({ maxWidth: 1024 });
   const auth = useAuth();
 
   return (
