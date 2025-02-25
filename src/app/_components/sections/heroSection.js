@@ -4,8 +4,10 @@ import { motion } from "framer-motion";
 import { TypingEffect } from "../ui/typingEffect";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { SectionLayout } from "../layouts/sectionLayout";
+import { useMediaQuery } from "react-responsive";
 
 export function HeroSection({ ...props }) {
+  const isMobile = useMediaQuery({ maxWidth: 1024 });
   const scrollToSection = () => {
     const nextSection = document.getElementById("service");
     if (nextSection) {
@@ -18,7 +20,17 @@ export function HeroSection({ ...props }) {
       <div className="w-full flex flex-col items-center text-center px-6 py-16 sm:py-24 md:py-32">
         <div className="flex flex-col gap-6 w-full max-w-[1100px]">
           <div className="text-white sm:text-6xl md:text-7xl font-extrabold tracking-tighter">
-            <TypingEffect text={"간편하게 만드는 영상 기획안"} />
+            {isMobile ? (
+              <TypingEffect
+                key="hero-section-typing-effect"
+                text={"간편하게 만드는\n영상 기획안"}
+              />
+            ) : (
+              <TypingEffect
+                key="hero-section-typing-effect"
+                text={"간편하게 만드는 영상 기획안"}
+              />
+            )}
           </div>
 
           <p className=" mt-5 text-white text-lg sm:text-4xl md:text-4xl font-medium opacity-90">

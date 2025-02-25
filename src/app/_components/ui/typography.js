@@ -1,3 +1,5 @@
+import { cn } from "@/lib/utils";
+
 export function TypographyH1({ children, className = "" }) {
   return (
     <h1
@@ -23,5 +25,18 @@ export function TypographyP({ children, className = "" }) {
     <p className={`text-base text-gray-600 leading-relaxed mb-4 ${className}`}>
       {children}
     </p>
+  );
+}
+
+export function TypographyHero({ children, className = "" }) {
+  return (
+    <h1
+      className={cn(
+        "text-5xl md:text-8xl text-center font-bold  md:leading-[6rem]",
+        className
+      )}
+    >
+      {children}
+    </h1>
   );
 }
