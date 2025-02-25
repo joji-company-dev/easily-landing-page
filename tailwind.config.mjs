@@ -54,7 +54,9 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        gradient: "gradientBG 3s ease infinite",
+        gradient: "gradient 3s ease infinite",
+        "gradient-slow": "gradient 18s ease infinite",
+        "gradient-reverse": "gradient-reverse 3s ease infinite",
       },
       keyframes: {
         "accordion-down": {
@@ -73,10 +75,14 @@ export default {
             height: "0",
           },
         },
-        gradientBG: {
+        gradient: {
           "0%": { backgroundPosition: "0% 50%" },
           "50%": { backgroundPosition: "100% 50%" },
           "100%": { backgroundPosition: "0% 50%" },
+        },
+        "gradient-reverse": {
+          "0%, 100%": { backgroundPosition: "100% 50%" },
+          "50%": { backgroundPosition: "0% 50%" },
         },
       },
       borderRadius: {

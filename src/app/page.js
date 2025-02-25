@@ -8,69 +8,46 @@ import { SubscribeSection } from "./_components/sections/subscribeSection";
 
 import { useActiveSectionContext } from "./_components/contexts/activeSectionContext";
 import { Detector } from "./_components/common/detector";
+import { GradientBackground } from "./_components/common/gradientBackground";
 
 export default function Home() {
   const { setActiveSectionId } = useActiveSectionContext();
 
   return (
     <div>
-      <Detector
-        onIntersect={() => setActiveSectionId("hero")}
-        options={{ rootMargin: "-50% 0px -60% 0px", threshold: 0 }}
-      >
-        <section
-          id="hero"
-          className="min-h-screen flex items-center justify-center transition-all 
-             bg-gradient-to-tr from-primary to-yellow-300 
-             bg-[length:200%_200%] animate-gradient"
+      <GradientBackground>
+        <Detector
+          onIntersect={() => setActiveSectionId("hero")}
+          options={{ rootMargin: "-50% 0px -60% 0px", threshold: 0 }}
         >
-          <HeroSection />
-        </section>
-      </Detector>
-      <Detector
-        onIntersect={() => setActiveSectionId("service")}
-        options={{ rootMargin: "-50% 0px -60% 0px", threshold: 0 }}
-      >
-        <section
-          id="service"
-          className="min-h-screen flex items-center justify-center bg-white"
+          <HeroSection id="hero" />
+        </Detector>
+        <Detector
+          onIntersect={() => setActiveSectionId("service")}
+          options={{ rootMargin: "-50% 0px -60% 0px", threshold: 0 }}
         >
-          <ServiceSection />
-        </section>
-      </Detector>
+          <ServiceSection id="service" />
+        </Detector>
+      </GradientBackground>
+
       <Detector
         onIntersect={() => setActiveSectionId("proposal")}
         options={{ rootMargin: "-50% 0px -60% 0px", threshold: 0 }}
       >
-        <section
-          id="proposal"
-          className="h-1/2 flex items-center justify-center bg-gray-100"
-        >
-          <ProposalSection />
-        </section>
+        <ProposalSection id="proposal" />
       </Detector>
       {/* FAQ Section */}
       <Detector
         onIntersect={() => setActiveSectionId("faq")}
         options={{ rootMargin: "-50% 0px -60% 0px", threshold: 0 }}
       >
-        <section
-          id="faq"
-          className="h-1/2 flex items-center justify-center bg-gray-100"
-        >
-          <FAQSection />
-        </section>
+        <FAQSection id="faq" />
       </Detector>
       <Detector
         onIntersect={() => setActiveSectionId("subscribe")}
         options={{ rootMargin: "-50% 0px -60% 0px", threshold: 0 }}
       >
-        <section
-          id="subscribe"
-          className="min-h-screen flex items-center justify-center bg-white"
-        >
-          <SubscribeSection />
-        </section>
+        <SubscribeSection id="subscribe" />
       </Detector>
     </div>
   );
