@@ -10,7 +10,7 @@ export const NAVBAR_HEIGHT = 64;
 const DROPDOWN_BAR_HEIGHT = 256;
 const MENU_BUTTON_HEIGHT = 20;
 
-if (typeof window !== undefined) {
+if (typeof window !== "undefined") {
   function setScrollbarWidthVariables() {
     const scrollbarWidth =
       window.innerWidth - document.documentElement.clientWidth;
