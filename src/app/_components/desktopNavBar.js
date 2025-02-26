@@ -137,7 +137,10 @@ const DesktopNavbar = ({
                         내 정보
                       </Link>
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={onLogoutButtonClick}>
+                    <DropdownMenuItem
+                      className="text-destructive hover:text-destructive/80"
+                      onClick={onLogoutButtonClick}
+                    >
                       로그아웃
                     </DropdownMenuItem>
                   </DropdownMenuContent>
