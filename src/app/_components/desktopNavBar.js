@@ -131,7 +131,11 @@ const DesktopNavbar = ({
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="translate-y-0 rounded-b-xl border-none shadow-md bg-slate-50">
                     <DropdownMenuItem asChild>
-                      <Link href="/myinfo">내 정보</Link>
+                      <Link
+                        href={`${process.env.NEXT_PUBLIC_DASHBOARD_BASE_URL}/dashboard/my`}
+                      >
+                        내 정보
+                      </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={onLogoutButtonClick}>
                       로그아웃
