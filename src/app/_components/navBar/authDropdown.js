@@ -14,9 +14,11 @@ export function AuthDropdown({
   onLoginButtonClick,
   onLogoutButtonClick,
 }) {
+  if (isLoading) return null;
+
   return (
-    <div className="relative">
-      {isLoading ? null : isLoggedIn ? (
+    <div>
+      {isLoggedIn ? (
         <div>
           <DropdownMenu>
             <DropdownMenuTrigger
@@ -25,7 +27,7 @@ export function AuthDropdown({
             >
               <Button variant="outline">환영합니다 {userName}!</Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="translate-y-0 rounded-b-xl border-none shadow-md bg-slate-50">
+            <DropdownMenuContent className="rounded-b-xl border-none shadow-md bg-slate-50">
               <DropdownMenuItem asChild>
                 <Link
                   href={`${process.env.NEXT_PUBLIC_DASHBOARD_BASE_URL}/dashboard/my`}

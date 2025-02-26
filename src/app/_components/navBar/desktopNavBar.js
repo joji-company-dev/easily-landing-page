@@ -3,18 +3,28 @@ import Link from "next/link";
 import Image from "next/image";
 import { useActiveSectionContext } from "../contexts/activeSectionContext";
 import { Button } from "../ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
 import { NAV_BAR_MENU_ITEMS } from "../../_consts/nav_bar_menu_items";
 import { AuthDropdown } from "./authDropdown";
 
 export const NAVBAR_HEIGHT = 64;
 const DROPDOWN_BAR_HEIGHT = 256;
 const MENU_BUTTON_HEIGHT = 20;
+
+if (typeof window !== undefined) {
+  function setScrollbarWidthVariables() {
+    const scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+
+    document.documentElement.style.setProperty(
+      "--scrollbar-width",
+      `${scrollbarWidth}px`
+    );
+  }
+
+  setTimeout(setScrollbarWidthVariables, 100);
+
+  window.addEventListener("resize", setScrollbarWidthVariables);
+}
 
 const DesktopNavbar = ({
   isLoggedIn,
@@ -28,7 +38,7 @@ const DesktopNavbar = ({
 
   return (
     <nav
-      className="fixed top-4 md:top-8 bg-slate-50 z-50 w-[calc(100%-4rem)] translate-x-[2rem] flex items-center shadow-md rounded-2xl transition-[border-radius] duration-100 ease-in-out lg:px-10"
+      className="fixed top-4 md:top-8 bg-slate-50 z-50 w-[calc(100vw-var(--scrollbar-width)-4rem)] translate-x-[2rem] flex items-center shadow-md rounded-2xl transition-[border-radius] duration-100 ease-in-out lg:px-10"
       style={{
         height: `${NAVBAR_HEIGHT}px`,
         ...(isMenuDropdownOpen
