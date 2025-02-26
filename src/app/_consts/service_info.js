@@ -6,8 +6,7 @@ export const SERVICE_INFOS = [
     이즐리는 영상 기획 과정에서 반복적이고 번거로운 작업을 빠르게 해결할 수 있도록 도와드립니다.
     처음 고객의 요구사항을 정리하는 순간부터 최종 기획안이 완성될 때까지, 이즐리가 곁에서 함께합니다.
     창의적인 일에만 집중하세요.`,
-    videoSrc:
-      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+    videoSrc: "/media/easily_main.mp4",
   },
   {
     id: 2,
@@ -18,8 +17,7 @@ export const SERVICE_INFOS = [
 <strong>요구사항 정리에 시간을 쓰지 마세요.</strong>
 이즐리에 편하게 전달만 하면, 바로 기획안을 작성할 수 있습니다.
 이즐리는 영상 기획에 특화된 AI를 활용해 사용자의 요구사항을 실시간으로 정리하고, 기획안 초안을 자동으로 생성해드립니다.`,
-    videoSrc:
-      "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+    videoSrc: "/media/easily_sub.mp4",
   },
   {
     id: 3,
@@ -31,7 +29,6 @@ export const SERVICE_INFOS = [
 <strong>이즐리는 최신 생성형 이미지 AI를 제공합니다.</strong>
 기획안에 맞는 레퍼런스 이미지를 빠르게 찾고, 생성하고, 적용하세요.
 더 완성도 높은 기획안을 만들어보세요.`,
-    videoSrc:
-      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+    videoSrc: "/media/easily_main.mp4",
   },
 ];
