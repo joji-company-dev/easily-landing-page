@@ -1,3 +1,5 @@
+import { useEffect, useRef, useState } from "react";
+import Autoplay from "embla-carousel-autoplay";
 import { Card, CardContent } from "../ui/card";
 import {
   Carousel,
@@ -6,16 +8,20 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "../ui/carousel";
-import { PROPOSAL_LIST } from "@/app/_consts/proposal_list";
-import { useEffect, useRef, useState } from "react";
-import Autoplay from "embla-carousel-autoplay";
+import { PROPOSAL_EXAMPLES } from "@/app/_consts/proposal_list";
+import { SectionLayout } from "../layouts/sectionLayout";
+import Image from "next/image";
+import { TypographyH1 } from "../ui/typography";
 
-export function ProposalSection() {
+export function ProposalSection({ ...props }) {
   const [count, setCount] = useState(0);
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    const sectionEl = sectionRef.current;
+    if (!sectionEl) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
@@ -26,14 +32,8 @@ export function ProposalSection() {
       { threshold: 0.1 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
     return () => {
-      if (observer && sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
+      observer.unobserve(sectionEl);
     };
   }, []);
 
@@ -59,40 +59,38 @@ export function ProposalSection() {
   const plugin = useRef(Autoplay({ delay: 5000, stopOnInteraction: true }));
 
   return (
-    <div ref={sectionRef}>
-      <h1 className="font-black text-center text-6xl mt-10 font-serif">
-        Heading
-      </h1>
-      <Carousel
-        plugins={[plugin.current]}
-        className="w-full max-w-screen-sm p-5"
-        onMouseEnter={plugin.current.stop}
-        onMouseLeave={plugin.current.play}
-      >
-        <CarouselContent>
-          {PROPOSAL_LIST.map((proposal) => (
-            <CarouselItem key={proposal.id}>
-              <div className="p-1">
-                <Card>
-                  <CardContent className="flex aspect-square items-center justify-center">
-                    <img
-                      src={proposal.image}
-                      alt={`${proposal.id}번 프로토절: ${proposal.title || "제목 없음"}`}
-                    />
-                  </CardContent>
-                </Card>
-              </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselPrevious className="w-20 h-20 -ml-5" />
-        <CarouselNext className="w-20 h-20 -mr-5" />
-      </Carousel>
-      <div className="w-full max-w-screen-sm">
-        <h1 className="font-black text-center text-4xl m-10 font-sans">
-          생성한 기획안 수 {count.toLocaleString()}
-        </h1>
+    <SectionLayout {...props}>
+      <div ref={sectionRef}>
+        <TypographyH1 className="text-center">기획안 예시</TypographyH1>
+        <Carousel
+          plugins={[plugin.current]}
+          className="w-full max-w-screen-sm p-5"
+          onMouseEnter={plugin.current.stop}
+          onMouseLeave={plugin.current.play}
+        >
+          <CarouselContent>
+            {PROPOSAL_EXAMPLES.map((proposal) => (
+              <CarouselItem key={proposal.id}>
+                <div className="p-1">
+                  <Image
+                    src={proposal.image}
+                    width={1920}
+                    height={1080}
+                    alt={`${proposal.id}번 프로토절: ${proposal.title || "제목 없음"}`}
+                  />
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="w-20 h-20 -ml-5" />
+          <CarouselNext className="w-20 h-20 -mr-5" />
+        </Carousel>
+        <div className="w-full max-w-screen-sm">
+          <h1 className="font-black text-center text-4xl m-10 font-sans">
+            생성한 기획안 수 {count.toLocaleString()}
+          </h1>
+        </div>
       </div>
-    </div>
+    </SectionLayout>
   );
 }
