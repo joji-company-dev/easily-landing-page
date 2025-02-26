@@ -85,7 +85,7 @@ export default function NoticePage() {
             {posts.map((post) => (
               <Card
                 key={post.id}
-                onClick={() => router.push(`/postDetail/${post.id}`)}
+                onClick={() => router.push(`/post/${post.id}`)}
                 className="hover:shadow-lg border rounded-lg p-4 transition duration-200 cursor-pointer"
               >
                 <CardContent className="p-0 flex flex-col md:flex-row justify-between items-start md:items-center">

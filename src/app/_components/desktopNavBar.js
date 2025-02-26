@@ -99,7 +99,7 @@ const DesktopNavbar = ({
                   <Link
                     key={subIndex}
                     href={menu.baseUrl + child.href}
-                    className={`block text-sm text-gray-700 hover:text-primary transition-colors text-left text-nowrap ${
+                    className={`block text-sm font-semibold text-gray-700 hover:text-primary transition-colors text-left text-nowrap ${
                       activeSectionId === child.href.replace("#", "")
                         ? "text-primary font-bold underline underline-offset-4"
                         : "text-muted-foreground"
