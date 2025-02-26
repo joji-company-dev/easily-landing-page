@@ -6,6 +6,7 @@ import { NAVBAR_HEIGHT } from "./desktopNavBar";
 import { Button } from "./ui/button";
 import { useActiveSectionContext } from "./contexts/activeSectionContext";
 import { useWindowScrollDirection } from "./hooks/useScrollDirection";
+import { NAV_BAR_MENU_ITEMS } from "../_consts/nav_bar_menu_items";
 
 export default function MobileNavbar({
   isLoggedIn,
@@ -23,37 +24,6 @@ export default function MobileNavbar({
   const toggleMenu = (menu) => {
     setOpenMenu(openMenu === menu ? null : menu);
   };
-
-  const mobileMenuItems = [
-    {
-      label: "홈",
-      baseUrl: "/",
-      children: [
-        { label: "소개", href: "#hero" },
-        { label: "서비스", href: "#service" },
-        { label: "예시", href: "#proposal" },
-        { label: "FAQ", href: "#faq" },
-        { label: "구독", href: "#subscribe" },
-      ],
-    },
-    {
-      label: "가격",
-      baseUrl: "/price",
-      children: [
-        { label: "가격", href: "/price" },
-        { label: "정책", href: "#policy" },
-        { label: "결제", href: "#purchase" },
-      ],
-    },
-    {
-      label: "공지사항",
-      baseUrl: "/post",
-      children: [
-        { label: "공지사항", href: "/post" },
-        { label: "게시판", href: "#board" },
-      ],
-    },
-  ];
 
   return (
     <>
@@ -105,7 +75,7 @@ export default function MobileNavbar({
         >
           <div className="flex flex-col gap-2">
             <div className="flex flex-col">
-              {mobileMenuItems.map((item) => (
+              {NAV_BAR_MENU_ITEMS.map((item) => (
                 <div key={item.label} className="">
                   {/* 메인 메뉴 버튼 */}
                   <Button

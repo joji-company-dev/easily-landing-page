@@ -1,9 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Card, CardContent } from "@/app/_components/ui/card";
-import { Skeleton } from "@/app/_components/ui/skeleton";
-import { TypographyH2, TypographyP } from "@/app/_components/ui/typography";
-import { Button } from "@/app/_components/ui/button";
+import {
+  TypographyH1,
+  TypographyH2,
+  TypographyP,
+} from "@/app/_components/ui/typography";
 import { useRouter } from "next/navigation";
 import {
   Pagination,
@@ -17,6 +19,10 @@ import usePagination from "../_components/hooks/usePagination";
 import { formatDate } from "../_utils/formatDate";
 import { Detector } from "../_components/common/detector";
 import { useActiveSectionContext } from "../_components/contexts/activeSectionContext";
+import { Separator } from "../_components/ui/separator";
+import dayjs from "dayjs";
+
+const FETCH_POSTS_LIMIT = 10;
 
 export default function NoticePage() {
   const [posts, setPosts] = useState([]);
@@ -34,10 +40,21 @@ export default function NoticePage() {
     getPageRange,
   } = usePagination(1, 1); // 초기 페이지와 총 페이지 수 설정
 
+  const isNewPost = (post) => {
+    const today = dayjs();
+    const createdAtDate = dayjs(post.createdAt);
+    const diff = today.diff(createdAtDate, "day");
+
+    if (diff < 7) {
+      return true;
+    }
+    return false;
+  };
+
   const fetchPosts = async (page) => {
     setLoading(true);
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/posts?page=${page}&limit=6&categories=NOTICE`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/posts?page=${page}&limit=${FETCH_POSTS_LIMIT}&categories=NOTICE`
     );
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -52,60 +69,44 @@ export default function NoticePage() {
     fetchPosts(currentPage);
   }, [currentPage]);
 
-  if (loading) {
-    return (
-      <div className="flex flex-col gap-4 mt-10">
-        <Skeleton className="h-8 w-full mb-4" />
-        <Skeleton className="h-6 w-5/6 mb-2" />
-        <Skeleton className="h-6 w-3/4" />
-      </div>
-    );
-  }
-
   return (
     <div>
       <Detector
         onIntersect={() => setActiveSectionId("notice")}
         options={{ rootMargin: "-50% 0px -60% 0px", threshold: 0 }}
       >
-        <div className="bg-white rounded-lg shadow-md p-6 max-w-5xl mx-auto mt-8">
-          <TypographyH2 className="text-orange-600 mb-6 text-center">
-            공지사항
-          </TypographyH2>
+        <div className="rounded-2xl shadow-lg p-6 max-w-5xl mx-auto mt-8 lg:mt-32 bg-white">
+          <TypographyH1 className="text-center">공지사항</TypographyH1>
+          <Separator className="mb-12" />
           <div className="space-y-4">
             {posts.map((post) => (
               <Card
                 key={post.id}
-                className="hover:shadow-lg border rounded-lg p-4 transition duration-200"
+                onClick={() => router.push(`/post/${post.id}`)}
+                className="hover:shadow-lg border rounded-lg p-4 transition duration-200 cursor-pointer"
               >
-                <CardContent className="flex flex-col md:flex-row justify-between items-start md:items-center">
+                <CardContent className="p-0 flex flex-col md:flex-row justify-between items-start md:items-center">
                   <div className="flex-1">
-                    <TypographyH2 className="text-orange-600 text-lg font-semibold mb-2">
-                      {post.title}
-                    </TypographyH2>
-                    <TypographyP className="text-gray-500 text-sm mb-1">
-                      <strong>작성자:</strong> {post.author.name}
-                    </TypographyP>
-                    <TypographyP className="text-gray-500 text-sm">
-                      <strong>조회수:</strong> {post.views} |{" "}
-                      <strong>댓글:</strong> {post.commentCount}
-                    </TypographyP>
-                  </div>
-                  <div className="text-sm text-gray-500 md:text-right md:mt-0">
-                    <TypographyP className="text-gray-400">
-                      {formatDate(post.createdAt)}
+                    <div className="flex gap-2 items-center">
+                      <TypographyH2 className="text-lg font-semibold m-0">
+                        {post.title}
+                      </TypographyH2>
+                      {isNewPost(post) && (
+                        <div className="text-xs text-primary">New</div>
+                      )}
+                    </div>
+
+                    <div className="flex gap-2 items-center">
+                      <span className="text-gray-400 text-sm">
+                        {formatDate(post.createdAt)}
+                      </span>
+                    </div>
+                    <TypographyP className="text-gray-500 text-sm m-0">
+                      {post.views}
+                      {post.views > 1 ? " Views" : " View"}
                     </TypographyP>
                   </div>
                 </CardContent>
-                <div className="flex justify-end">
-                  <Button
-                    onClick={() => router.push(`/postDetail/${post.id}`)}
-                    variant="outline"
-                    className="text-orange-500 border-orange-500 hover:bg-orange-500 hover:text-white"
-                  >
-                    자세히 보기
-                  </Button>
-                </div>
               </Card>
             ))}
           </div>

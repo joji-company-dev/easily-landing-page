@@ -9,6 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+import { NAV_BAR_MENU_ITEMS } from "../_consts/nav_bar_menu_items";
 
 export const NAVBAR_HEIGHT = 64;
 const DROPDOWN_BAR_HEIGHT = 256;
@@ -23,36 +24,6 @@ const DesktopNavbar = ({
 }) => {
   const { activeSectionId } = useActiveSectionContext();
   const [isMenuDropdownOpen, setIsMenuDropdownOpen] = useState(false);
-
-  const menuItems = [
-    {
-      label: "홈",
-      baseUrl: "/",
-      children: [
-        { label: "소개", href: "#hero" },
-        { label: "서비스", href: "#service" },
-        { label: "예시", href: "#proposal" },
-        { label: "FAQ", href: "#faq" },
-        { label: "구독", href: "#subscribe" },
-      ],
-    },
-    {
-      label: "가격",
-      baseUrl: "/price",
-      children: [
-        { label: "정책", href: "#policy" },
-        { label: "결제", href: "#purchase" },
-      ],
-    },
-    {
-      label: "공지사항",
-      baseUrl: "/post",
-      children: [
-        { label: "공지사항", href: "#notice" },
-        { label: "게시판", href: "#board" },
-      ],
-    },
-  ];
 
   return (
     <nav
@@ -99,7 +70,7 @@ const DesktopNavbar = ({
           }}
           onMouseLeave={() => setIsMenuDropdownOpen(false)}
         >
-          {menuItems.map((menu, index) => (
+          {NAV_BAR_MENU_ITEMS.map((menu, index) => (
             <div
               onMouseEnter={() => setIsMenuDropdownOpen(true)}
               key={index}
@@ -128,7 +99,7 @@ const DesktopNavbar = ({
                   <Link
                     key={subIndex}
                     href={menu.baseUrl + child.href}
-                    className={`block text-sm text-gray-700 hover:text-primary transition-colors text-left text-nowrap ${
+                    className={`block text-sm font-semibold text-gray-700 hover:text-primary transition-colors text-left text-nowrap ${
                       activeSectionId === child.href.replace("#", "")
                         ? "text-primary font-bold underline underline-offset-4"
                         : "text-muted-foreground"
