@@ -23,6 +23,9 @@ import { Detector } from "../_components/common/detector";
 import { useActiveSectionContext } from "../_components/contexts/activeSectionContext";
 import { Separator } from "../_components/ui/separator";
 import dayjs from "dayjs";
+import { BackgroundGradientAnimation } from "../_components/common/gradientBackground";
+
+const FETCH_POSTS_LIMIT = 10;
 
 export default function NoticePage() {
   const [posts, setPosts] = useState([]);
@@ -54,7 +57,7 @@ export default function NoticePage() {
   const fetchPosts = async (page) => {
     setLoading(true);
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/posts?page=${page}&limit=6&categories=NOTICE`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/posts?page=${page}&limit=${FETCH_POSTS_LIMIT}&categories=NOTICE`
     );
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -75,8 +78,9 @@ export default function NoticePage() {
         onIntersect={() => setActiveSectionId("notice")}
         options={{ rootMargin: "-50% 0px -60% 0px", threshold: 0 }}
       >
-        <div className="rounded-lg shadow-md p-6 max-w-5xl mx-auto mt-8 lg:mt-32">
+        <div className="rounded-2xl shadow-lg p-6 max-w-5xl mx-auto mt-8 lg:mt-32 bg-white">
           <TypographyH1 className="text-center">공지사항</TypographyH1>
+          <Separator className="mb-12" />
           <div className="space-y-4">
             {posts.map((post) => (
               <Card
@@ -90,20 +94,17 @@ export default function NoticePage() {
                       <TypographyH2 className="text-lg font-semibold m-0">
                         {post.title}
                       </TypographyH2>
-                      <div className="text-xs text-primary">
-                        {isNewPost(post) ? "New" : "New"}
-                      </div>
+                      {isNewPost(post) && (
+                        <div className="text-xs text-primary">New</div>
+                      )}
                     </div>
 
                     <div className="flex gap-2 items-center">
-                      <span className="text-primary text-xs">
-                        댓글: {post.commentCount}
-                      </span>
                       <span className="text-gray-400 text-sm">
                         {formatDate(post.createdAt)}
                       </span>
                     </div>
-                    <TypographyP className="text-gray-500 text-sm">
+                    <TypographyP className="text-gray-500 text-sm m-0">
                       {post.views}
                       {post.views > 1 ? " Views" : " View"}
                     </TypographyP>
