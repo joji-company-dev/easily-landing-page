@@ -3,19 +3,30 @@ import Link from "next/link";
 import Image from "next/image";
 import { X, TableOfContents, ChevronDown, ChevronUp } from "lucide-react";
 import { NAVBAR_HEIGHT } from "./desktopNavBar";
-import { Button } from "./ui/button";
-import { useActiveSectionContext } from "./contexts/activeSectionContext";
-import { useWindowScrollDirection } from "./hooks/useScrollDirection";
-import { NAV_BAR_MENU_ITEMS } from "../_consts/nav_bar_menu_items";
+import { Button } from "../ui/button";
+import { useActiveSectionContext } from "../contexts/activeSectionContext";
+import { useWindowScrollDirection } from "../hooks/useScrollDirection";
+import { NAV_BAR_MENU_ITEMS } from "../../_consts/nav_bar_menu_items";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
+import { AuthDropdown } from "./authDropdown";
 
 export default function MobileNavbar({
   isLoggedIn,
   isLoading,
   userName,
   onLoginButtonClick,
+  onLogoutButtonClick,
 }) {
-  const { direction } = useWindowScrollDirection();
-  const isNavBarHidden = useMemo(() => direction === "down", [direction]);
+  const { direction, y } = useWindowScrollDirection();
+  const isNavBarHidden = useMemo(
+    () => direction === "down" && y > 50,
+    [direction, y]
+  );
 
   const { activeSectionId } = useActiveSectionContext();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -49,6 +60,13 @@ export default function MobileNavbar({
           </Link>
 
           <div className="flex items-center gap-4">
+            <AuthDropdown
+              isLoggedIn={isLoggedIn}
+              isLoading={isLoading}
+              userName={userName}
+              onLoginButtonClick={onLoginButtonClick}
+              onLogoutButtonClick={onLogoutButtonClick}
+            />
             <Button
               variant="ghost"
               onClick={() => {
@@ -81,7 +99,9 @@ export default function MobileNavbar({
                   <Button
                     variant="ghost"
                     onClick={() => toggleMenu(item.label)}
-                    className={"font-semibold py-2 flex items-center"}
+                    className={
+                      "font-semibold py-2 flex items-center w-full justify-start"
+                    }
                   >
                     <div className=" flex items-center justify-between">
                       <span>{item.label}</span>
@@ -117,16 +137,6 @@ export default function MobileNavbar({
                 대시보드
               </Link>
             </Button>
-            {/* 로그인 버튼 */}
-            {isLoading ? null : isLoggedIn ? (
-              <span className="text-muted-foreground  font-semibold">
-                환영합니다 {userName}!
-              </span>
-            ) : (
-              <Button variant="secondary" onClick={onLoginButtonClick}>
-                로그인
-              </Button>
-            )}
           </div>
         </div>
       </nav>
