@@ -1,15 +1,16 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useActiveSectionContext } from "./contexts/activeSectionContext";
-import { Button } from "./ui/button";
+import { useActiveSectionContext } from "../contexts/activeSectionContext";
+import { Button } from "../ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
-import { NAV_BAR_MENU_ITEMS } from "../_consts/nav_bar_menu_items";
+} from "../ui/dropdown-menu";
+import { NAV_BAR_MENU_ITEMS } from "../../_consts/nav_bar_menu_items";
+import { AuthDropdown } from "./authDropdown";
 
 export const NAVBAR_HEIGHT = 64;
 const DROPDOWN_BAR_HEIGHT = 256;
@@ -118,40 +119,13 @@ const DesktopNavbar = ({
             <Button variant="link">대시보드</Button>
           </Link>
 
-          {/* 로그인 여부에 따른 사용자 정보 */}
-          <div className="relative">
-            {isLoading ? null : isLoggedIn ? (
-              <div>
-                <DropdownMenu>
-                  <DropdownMenuTrigger
-                    className="text-sm font-semibold text-muted-foreground"
-                    asChild
-                  >
-                    <Button variant="outline">환영합니다 {userName}!</Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent className="translate-y-0 rounded-b-xl border-none shadow-md bg-slate-50">
-                    <DropdownMenuItem asChild>
-                      <Link
-                        href={`${process.env.NEXT_PUBLIC_DASHBOARD_BASE_URL}/dashboard/my`}
-                      >
-                        내 정보
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem
-                      className="text-destructive hover:text-destructive/80"
-                      onClick={onLogoutButtonClick}
-                    >
-                      로그아웃
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </div>
-            ) : (
-              <Button variant="secondary" onClick={onLoginButtonClick}>
-                로그인
-              </Button>
-            )}
-          </div>
+          <AuthDropdown
+            isLoggedIn={isLoggedIn}
+            isLoading={isLoading}
+            userName={userName}
+            onLoginButtonClick={onLoginButtonClick}
+            onLogoutButtonClick={onLogoutButtonClick}
+          />
         </div>
       </div>
     </nav>

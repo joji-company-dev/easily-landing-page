@@ -3,7 +3,7 @@
 import { useMediaQuery } from "react-responsive";
 import MobileNavbar from "./mobileNavBar";
 import DesktopNavbar from "./desktopNavBar";
-import useAuth from "./hooks/useAuth";
+import useAuth from "../hooks/useAuth";
 
 export default function NavBar() {
   const isMobile = useMediaQuery({ maxWidth: 1024 });

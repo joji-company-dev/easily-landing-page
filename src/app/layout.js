@@ -1,7 +1,7 @@
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Noto_Sans_KR } from "next/font/google";
 import { cn } from "@/lib/utils";
-import NavBar from "./_components/navBar";
+import NavBar from "./_components/navBar/navBar";
 import Footer from "./_components/footer";
 import { Toaster } from "./_components/ui/toaster";
 import { ActiveSectionProvider } from "./_components/contexts/activeSectionContext";

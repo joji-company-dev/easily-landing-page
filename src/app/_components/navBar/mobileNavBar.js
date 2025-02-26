@@ -3,16 +3,17 @@ import Link from "next/link";
 import Image from "next/image";
 import { X, TableOfContents, ChevronDown, ChevronUp } from "lucide-react";
 import { NAVBAR_HEIGHT } from "./desktopNavBar";
-import { Button } from "./ui/button";
-import { useActiveSectionContext } from "./contexts/activeSectionContext";
-import { useWindowScrollDirection } from "./hooks/useScrollDirection";
-import { NAV_BAR_MENU_ITEMS } from "../_consts/nav_bar_menu_items";
+import { Button } from "../ui/button";
+import { useActiveSectionContext } from "../contexts/activeSectionContext";
+import { useWindowScrollDirection } from "../hooks/useScrollDirection";
+import { NAV_BAR_MENU_ITEMS } from "../../_consts/nav_bar_menu_items";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
+} from "../ui/dropdown-menu";
+import { AuthDropdown } from "./authDropdown";
 
 export default function MobileNavbar({
   isLoggedIn,
@@ -59,39 +60,13 @@ export default function MobileNavbar({
           </Link>
 
           <div className="flex items-center gap-4">
-            <div className="relative">
-              {isLoading ? null : isLoggedIn ? (
-                <div>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger
-                      className="text-sm font-semibold text-muted-foreground"
-                      asChild
-                    >
-                      <Button variant="outline">환영합니다 {userName}!</Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent className="translate-y-0 rounded-b-xl border-none shadow-md bg-slate-50">
-                      <DropdownMenuItem asChild>
-                        <Link
-                          href={`${process.env.NEXT_PUBLIC_DASHBOARD_BASE_URL}/dashboard/my`}
-                        >
-                          내 정보
-                        </Link>
-                      </DropdownMenuItem>
-                      <DropdownMenuItem
-                        className="text-destructive hover:text-destructive/80"
-                        onClick={onLogoutButtonClick}
-                      >
-                        로그아웃
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </div>
-              ) : (
-                <Button variant="secondary" onClick={onLoginButtonClick}>
-                  로그인
-                </Button>
-              )}
-            </div>
+            <AuthDropdown
+              isLoggedIn={isLoggedIn}
+              isLoading={isLoading}
+              userName={userName}
+              onLoginButtonClick={onLoginButtonClick}
+              onLogoutButtonClick={onLogoutButtonClick}
+            />
             <Button
               variant="ghost"
               onClick={() => {
