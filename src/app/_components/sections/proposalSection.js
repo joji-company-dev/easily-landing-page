@@ -57,7 +57,7 @@ export function ProposalSection({ ...props }) {
 
   return (
     <SectionLayout {...props}>
-      <div className="h-full pt-24">
+      <div className="h-full pt-24 max-w-full">
         <ContainerScroll
           titleComponent={
             <div ref={sectionRef}>
