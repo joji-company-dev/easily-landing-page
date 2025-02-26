@@ -9,13 +9,20 @@ import "./globals.css";
 
 const fonts = Noto_Sans_KR({ subsets: ["latin"] });
 
+/**
+ * @type {import('next').Viewport}
+ */
 export const viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
   userScalable: true,
+  colorScheme: "only light",
 };
 
+/**
+ * @type {import('next').Metadata}
+ */
 export const metadata = {
   title: "이즐리 | 영상 기획안",
   description:
