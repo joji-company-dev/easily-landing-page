@@ -14,8 +14,11 @@ export default function MobileNavbar({
   userName,
   onLoginButtonClick,
 }) {
-  const { direction } = useWindowScrollDirection();
-  const isNavBarHidden = useMemo(() => direction === "down", [direction]);
+  const { direction, y } = useWindowScrollDirection();
+  const isNavBarHidden = useMemo(
+    () => direction === "down" && y > 50,
+    [direction, y]
+  );
 
   const { activeSectionId } = useActiveSectionContext();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

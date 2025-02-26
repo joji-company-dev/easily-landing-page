@@ -19,5 +19,6 @@ export function useWindowScrollDirection() {
 
   return {
     direction: scrollDirection,
+    y,
   };
 }
