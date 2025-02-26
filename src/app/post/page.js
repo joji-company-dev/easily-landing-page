@@ -1,13 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Card, CardContent } from "@/app/_components/ui/card";
-import { Skeleton } from "@/app/_components/ui/skeleton";
 import {
   TypographyH1,
   TypographyH2,
   TypographyP,
 } from "@/app/_components/ui/typography";
-import { Button } from "@/app/_components/ui/button";
 import { useRouter } from "next/navigation";
 import {
   Pagination,
@@ -23,7 +21,6 @@ import { Detector } from "../_components/common/detector";
 import { useActiveSectionContext } from "../_components/contexts/activeSectionContext";
 import { Separator } from "../_components/ui/separator";
 import dayjs from "dayjs";
-import { BackgroundGradientAnimation } from "../_components/common/gradientBackground";
 
 const FETCH_POSTS_LIMIT = 10;
 
