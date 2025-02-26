@@ -1,3 +1,4 @@
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { Noto_Sans_KR } from "next/font/google";
 import { cn } from "@/lib/utils";
 import NavBar from "./_components/navBar";
@@ -80,6 +81,7 @@ export default function RootLayout({ children }) {
           <Toaster />
           <Footer />
         </ActiveSectionProvider>
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID} />
       </body>
     </html>
   );
