@@ -7,7 +7,7 @@ export const NAV_BAR_MENU_ITEMS = [
       { label: "서비스", href: "#service" },
       { label: "예시", href: "#proposal" },
       { label: "FAQ", href: "#faq" },
-      { label: "구독", href: "#subscribe" },
+      { label: "뉴스레터", href: "#subscribe" },
     ],
   },
   // TODO: 가격정책 정해진 후 추가
