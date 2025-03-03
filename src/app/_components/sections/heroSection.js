@@ -10,7 +10,6 @@ import { HeroLogo } from "../common/heroLogo";
 // import logoSrc from '../../../../public/l'
 
 export function HeroSection({ ...props }) {
-  const isMobile = useMediaQuery({ maxWidth: 1024 });
   const scrollToSection = () => {
     const nextSection = document.getElementById("service");
     if (nextSection) {
@@ -26,17 +25,10 @@ export function HeroSection({ ...props }) {
         </div>
         <div className="flex flex-col items-center gap-6 w-full max-w-[1100px]">
           <div className="text-white sm:text-6xl md:text-7xl font-extrabold tracking-tighter">
-            {isMobile ? (
-              <TypingEffect
-                key="hero-section-typing-effect"
-                text={"간편하게 만드는\n영상 기획안"}
-              />
-            ) : (
-              <TypingEffect
-                key="hero-section-typing-effect"
-                text={"간편하게 만드는 영상 기획안"}
-              />
-            )}
+            <TypingEffect
+              key="hero-section-typing-effect"
+              text={"간편하게 만드는\n영상 기획안"}
+            />
           </div>
 
           <p className=" mt-5 text-white text-lg sm:text-4xl md:text-4xl font-medium opacity-90">
