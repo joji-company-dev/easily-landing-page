@@ -24,7 +24,9 @@ export const viewport = {
  * @type {import('next').Metadata}
  */
 export const metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_EASILY_BASE_URL ?? ""),
+  metadataBase: process.env.NEXT_PUBLIC_EASILY_BASE_URL
+    ? new URL(process.env.NEXT_PUBLIC_EASILY_BASE_URL)
+    : undefined,
   title: "이즐리 - 영상 기획을 더 쉽게, 더 강력하게",
   description:
     "이즐리는 영상 기획을 위한 전문 도구로, 자유로운 블록 편집을 지원합니다. 효율적인 기획을 돕고 팀 협업을 강화하세요.",
