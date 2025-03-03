@@ -25,9 +25,9 @@ export const viewport = {
  */
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_EASILY_BASE_URL ?? ""),
-  title: "이즐리 | 영상 기획안",
+  title: "이즐리 - 영상 기획을 더 쉽게, 더 강력하게",
   description:
-    "세상 쉬운 영상기획 이젠 이즐리로 하세요 · 프로턱션을 위한 최고의 도구 · 창의적인 일에 집중하세요 · 간편한 기획안 초안 생성 · 고품질 레퍼런스 이미지 생성",
+    "이즐리는 영상 기획을 위한 전문 도구로, 자유로운 블록 편집을 지원합니다. 효율적인 기획을 돕고 팀 협업을 강화하세요.",
   keywords: "영상 기획서, AI 기획서, 콘텐츠 기획, 유튜브 기획",
   authors: [{ name: "이즐리" }],
   creator: "이즐리",
@@ -35,9 +35,9 @@ export const metadata = {
 
   // 오픈그래프 메타데이터 (소셜 미디어 공유용)
   openGraph: {
-    title: "이즐리 | 영상 기획안",
+    title: "이즐리 - 영상 기획을 더 쉽게, 더 강력하게",
     description:
-      "세상 쉬운 영상기획 이젠 이즐리로 하세요 · 프로턱션을 위한 최고의 도구 · 창의적인 일에 집중하세요 · 간편한 기획안 초안 생성 · 고품질 레퍼런스 이미지 생성",
+      "이즐리는 영상 기획을 위한 전문 도구로, 자유로운 블록 편집을 지원합니다. 효율적인 기획을 돕고 팀 협업을 강화하세요.",
     url: "https://easily.jojicompany.com",
     siteName: "이즐리",
     locale: "ko_KR",
@@ -52,8 +52,9 @@ export const metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "이즐리 | 영상 기획서 생성 대시보드",
-    description: "간편하게 만드는 영상 기획안",
+    title: "이즐리 - 영상 기획을 더 쉽게, 더 강력하게",
+    description:
+      "이즐리는 영상 기획을 위한 전문 도구로, 자유로운 블록 편집을 지원합니다. 효율적인 기획을 돕고 팀 협업을 강화하세요.",
     images: ["/og.jpg"],
   },
 
