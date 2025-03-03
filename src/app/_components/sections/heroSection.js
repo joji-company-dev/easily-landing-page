@@ -10,7 +10,6 @@ import { HeroLogo } from "../common/heroLogo";
 // import logoSrc from '../../../../public/l'
 
 export function HeroSection({ ...props }) {
-  const isMobile = useMediaQuery({ maxWidth: 1024 });
   const scrollToSection = () => {
     const nextSection = document.getElementById("service");
     if (nextSection) {
@@ -26,22 +25,15 @@ export function HeroSection({ ...props }) {
         </div>
         <div className="flex flex-col items-center gap-6 w-full max-w-[1100px]">
           <div className="text-white sm:text-6xl md:text-7xl font-extrabold tracking-tighter">
-            {isMobile ? (
-              <TypingEffect
-                key="hero-section-typing-effect"
-                text={"간편하게 만드는\n영상 기획안"}
-              />
-            ) : (
-              <TypingEffect
-                key="hero-section-typing-effect"
-                text={"간편하게 만드는 영상 기획안"}
-              />
-            )}
+            <TypingEffect
+              key="hero-section-typing-effect"
+              text={"간편하게 만드는\n영상 기획안"}
+            />
           </div>
 
-          <p className=" mt-5 text-white text-lg sm:text-4xl md:text-4xl font-medium opacity-90">
-            창의적인 영상 기획을{" "}
-            <span className="text-primary font-bold">
+          <p className=" mt-5 text-white text-3xl font-medium opacity-90">
+            영상 기획을{" "}
+            <span className="font-bold text-4xl">
               쉽고, 빠르게, 효과적으로!
             </span>
           </p>
@@ -107,7 +99,7 @@ export function CTALink({
     <Button
       asChild
       variant={variant}
-      className="px-6 py-4 md:py-6 shadow-lg font-semibold flex items-center justify-center flex-1 "
+      className="px-6 py-4 md:py-7 md:mx-12 shadow-lg md:text-lg font-semibold flex items-center justify-center flex-1 rounded-lg"
     >
       <motion.a
         href={href}

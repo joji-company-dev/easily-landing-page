@@ -53,7 +53,7 @@ export function ProposalSection({ ...props }) {
     }
   }, [isVisible]);
 
-  const plugin = useRef(Autoplay({ delay: 5000, stopOnInteraction: true }));
+  const plugin = useRef(Autoplay({ delay: 2500, stopOnInteraction: true }));
 
   return (
     <SectionLayout {...props}>
@@ -63,9 +63,9 @@ export function ProposalSection({ ...props }) {
             <div ref={sectionRef}>
               <TypographyH1 className="text-6xl mb-0">이즐리로</TypographyH1>
               <TypographyH1 className="text-5xl mt-0 mb-0 text-primary">
-                {count.toLocaleString()}개
+                {count}개+
               </TypographyH1>
-              <TypographyH1>이상의 기획안이 생성되고 있습니다.</TypographyH1>
+              <TypographyH1>기획안들이 생성되고 있습니다.</TypographyH1>
             </div>
           }
         >
