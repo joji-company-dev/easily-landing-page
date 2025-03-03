@@ -53,7 +53,7 @@ export function ProposalSection({ ...props }) {
     }
   }, [isVisible]);
 
-  const plugin = useRef(Autoplay({ delay: 5000, stopOnInteraction: true }));
+  const plugin = useRef(Autoplay({ delay: 2500, stopOnInteraction: true }));
 
   return (
     <SectionLayout {...props}>
