@@ -27,7 +27,7 @@ export default function Footer() {
       </p>
 
       <p className="mt-3 text-xs text-gray-600">
-        Copyright 2026. 이즐리. All rights reserved.
+        Copyright 2026. 조지컴퍼니. All rights reserved.
       </p>
     </footer>
   );
