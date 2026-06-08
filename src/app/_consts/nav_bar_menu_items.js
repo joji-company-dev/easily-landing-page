@@ -10,15 +10,11 @@ export const NAV_BAR_MENU_ITEMS = [
       { label: "뉴스레터", href: "#subscribe" },
     ],
   },
-  // TODO: 가격정책 정해진 후 추가
-  // {
-  //   label: "가격",
-  //   baseUrl: "/price",
-  //   children: [
-  //     { label: "정책", href: "#policy" },
-  //     { label: "결제", href: "#purchase" },
-  //   ],
-  // },
+  {
+    label: "요금제",
+    baseUrl: "/price",
+    children: [],
+  },
   {
     label: "공지사항",
     baseUrl: "/post",
