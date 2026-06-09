@@ -25,12 +25,12 @@ const PLANS = [
   {
     name: "라이트",
     description: "개인 크리에이터를 위한 플랜",
-    price: "₩3,900",
+    price: "₩6,900",
     priceSuffix: "/ 월",
     cta: "라이트 시작하기",
     highlight: true,
     badge: "추천",
-    quotas: ["기획안 10개까지 생성", "유튜브 링크 분석 5회 / 월"],
+    quotas: ["기획안 10개까지 생성", "유튜브 링크 분석 10회 / 월"],
     features: [
       { label: "1080p 화질", included: true },
       { label: "최대 영상 길이 10분", included: true },
@@ -41,11 +41,11 @@ const PLANS = [
   {
     name: "프로",
     description: "본격적인 운영을 위한 플랜",
-    price: "₩9,900",
+    price: "₩19,800",
     priceSuffix: "/ 월",
     cta: "프로 시작하기",
     highlight: false,
-    quotas: ["기획안 무제한 생성", "유튜브 링크 분석 20회 / 월"],
+    quotas: ["기획안 무제한 생성", "유튜브 링크 분석 30회 / 월"],
     features: [
       { label: "1080p 화질", included: true },
       { label: "최대 영상 길이 10분", included: true },
