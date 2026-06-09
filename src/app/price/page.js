@@ -5,6 +5,11 @@ import { cn } from "@/lib/utils";
 // 요금제 정책 (레이아웃은 참고 디자인, 색은 easily 주황 브랜드)
 // 모든 플랜 공통: 최대 영상 길이 10분
 // ──────────────────────────────────────────────────────────
+// 대시보드(결제 페이지) 베이스 URL — 클릭 시 결제로 이동
+const DASHBOARD_URL =
+  process.env.NEXT_PUBLIC_DASHBOARD_URL ||
+  "https://easily-dashboard.jojicompany.com";
+
 const PLANS = [
   {
     name: "무료",
@@ -12,6 +17,7 @@ const PLANS = [
     price: "무료",
     priceSuffix: "",
     cta: "무료로 시작",
+    href: `${DASHBOARD_URL}/login`,
     highlight: false,
     quotas: ["기획안 3개까지 생성", "유튜브 링크 분석 3회 / 월"],
     features: [
@@ -28,6 +34,7 @@ const PLANS = [
     price: "₩6,900",
     priceSuffix: "/ 월",
     cta: "라이트 시작하기",
+    href: `${DASHBOARD_URL}/dashboard/billing?plan=LIGHT`,
     highlight: true,
     badge: "추천",
     quotas: ["기획안 10개까지 생성", "유튜브 링크 분석 10회 / 월"],
@@ -44,6 +51,7 @@ const PLANS = [
     price: "₩19,800",
     priceSuffix: "/ 월",
     cta: "프로 시작하기",
+    href: `${DASHBOARD_URL}/dashboard/billing?plan=PRO`,
     highlight: false,
     quotas: ["기획안 무제한 생성", "유튜브 링크 분석 30회 / 월"],
     features: [
@@ -101,17 +109,17 @@ function PlanCard({ plan }) {
       </div>
 
       {/* CTA */}
-      <button
-        type="button"
+      <a
+        href={plan.href}
         className={cn(
-          "mt-6 w-full rounded-lg py-2.5 text-sm font-semibold transition-colors",
+          "mt-6 block w-full rounded-lg py-2.5 text-center text-sm font-semibold transition-colors",
           plan.highlight
             ? "bg-primary text-primary-foreground hover:bg-primary/90"
             : "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         )}
       >
         {plan.cta}
-      </button>
+      </a>
 
       {/* 플랜 내 포함 */}
       <div className="mt-8">
