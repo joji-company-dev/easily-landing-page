@@ -23,7 +23,7 @@ export default function Footer() {
         조지컴퍼니 | 대표 조영진 | 사업자등록번호 108-39-69341
         <br className="sm:hidden" />
         <span className="hidden sm:inline"> | </span>
-        경기도 안양시 동안구 시민대로 327번길 11-41 3F 3900호 | contact@jojicompany.com
+        경기도 안양시 동안구 시민대로 327번길 11-41 3F 309호 | 연락처 010-7510-7298 | contact@jojicompany.com
       </p>
 
       <p className="mt-3 text-xs text-gray-600">

@@ -110,7 +110,8 @@ export default function PrivacyPage() {
         <p>본 개인정보처리방침은 2026년 6월 8일부터 시행됩니다.</p>
         <p className="text-xs">
           상호: 조지컴퍼니 | 대표자: 조영진 | 사업자등록번호: 108-39-69341 | 주소: 경기도
-          안양시 동안구 시민대로 327번길 11-41 3F 3900호 | 문의: contact@jojicompany.com
+          안양시 동안구 시민대로 327번길 11-41 3F 309호 | 연락처: 010-7510-7298 | 문의:
+          contact@jojicompany.com
         </p>
       </Article>
     </div>
