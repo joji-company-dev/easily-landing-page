@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 
 // ──────────────────────────────────────────────────────────
 // 요금제 정책 (레이아웃은 참고 디자인, 색은 easily 주황 브랜드)
-// 모든 플랜 공통: 최대 영상 길이 10분
+// 모든 플랜 공통: 최대 영상 길이 5분
 // ──────────────────────────────────────────────────────────
 // 대시보드(결제 페이지) 베이스 URL — 클릭 시 결제로 이동
 const DASHBOARD_URL =
@@ -19,12 +19,11 @@ const PLANS = [
     cta: "무료로 시작",
     href: `${DASHBOARD_URL}/login`,
     highlight: false,
-    quotas: ["기획안 3개까지 생성", "유튜브 링크 분석 3회 / 월"],
+    quotas: ["기획안 3개까지 생성", "유튜브 영상 분석 15분 / 월"],
     features: [
       { label: "720p 화질", included: true },
-      { label: "최대 영상 길이 10분", included: true },
+      { label: "최대 영상 길이 5분", included: true },
       { label: "공유하기", included: false },
-      { label: "내보내기", included: false },
     ],
     note: "무료로 만든 기획안은 홈에 자동 게시됩니다.",
   },
@@ -37,12 +36,11 @@ const PLANS = [
     href: `${DASHBOARD_URL}/dashboard/billing?plan=LIGHT`,
     highlight: true,
     badge: "추천",
-    quotas: ["기획안 10개까지 생성", "유튜브 링크 분석 10회 / 월"],
+    quotas: ["기획안 10개까지 생성", "유튜브 영상 분석 50분 / 월"],
     features: [
       { label: "1080p 화질", included: true },
-      { label: "최대 영상 길이 10분", included: true },
-      { label: "공유하기", included: true },
-      { label: "내보내기", included: false },
+      { label: "최대 영상 길이 5분", included: true },
+      { label: "공유하기", included: false },
     ],
   },
   {
@@ -53,12 +51,11 @@ const PLANS = [
     cta: "프로 시작하기",
     href: `${DASHBOARD_URL}/dashboard/billing?plan=PRO`,
     highlight: false,
-    quotas: ["기획안 무제한 생성", "유튜브 링크 분석 30회 / 월"],
+    quotas: ["기획안 무제한 생성", "유튜브 영상 분석 150분 / 월"],
     features: [
       { label: "1080p 화질", included: true },
-      { label: "최대 영상 길이 10분", included: true },
+      { label: "최대 영상 길이 5분", included: true },
       { label: "공유하기", included: true },
-      { label: "내보내기", included: true },
     ],
   },
 ];
@@ -163,7 +160,7 @@ export default function PricePage() {
           지금 시작하세요
         </h2>
         <p className="mt-4 text-muted-foreground">
-          모든 플랜은 최대 영상 길이 10분까지 지원합니다.
+          모든 플랜은 최대 영상 길이 5분까지 지원합니다.
         </p>
       </div>
 
