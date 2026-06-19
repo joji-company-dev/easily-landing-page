@@ -24,7 +24,6 @@ const PLANS = [
       { label: "720p 화질", included: true },
       { label: "최대 영상 길이 5분", included: true },
       { label: "공유하기", included: false },
-      { label: "내보내기", included: false },
     ],
     note: "무료로 만든 기획안은 홈에 자동 게시됩니다.",
   },
@@ -42,7 +41,6 @@ const PLANS = [
       { label: "1080p 화질", included: true },
       { label: "최대 영상 길이 5분", included: true },
       { label: "공유하기", included: false },
-      { label: "내보내기", included: false },
     ],
   },
   {
@@ -58,7 +56,6 @@ const PLANS = [
       { label: "1080p 화질", included: true },
       { label: "최대 영상 길이 5분", included: true },
       { label: "공유하기", included: true },
-      { label: "내보내기", included: true },
     ],
   },
 ];
