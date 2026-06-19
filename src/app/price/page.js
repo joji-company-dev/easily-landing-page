@@ -19,7 +19,7 @@ const PLANS = [
     cta: "무료로 시작",
     href: `${DASHBOARD_URL}/login`,
     highlight: false,
-    quotas: ["기획안 생성 무제한", "유튜브 영상 분석 15분 / 월"],
+    quotas: ["기획안 3개까지 생성", "유튜브 영상 분석 15분 / 월"],
     features: [
       { label: "720p 화질", included: true },
       { label: "최대 영상 길이 5분", included: true },
@@ -37,7 +37,7 @@ const PLANS = [
     href: `${DASHBOARD_URL}/dashboard/billing?plan=LIGHT`,
     highlight: true,
     badge: "추천",
-    quotas: ["기획안 생성 무제한", "유튜브 영상 분석 50분 / 월"],
+    quotas: ["기획안 10개까지 생성", "유튜브 영상 분석 50분 / 월"],
     features: [
       { label: "1080p 화질", included: true },
       { label: "최대 영상 길이 5분", included: true },
@@ -53,7 +53,7 @@ const PLANS = [
     cta: "프로 시작하기",
     href: `${DASHBOARD_URL}/dashboard/billing?plan=PRO`,
     highlight: false,
-    quotas: ["기획안 생성 무제한", "유튜브 영상 분석 150분 / 월"],
+    quotas: ["기획안 무제한 생성", "유튜브 영상 분석 150분 / 월"],
     features: [
       { label: "1080p 화질", included: true },
       { label: "최대 영상 길이 5분", included: true },
