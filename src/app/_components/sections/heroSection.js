@@ -27,26 +27,32 @@ export function HeroSection({ ...props }) {
           <div className="text-white sm:text-6xl md:text-7xl font-extrabold tracking-tighter">
             <TypingEffect
               key="hero-section-typing-effect"
-              text={"간편하게 만드는\n영상 기획안"}
+              text={"연출은\n뜯어볼수록 는다"}
             />
           </div>
 
-          <p className=" mt-5 text-white text-3xl font-medium opacity-90">
-            영상 기획을{" "}
-            <span className="font-bold text-4xl">
-              쉽고, 빠르게, 효과적으로!
-            </span>
-          </p>
+          <div className="mt-5 flex flex-col gap-2">
+            <p className="text-white text-2xl md:text-3xl font-medium opacity-90">
+              유튜브 링크만 넣으면 컷·샷·앵글·구성까지{" "}
+              <span className="font-bold text-3xl md:text-4xl">자동 분석</span>
+            </p>
+            <p className="text-white/80 text-lg md:text-xl">
+              며칠 걸리던 레퍼런스 분석이 1분이면 끝나요.
+            </p>
+          </div>
           <div className="flex flex-col md:flex-row md:justify-center w-full md:w-4/5 gap-4 mt-6">
             <CTALink href="https://easily-dashboard.jojicompany.com/dashboard/proposal/create">
               <LayoutDashboardIcon size={32} />
-              기획안 생성하기
+              지금 영상 뜯어보기
             </CTALink>
           </div>
+          <p className="text-white/70 text-base md:text-lg">
+            좋아하는 광고·뮤직비디오 유튜브 링크부터 넣어보세요.
+          </p>
         </div>
         <div className="relative flex flex-col gap-4 mt-20">
-          <VerifiedText>Powered by OpenAI</VerifiedText>
-          <VerifiedText>Powered by Flux 1.0</VerifiedText>
+          <VerifiedText>유튜브 링크 1개면 끝</VerifiedText>
+          <VerifiedText>1분 만에 첫 분석</VerifiedText>
         </div>
         <div className="absolute flex justify-center bottom-4">
           <motion.button
