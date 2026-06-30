@@ -28,7 +28,7 @@ const nextConfig = {
   },
   redirects: async () => {
     return OLD_SITE_HOSTS.map((host) => ({
-      source: "/:path*",
+      source: "/:path((?!_next/).*)",
       has: [
         {
           type: "host",
