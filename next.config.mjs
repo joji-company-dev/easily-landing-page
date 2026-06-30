@@ -35,6 +35,13 @@ const nextConfig = {
           value: host,
         },
       ],
+      missing: [
+        {
+          type: "header",
+          key: "x-easily-origin-router",
+          value: "1",
+        },
+      ],
       destination: `${NEW_SITE_URL}/:path*`,
       permanent: true,
     }));
