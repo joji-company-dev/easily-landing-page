@@ -8,6 +8,52 @@ import { ActiveSectionProvider } from "./_components/contexts/activeSectionConte
 import "./globals.css";
 
 const fonts = Noto_Sans_KR({ subsets: ["latin"] });
+const siteUrl = (
+  process.env.NEXT_PUBLIC_EASILY_BASE_URL || "https://easily.jojicompany.com"
+).replace(/\/$/, "");
+const seoTitle =
+  "이즐리 - 광고·영화 레퍼런스 분석 | 국내 1위 온라인 스토리보드";
+const seoDescription =
+  "스토리보드, 연출 공부, 영상 레퍼런스를 장면과 샷 단위로 분석하고 온라인 기획안으로 정리하세요. 1080p 스크린샷, 마크다운 작성, 공유와 다운로드까지 지원합니다.";
+const seoKeywords = [
+  "스토리보드",
+  "온라인 스토리보드",
+  "연출 공부",
+  "연출공부",
+  "레퍼런스 분석",
+  "영상 레퍼런스",
+  "광고 레퍼런스",
+  "영화 레퍼런스",
+  "영상 기획안",
+  "콘텐츠 기획",
+];
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "이즐리",
+  alternateName: "Easily",
+  url: siteUrl,
+  applicationCategory: "DesignApplication",
+  operatingSystem: "Web",
+  headline: seoTitle,
+  description: seoDescription,
+  keywords: seoKeywords.join(", "),
+  offers: {
+    "@type": "AggregateOffer",
+    priceCurrency: "KRW",
+    lowPrice: "0",
+    highPrice: "19800",
+  },
+  featureList: [
+    "광고·영화 레퍼런스 분석",
+    "온라인 스토리보드 작성",
+    "장면과 샷 단위 분석",
+    "1080p 스크린샷 저장",
+    "마크다운 형식 기획안 작성",
+    "공유와 이미지 다운로드",
+  ],
+};
+const googleAnalyticsId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
 
 /**
  * @type {import('next').Viewport}
@@ -24,23 +70,19 @@ export const viewport = {
  * @type {import('next').Metadata}
  */
 export const metadata = {
-  metadataBase: process.env.NEXT_PUBLIC_EASILY_BASE_URL
-    ? new URL(process.env.NEXT_PUBLIC_EASILY_BASE_URL)
-    : undefined,
-  title: "이즐리 - 영상 기획을 더 쉽게, 더 강력하게",
-  description:
-    "이즐리는 영상 기획을 위한 전문 도구로, 자유로운 블록 편집을 지원합니다. 효율적인 기획을 돕고 팀 협업을 강화하세요.",
-  keywords: "영상 기획서, AI 기획서, 콘텐츠 기획, 유튜브 기획",
+  metadataBase: new URL(siteUrl),
+  title: seoTitle,
+  description: seoDescription,
+  keywords: seoKeywords,
   authors: [{ name: "이즐리" }],
   creator: "이즐리",
   publisher: "이즐리",
 
   // 오픈그래프 메타데이터 (소셜 미디어 공유용)
   openGraph: {
-    title: "이즐리 - 영상 기획을 더 쉽게, 더 강력하게",
-    description:
-      "이즐리는 영상 기획을 위한 전문 도구로, 자유로운 블록 편집을 지원합니다. 효율적인 기획을 돕고 팀 협업을 강화하세요.",
-    url: "https://easily.jojicompany.com",
+    title: seoTitle,
+    description: seoDescription,
+    url: siteUrl,
     siteName: "이즐리",
     locale: "ko_KR",
     type: "website",
@@ -54,9 +96,8 @@ export const metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "이즐리 - 영상 기획을 더 쉽게, 더 강력하게",
-    description:
-      "이즐리는 영상 기획을 위한 전문 도구로, 자유로운 블록 편집을 지원합니다. 효율적인 기획을 돕고 팀 협업을 강화하세요.",
+    title: seoTitle,
+    description: seoDescription,
     images: ["/og.jpg"],
   },
 
@@ -66,16 +107,16 @@ export const metadata = {
     googleBot: {
       index: true,
       follow: true,
-      "max-video-preview": 3,
+      "max-video-preview": -1,
       "max-image-preview": "large",
-      "max-snippet": 3,
+      "max-snippet": -1,
     },
   },
 
   alternates: {
-    canonical: "https://easily.jojicompany.com",
+    canonical: siteUrl,
     languages: {
-      "ko-KR": "https://easily.jojicompany.com",
+      "ko-KR": siteUrl,
     },
   },
 };
@@ -93,7 +134,13 @@ export default function RootLayout({ children }) {
           <Toaster />
           <Footer />
         </ActiveSectionProvider>
-        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+          }}
+        />
+        {googleAnalyticsId && <GoogleAnalytics gaId={googleAnalyticsId} />}
       </body>
     </html>
   );

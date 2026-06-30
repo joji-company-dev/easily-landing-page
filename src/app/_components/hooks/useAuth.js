@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { DASHBOARD_LOGIN_URL } from "../../_consts/external_urls";
 
 const useAuth = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 여부
@@ -6,7 +7,13 @@ const useAuth = () => {
   const [userName, setUserName] = useState(""); // 사용자 이름
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/profile`, {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+    if (!baseUrl) {
+      setIsLoading(false);
+      return;
+    }
+
+    fetch(`${baseUrl}/auth/profile`, {
       method: "GET",
       credentials: "include",
     })
@@ -35,12 +42,14 @@ const useAuth = () => {
 
   const redirectToLogin = () => {
     window.location.href =
-      "https://easily-dashboard.jojicompany.com/login?fallback=" +
-      window.location.href;
+      `${DASHBOARD_LOGIN_URL}?fallback=` + window.location.href;
   };
 
   const handleLogout = () => {
-    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/logout`, {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+    if (!baseUrl) return;
+
+    fetch(`${baseUrl}/auth/logout`, {
       method: "POST",
       credentials: "include",
     }).then((response) => {

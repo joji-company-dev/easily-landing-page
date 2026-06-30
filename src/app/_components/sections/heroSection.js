@@ -7,6 +7,7 @@ import { useMediaQuery } from "react-responsive";
 import { CheckIcon, ChevronsDownIcon, LayoutDashboardIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import { HeroLogo } from "../common/heroLogo";
+import { DASHBOARD_PROPOSAL_CREATE_URL } from "../../_consts/external_urls";
 // import logoSrc from '../../../../public/l'
 
 export function HeroSection({ ...props }) {
@@ -27,32 +28,32 @@ export function HeroSection({ ...props }) {
           <div className="text-white sm:text-6xl md:text-7xl font-extrabold tracking-tighter">
             <TypingEffect
               key="hero-section-typing-effect"
-              text={"연출은\n뜯어볼수록 는다"}
+              text={"가장 빠른\n온라인 스토리보드"}
             />
           </div>
 
           <div className="mt-5 flex flex-col gap-2">
             <p className="text-white text-2xl md:text-3xl font-medium opacity-90">
-              유튜브 링크만 넣으면 컷·샷·앵글·구성까지{" "}
-              <span className="font-bold text-3xl md:text-4xl">자동 분석</span>
+              유튜브 링크만 넣으면 상세 씬과 샷 구성이{" "}
+              <span className="font-bold text-3xl md:text-4xl">자동 정리</span>
             </p>
             <p className="text-white/80 text-lg md:text-xl">
-              며칠 걸리던 레퍼런스 분석이 1분이면 끝나요.
+              컷 이미지, 앵글, 카메라 무빙, 자막·나레이션 메모까지 한 화면에서 편집하세요.
             </p>
           </div>
           <div className="flex flex-col md:flex-row md:justify-center w-full md:w-4/5 gap-4 mt-6">
-            <CTALink href="https://easily-dashboard.jojicompany.com/dashboard/proposal/create">
+            <CTALink href={DASHBOARD_PROPOSAL_CREATE_URL}>
               <LayoutDashboardIcon size={32} />
-              지금 영상 뜯어보기
+              지금 레퍼런스 영상 분석하기
             </CTALink>
           </div>
           <p className="text-white/70 text-base md:text-lg">
-            좋아하는 광고·뮤직비디오 유튜브 링크부터 넣어보세요.
+            분석 결과는 스토리보드 문서로 저장되고, 공유와 이미지 다운로드까지 이어집니다.
           </p>
         </div>
         <div className="relative flex flex-col gap-4 mt-20">
-          <VerifiedText>유튜브 링크 1개면 끝</VerifiedText>
-          <VerifiedText>1분 만에 첫 분석</VerifiedText>
+          <VerifiedText>상세 씬·샷 단위 자동 정리</VerifiedText>
+          <VerifiedText>1080 FHD 이미지 저장·zip 다운로드</VerifiedText>
         </div>
         <div className="absolute flex justify-center bottom-4">
           <motion.button

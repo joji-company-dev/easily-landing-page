@@ -9,6 +9,159 @@ html {
   scroll-behavior: smooth;
 }
 
+.proposal-scroll-frame {
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  animation: proposal-scroll 18s ease-in-out infinite alternate;
+}
+
+@keyframes proposal-scroll {
+  0%,
+  18% {
+    background-position: top center;
+  }
+  82%,
+  100% {
+    background-position: bottom center;
+  }
+}
+
+.service-demo-frame {
+  isolation: isolate;
+}
+
+.service-demo-frame::after {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  content: "";
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0) 18%
+    ),
+    radial-gradient(
+      circle at var(--service-focus-origin, 50% 50%),
+      rgba(255, 129, 55, 0.18),
+      rgba(255, 129, 55, 0) 34%
+    );
+  opacity: 0;
+  animation: service-demo-glow 11s ease-in-out infinite;
+}
+
+.service-demo-canvas {
+  position: absolute;
+  inset: 0;
+  transform-origin: var(--service-focus-origin, 50% 50%);
+  animation: service-demo-zoom 11s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  will-change: transform;
+}
+
+.service-demo-focus {
+  position: absolute;
+  z-index: 2;
+  border: 2px solid rgba(255, 129, 55, 0.82);
+  border-radius: 6px;
+  box-shadow:
+    0 0 0 999px rgba(0, 0, 0, 0.08),
+    0 12px 34px rgba(255, 129, 55, 0.28);
+  opacity: 0;
+  animation: service-demo-focus 11s ease-in-out infinite;
+}
+
+.service-demo-playback {
+  position: absolute;
+  z-index: 3;
+  height: 3px;
+  border-radius: 999px;
+  background: #ff2d2d;
+  opacity: 0;
+  transform-origin: left center;
+  animation: service-demo-playback 11s linear infinite;
+}
+
+@keyframes service-demo-zoom {
+  0%,
+  15% {
+    transform: scale(1);
+  }
+  28%,
+  68% {
+    transform: scale(var(--service-focus-zoom, 1.55));
+  }
+  84%,
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes service-demo-focus {
+  0%,
+  18%,
+  82%,
+  100% {
+    opacity: 0;
+  }
+  30%,
+  66% {
+    opacity: 1;
+  }
+}
+
+@keyframes service-demo-glow {
+  0%,
+  20%,
+  82%,
+  100% {
+    opacity: 0;
+  }
+  32%,
+  66% {
+    opacity: 1;
+  }
+}
+
+@keyframes service-demo-playback {
+  0%,
+  28% {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  34% {
+    opacity: 1;
+    transform: scaleX(0.08);
+  }
+  66% {
+    opacity: 1;
+    transform: scaleX(0.42);
+  }
+  74%,
+  100% {
+    opacity: 0;
+    transform: scaleX(0.42);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .proposal-scroll-frame {
+    animation: none;
+  }
+
+  .service-demo-frame::after,
+  .service-demo-canvas,
+  .service-demo-focus,
+  .service-demo-playback {
+    animation: none;
+  }
+
+  .service-demo-focus {
+    opacity: 1;
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

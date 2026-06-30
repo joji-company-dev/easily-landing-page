@@ -7,6 +7,7 @@ import { Button } from "../ui/button";
 import { useActiveSectionContext } from "../contexts/activeSectionContext";
 import { useWindowScrollDirection } from "../hooks/useScrollDirection";
 import { NAV_BAR_MENU_ITEMS } from "../../_consts/nav_bar_menu_items";
+import { DASHBOARD_URL } from "../../_consts/external_urls";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -133,7 +134,7 @@ export default function MobileNavbar({
             </div>
 
             <Button asChild>
-              <Link href="https://easily-dashboard.jojicompany.com">
+              <Link href={DASHBOARD_URL}>
                 대시보드
               </Link>
             </Button>
