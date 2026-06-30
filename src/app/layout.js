@@ -8,6 +8,9 @@ import { ActiveSectionProvider } from "./_components/contexts/activeSectionConte
 import "./globals.css";
 
 const fonts = Noto_Sans_KR({ subsets: ["latin"] });
+const siteUrl = (
+  process.env.NEXT_PUBLIC_EASILY_BASE_URL || "https://easilystoryboard.com"
+).replace(/\/$/, "");
 
 /**
  * @type {import('next').Viewport}
@@ -24,9 +27,7 @@ export const viewport = {
  * @type {import('next').Metadata}
  */
 export const metadata = {
-  metadataBase: process.env.NEXT_PUBLIC_EASILY_BASE_URL
-    ? new URL(process.env.NEXT_PUBLIC_EASILY_BASE_URL)
-    : undefined,
+  metadataBase: new URL(siteUrl),
   title: "이즐리 - 영상 기획을 더 쉽게, 더 강력하게",
   description:
     "이즐리는 영상 기획을 위한 전문 도구로, 자유로운 블록 편집을 지원합니다. 효율적인 기획을 돕고 팀 협업을 강화하세요.",
@@ -40,7 +41,7 @@ export const metadata = {
     title: "이즐리 - 영상 기획을 더 쉽게, 더 강력하게",
     description:
       "이즐리는 영상 기획을 위한 전문 도구로, 자유로운 블록 편집을 지원합니다. 효율적인 기획을 돕고 팀 협업을 강화하세요.",
-    url: "https://easily.jojicompany.com",
+    url: siteUrl,
     siteName: "이즐리",
     locale: "ko_KR",
     type: "website",
@@ -73,9 +74,9 @@ export const metadata = {
   },
 
   alternates: {
-    canonical: "https://easily.jojicompany.com",
+    canonical: siteUrl,
     languages: {
-      "ko-KR": "https://easily.jojicompany.com",
+      "ko-KR": siteUrl,
     },
   },
 };

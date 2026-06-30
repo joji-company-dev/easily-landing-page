@@ -1,15 +1,12 @@
 import { Check, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { DASHBOARD_URL } from "../_consts/external_urls";
 
 // ──────────────────────────────────────────────────────────
 // 요금제 정책 (레이아웃은 참고 디자인, 색은 easily 주황 브랜드)
 // 모든 플랜 공통: 최대 영상 길이 5분
 // ──────────────────────────────────────────────────────────
 // 대시보드(결제 페이지) 베이스 URL — 클릭 시 결제로 이동
-const DASHBOARD_URL =
-  process.env.NEXT_PUBLIC_DASHBOARD_URL ||
-  "https://easily-dashboard.jojicompany.com";
-
 const PLANS = [
   {
     name: "무료",

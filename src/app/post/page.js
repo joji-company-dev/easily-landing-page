@@ -21,6 +21,7 @@ import { Detector } from "../_components/common/detector";
 import { useActiveSectionContext } from "../_components/contexts/activeSectionContext";
 import { Separator } from "../_components/ui/separator";
 import dayjs from "dayjs";
+import { API_BASE_URL } from "../_consts/external_urls";
 
 const FETCH_POSTS_LIMIT = 10;
 
@@ -54,7 +55,7 @@ export default function NoticePage() {
   const fetchPosts = async (page) => {
     setLoading(true);
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/posts?page=${page}&limit=${FETCH_POSTS_LIMIT}&categories=NOTICE`
+      `${API_BASE_URL}/posts?page=${page}&limit=${FETCH_POSTS_LIMIT}&categories=NOTICE`
     );
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);

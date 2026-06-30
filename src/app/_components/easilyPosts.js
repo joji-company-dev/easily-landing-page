@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Skeleton } from "@/app/_components/ui/skeleton";
 import { TypographyH2 } from "@/app/_components/ui/typography";
+import { API_BASE_URL } from "@/app/_consts/external_urls";
 
 /**
  * @typedef {Object} Post
@@ -23,7 +24,7 @@ export default function EasilyPosts() {
     const fetchPosts = async () => {
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/posts?categories=NOTICE`
+          `${API_BASE_URL}/posts?categories=NOTICE`
         );
         if (!response.ok)
           throw new Error(`HTTP error! status: ${response.status}`);
