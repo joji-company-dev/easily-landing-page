@@ -1,8 +1,12 @@
 /** @type {import('next').NextConfig} */
 const NEW_SITE_URL = "https://easilystoryboard.com";
 const OLD_SITE_HOSTS = ["easily.jojicompany.com", "www.easily.jojicompany.com"];
+const isProduction = process.env.NODE_ENV === "production";
 
 const nextConfig = {
+  assetPrefix: isProduction
+    ? process.env.NEXT_PUBLIC_ASSET_PREFIX || "https://easily.jojicompany.com"
+    : undefined,
   images: {
     remotePatterns: [
       {
