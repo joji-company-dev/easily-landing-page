@@ -10,7 +10,7 @@ import { DASHBOARD_URL } from "../_consts/external_urls";
 const PLANS = [
   {
     name: "무료",
-    description: "영상 제작을 체험해보세요",
+    description: "레퍼런스 분석과 스토리보드를 가볍게 시작해보세요",
     price: "무료",
     priceSuffix: "",
     cta: "무료로 시작",
@@ -25,9 +25,12 @@ const PLANS = [
   },
   {
     name: "라이트",
-    description: "개인 크리에이터를 위한 플랜",
+    description: "레퍼런스를 분석하고 스토리보드를 꾸준히 만드는 플랜",
+    originalPrice: "₩9,900",
     price: "₩6,900",
     priceSuffix: "/ 월",
+    promoLabel: "신규 런칭 이벤트",
+    discountRate: "30%",
     cta: "라이트 시작하기",
     href: `${DASHBOARD_URL}/dashboard/billing?plan=LIGHT`,
     highlight: true,
@@ -41,9 +44,12 @@ const PLANS = [
   },
   {
     name: "프로",
-    description: "본격적인 운영을 위한 플랜",
+    description: "많은 레퍼런스 분석과 공유까지 필요한 팀용 플랜",
+    originalPrice: "₩33,000",
     price: "₩19,800",
     priceSuffix: "/ 월",
+    promoLabel: "정식 출시 이벤트 할인",
+    discountRate: "40%",
     cta: "프로 시작하기",
     href: `${DASHBOARD_URL}/dashboard/billing?plan=PRO`,
     highlight: false,
@@ -92,13 +98,30 @@ function PlanCard({ plan }) {
       <p className="mt-1 text-sm text-muted-foreground">{plan.description}</p>
 
       {/* 가격 */}
-      <div className="mt-6 flex items-end gap-1">
-        <span className="text-3xl font-bold tracking-tight">{plan.price}</span>
-        {plan.priceSuffix && (
-          <span className="pb-1 text-sm text-muted-foreground">
-            {plan.priceSuffix}
-          </span>
+      <div className="mt-6">
+        {plan.promoLabel && (
+          <div className="mb-2 inline-flex rounded-full bg-primary/10 px-2.5 py-1 text-xs font-bold text-primary">
+            {plan.promoLabel}
+            {plan.discountRate && (
+              <span className="ml-1">· {plan.discountRate} 할인</span>
+            )}
+          </div>
         )}
+        {plan.originalPrice && (
+          <p className="text-sm font-semibold text-muted-foreground line-through decoration-primary decoration-2">
+            {plan.originalPrice}
+          </p>
+        )}
+        <div className="flex items-end gap-1">
+          <span className="text-3xl font-bold tracking-tight text-primary">
+            {plan.price}
+          </span>
+          {plan.priceSuffix && (
+            <span className="pb-1 text-sm text-muted-foreground">
+              {plan.priceSuffix}
+            </span>
+          )}
+        </div>
       </div>
 
       {/* CTA */}
