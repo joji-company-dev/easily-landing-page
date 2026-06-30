@@ -1,11 +1,19 @@
 /** @type {import('next').NextConfig} */
 const NEW_SITE_URL = "https://easilystoryboard.com";
 const OLD_SITE_HOSTS = ["easily.jojicompany.com", "www.easily.jojicompany.com"];
+const OLD_SITE_URLS = [
+  ...OLD_SITE_HOSTS.map((host) => `https://${host}`),
+  "https://easily-dashboard.jojicompany.com",
+];
+const normalizePublicUrl = (url) => {
+  const normalized = (url || NEW_SITE_URL).replace(/\/$/, "");
+  return OLD_SITE_URLS.includes(normalized) ? NEW_SITE_URL : normalized;
+};
 const isProduction = process.env.NODE_ENV === "production";
 
 const nextConfig = {
   assetPrefix: isProduction
-    ? process.env.NEXT_PUBLIC_ASSET_PREFIX || "https://easily.jojicompany.com"
+    ? normalizePublicUrl(process.env.NEXT_PUBLIC_ASSET_PREFIX)
     : undefined,
   images: {
     remotePatterns: [

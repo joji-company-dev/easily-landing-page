@@ -1,6 +1,6 @@
-const baseUrl = (
-  process.env.NEXT_PUBLIC_EASILY_BASE_URL || "https://easilystoryboard.com"
-).replace(/\/$/, "");
+import { normalizePublicUrl } from "./_consts/public_urls";
+
+const baseUrl = normalizePublicUrl(process.env.NEXT_PUBLIC_EASILY_BASE_URL);
 export default async function sitemap() {
   return [
     {
