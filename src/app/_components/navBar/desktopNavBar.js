@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useActiveSectionContext } from "../contexts/activeSectionContext";
@@ -11,22 +11,6 @@ export const NAVBAR_HEIGHT = 64;
 const DROPDOWN_BAR_HEIGHT = 256;
 const MENU_BUTTON_HEIGHT = 20;
 
-if (typeof window !== "undefined") {
-  function setScrollbarWidthVariables() {
-    const scrollbarWidth =
-      window.innerWidth - document.documentElement.clientWidth;
-
-    document.documentElement.style.setProperty(
-      "--scrollbar-width",
-      `${scrollbarWidth}px`
-    );
-  }
-
-  setTimeout(setScrollbarWidthVariables, 100);
-
-  window.addEventListener("resize", setScrollbarWidthVariables);
-}
-
 const DesktopNavbar = ({
   isLoggedIn,
   isLoading,
@@ -36,6 +20,25 @@ const DesktopNavbar = ({
 }) => {
   const { activeSectionId } = useActiveSectionContext();
   const [isMenuDropdownOpen, setIsMenuDropdownOpen] = useState(false);
+
+  useEffect(() => {
+    const setScrollbarWidthVariables = () => {
+      const scrollbarWidth =
+        window.innerWidth - document.documentElement.clientWidth;
+
+      document.documentElement.style.setProperty(
+        "--scrollbar-width",
+        `${scrollbarWidth}px`
+      );
+    };
+
+    setScrollbarWidthVariables();
+    window.addEventListener("resize", setScrollbarWidthVariables);
+
+    return () => {
+      window.removeEventListener("resize", setScrollbarWidthVariables);
+    };
+  }, []);
 
   return (
     <nav

@@ -3,7 +3,6 @@ import Autoplay from "embla-carousel-autoplay";
 import { Carousel, CarouselContent, CarouselItem } from "../ui/carousel";
 import { PROPOSAL_EXAMPLES } from "@/app/_consts/proposal_list";
 import { SectionLayout } from "../layouts/sectionLayout";
-import Image from "next/image";
 import { TypographyH1 } from "../ui/typography";
 import { ContainerScroll } from "../ui/container-scroll";
 
@@ -81,15 +80,12 @@ export function ProposalSection({ ...props }) {
             <CarouselContent className="h-full">
               {PROPOSAL_EXAMPLES.map((proposal) => (
                 <CarouselItem key={proposal.id}>
-                  <div className="h-full">
-                    <Image
-                      className="w-full h-full object-fill"
-                      src={proposal.image}
-                      width={1920}
-                      height={1080}
-                      alt={`${proposal.title} 기획안`}
-                    />
-                  </div>
+                  <div
+                    className="proposal-scroll-frame h-full w-full bg-white"
+                    role="img"
+                    aria-label={`${proposal.title} 기획안 예시`}
+                    style={{ backgroundImage: `url(${proposal.image})` }}
+                  />
                 </CarouselItem>
               ))}
             </CarouselContent>
