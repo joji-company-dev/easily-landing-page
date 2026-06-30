@@ -7,6 +7,7 @@ import { useMediaQuery } from "react-responsive";
 import { CheckIcon, ChevronsDownIcon, LayoutDashboardIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import { HeroLogo } from "../common/heroLogo";
+import { DASHBOARD_PROPOSAL_CREATE_URL } from "../../_consts/external_urls";
 // import logoSrc from '../../../../public/l'
 
 export function HeroSection({ ...props }) {
@@ -41,7 +42,7 @@ export function HeroSection({ ...props }) {
             </p>
           </div>
           <div className="flex flex-col md:flex-row md:justify-center w-full md:w-4/5 gap-4 mt-6">
-            <CTALink href="https://easily-dashboard.jojicompany.com/dashboard/proposal/create">
+            <CTALink href={DASHBOARD_PROPOSAL_CREATE_URL}>
               <LayoutDashboardIcon size={32} />
               지금 영상 뜯어보기
             </CTALink>

@@ -6,6 +6,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import { DASHBOARD_URL } from "../../_consts/external_urls";
 
 export function AuthDropdown({
   isLoggedIn,
@@ -29,9 +30,7 @@ export function AuthDropdown({
             </DropdownMenuTrigger>
             <DropdownMenuContent className="rounded-b-xl border-none shadow-md bg-slate-50">
               <DropdownMenuItem asChild>
-                <Link
-                  href={`${process.env.NEXT_PUBLIC_DASHBOARD_BASE_URL}/dashboard/my`}
-                >
+                <Link href={`${DASHBOARD_URL}/dashboard/my`}>
                   내 정보
                 </Link>
               </DropdownMenuItem>
