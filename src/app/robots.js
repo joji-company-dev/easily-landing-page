@@ -1,7 +1,7 @@
+import { normalizePublicUrl } from "./_consts/public_urls";
+
 export default function robots() {
-  const baseUrl = (
-    process.env.NEXT_PUBLIC_EASILY_BASE_URL || "https://easilystoryboard.com"
-  ).replace(/\/$/, "");
+  const baseUrl = normalizePublicUrl(process.env.NEXT_PUBLIC_EASILY_BASE_URL);
 
   return {
     rules: {
