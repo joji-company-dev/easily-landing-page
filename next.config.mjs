@@ -1,4 +1,7 @@
 /** @type {import('next').NextConfig} */
+const NEW_SITE_URL = "https://easilystoryboard.com";
+const OLD_SITE_HOSTS = ["easily.jojicompany.com", "www.easily.jojicompany.com"];
+
 const nextConfig = {
   images: {
     remotePatterns: [
@@ -18,6 +21,19 @@ const nextConfig = {
     } else {
       return [];
     }
+  },
+  redirects: async () => {
+    return OLD_SITE_HOSTS.map((host) => ({
+      source: "/:path*",
+      has: [
+        {
+          type: "host",
+          value: host,
+        },
+      ],
+      destination: `${NEW_SITE_URL}/:path*`,
+      permanent: true,
+    }));
   },
 };
 

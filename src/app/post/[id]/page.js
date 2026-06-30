@@ -5,6 +5,7 @@ import Link from "next/link";
 import { formatDate } from "@/app/_utils/formatDate";
 import { Separator } from "@/app/_components/ui/separator";
 import { Button } from "@/app/_components/ui/button";
+import { API_BASE_URL } from "@/app/_consts/external_urls";
 
 export default function CommunityPostDetailPage({ params }) {
   const { id } = use(params);
@@ -15,7 +16,7 @@ export default function CommunityPostDetailPage({ params }) {
   useEffect(() => {
     const fetchPostDetail = async () => {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/posts/${id}`
+        `${API_BASE_URL}/posts/${id}`
       );
       const data = await response.json();
       setPostData(data);

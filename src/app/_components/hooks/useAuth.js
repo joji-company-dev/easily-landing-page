@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
-import { DASHBOARD_LOGIN_URL } from "../../_consts/external_urls";
+import {
+  API_BASE_URL,
+  DASHBOARD_LOGIN_URL,
+} from "../../_consts/external_urls";
 
 const useAuth = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 여부
@@ -7,13 +10,7 @@ const useAuth = () => {
   const [userName, setUserName] = useState(""); // 사용자 이름
 
   useEffect(() => {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-    if (!baseUrl) {
-      setIsLoading(false);
-      return;
-    }
-
-    fetch(`${baseUrl}/auth/profile`, {
+    fetch(`${API_BASE_URL}/auth/profile`, {
       method: "GET",
       credentials: "include",
     })
@@ -46,10 +43,7 @@ const useAuth = () => {
   };
 
   const handleLogout = () => {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-    if (!baseUrl) return;
-
-    fetch(`${baseUrl}/auth/logout`, {
+    fetch(`${API_BASE_URL}/auth/logout`, {
       method: "POST",
       credentials: "include",
     }).then((response) => {

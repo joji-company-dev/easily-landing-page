@@ -9,7 +9,7 @@ import "./globals.css";
 
 const fonts = Noto_Sans_KR({ subsets: ["latin"] });
 const siteUrl = (
-  process.env.NEXT_PUBLIC_EASILY_BASE_URL || "https://easily.jojicompany.com"
+  process.env.NEXT_PUBLIC_EASILY_BASE_URL || "https://easilystoryboard.com"
 ).replace(/\/$/, "");
 const seoTitle =
   "이즐리 - 광고·영화 레퍼런스 분석 | 국내 1위 온라인 스토리보드";

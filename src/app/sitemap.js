@@ -1,5 +1,5 @@
 const baseUrl = (
-  process.env.NEXT_PUBLIC_EASILY_BASE_URL || "https://easily.jojicompany.com"
+  process.env.NEXT_PUBLIC_EASILY_BASE_URL || "https://easilystoryboard.com"
 ).replace(/\/$/, "");
 
 export default async function sitemap() {

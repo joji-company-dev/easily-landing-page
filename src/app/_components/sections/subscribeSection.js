@@ -5,6 +5,7 @@ import { Input } from "@/app/_components/ui/input";
 import { Button } from "@/app/_components/ui/button";
 import { useToast } from "@/app/_components/hooks/use-toast";
 import { SectionLayout } from "../layouts/sectionLayout";
+import { API_BASE_URL } from "../../_consts/external_urls";
 
 export function SubscribeSection({ ...props }) {
   const [email, setEmail] = useState("");
@@ -37,7 +38,7 @@ export function SubscribeSection({ ...props }) {
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/email-subscription/subscribe`,
+        `${API_BASE_URL}/email-subscription/subscribe`,
         {
           method: "POST",
           headers: {
