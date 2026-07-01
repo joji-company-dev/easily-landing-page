@@ -42,7 +42,7 @@ const structuredData = {
     "@type": "AggregateOffer",
     priceCurrency: "KRW",
     lowPrice: "0",
-    highPrice: "29900",
+    highPrice: "39600",
   },
   featureList: [
     "광고·영화 레퍼런스 분석",
