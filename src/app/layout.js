@@ -5,6 +5,7 @@ import NavBar from "./_components/navBar/navBar";
 import Footer from "./_components/footer";
 import { Toaster } from "./_components/ui/toaster";
 import { ActiveSectionProvider } from "./_components/contexts/activeSectionContext";
+import ChannelTalkClient from "./_components/channelTalkClient";
 import { normalizePublicUrl } from "./_consts/public_urls";
 import "./globals.css";
 
@@ -131,6 +132,7 @@ export default function RootLayout({ children }) {
           <NavBar />
           {children}
           <Toaster />
+          <ChannelTalkClient />
           <Footer />
         </ActiveSectionProvider>
         <script
