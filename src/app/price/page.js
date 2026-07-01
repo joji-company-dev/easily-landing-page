@@ -21,6 +21,7 @@ const PLANS = [
       { label: "720p 화질", included: true },
       { label: "최대 영상 길이 5분", included: true },
       { label: "공유하기", included: false },
+      { label: "스토리보드 PDF 내보내기", included: false },
     ],
   },
   {
@@ -40,6 +41,7 @@ const PLANS = [
       { label: "1080p 화질", included: true },
       { label: "최대 영상 길이 5분", included: true },
       { label: "공유하기", included: false },
+      { label: "스토리보드 PDF 내보내기", included: false },
     ],
   },
   {
@@ -58,6 +60,7 @@ const PLANS = [
       { label: "1080p 화질", included: true },
       { label: "최대 영상 길이 5분", included: true },
       { label: "공유하기", included: true },
+      { label: "스토리보드 PDF 내보내기", included: true },
     ],
   },
 ];

@@ -55,4 +55,21 @@ export const SERVICE_INFOS = [
       },
     },
   },
+  {
+    id: 4,
+    title: "완성된 스토리보드는 고급 PDF로 저장.",
+    subtitle:
+      "샷 이미지와 설명이 다크 시트 형태로 정리되어 제안서처럼 바로 공유할 수 있습니다. 스토리보드 PDF 내보내기는 프로 플랜부터 사용할 수 있어요.",
+    imageSrc: "/service-screenshots/storyboard-pdf-export.png",
+    focus: {
+      origin: "50% 50%",
+      zoom: 1.08,
+      rect: {
+        left: "4%",
+        top: "5%",
+        width: "92%",
+        height: "90%",
+      },
+    },
+  },
 ];
