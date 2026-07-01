@@ -13,6 +13,7 @@ const useAuth = () => {
     fetch(`${API_BASE_URL}/auth/profile`, {
       method: "GET",
       credentials: "include",
+      cache: "no-store",
     })
       .then((response) => {
         if (response.status === 200) {
@@ -38,13 +39,14 @@ const useAuth = () => {
   }, []);
 
   const redirectToLogin = () => {
-    window.location.href = `${DASHBOARD_LOGIN_URL}?fallback=${window.location.href}`;
+    window.location.href = `${DASHBOARD_LOGIN_URL}?fallback=${encodeURIComponent(window.location.href)}`;
   };
 
   const handleLogout = () => {
     fetch(`${API_BASE_URL}/auth/logout`, {
       method: "POST",
       credentials: "include",
+      cache: "no-store",
     }).then((response) => {
       if (response.status === 201) {
         setIsLoggedIn(false);

@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useActiveSectionContext } from "../contexts/activeSectionContext";
 import { Button } from "../ui/button";
-import { DASHBOARD_URL } from "../../_consts/external_urls";
+import { DASHBOARD_HOME_URL } from "../../_consts/external_urls";
 import { NAV_BAR_MENU_ITEMS } from "../../_consts/nav_bar_menu_items";
 import { AuthDropdown } from "./authDropdown";
 
@@ -129,7 +129,7 @@ const DesktopNavbar = ({
         </div>
 
         <div className="flex items-center gap-4 z-10">
-          <Link href={DASHBOARD_URL}>
+          <Link href={DASHBOARD_HOME_URL}>
             <Button variant="link">대시보드</Button>
           </Link>
 
