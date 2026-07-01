@@ -16,7 +16,7 @@ const PLANS = [
     cta: "무료로 시작",
     href: `${DASHBOARD_URL}/login`,
     highlight: false,
-    quotas: ["기획안 3개까지 생성", "유튜브 영상 분석 15분 / 월"],
+    quotas: ["기획안 3개까지 생성", "유튜브 영상 분석 5분 / 월"],
     features: [
       { label: "720p 화질", included: true },
       { label: "최대 영상 길이 5분", included: true },
@@ -26,11 +26,11 @@ const PLANS = [
   {
     name: "라이트",
     description: "레퍼런스를 분석하고 스토리보드를 꾸준히 만드는 플랜",
-    originalPrice: "₩9,900",
-    price: "₩6,900",
+    originalPrice: "₩14,900",
+    price: "₩9,900",
     priceSuffix: "/ 월",
     promoLabel: "신규 런칭 이벤트",
-    discountRate: "30%",
+    discountRate: "33%",
     cta: "라이트 시작하기",
     href: `${DASHBOARD_URL}/dashboard/billing?plan=LIGHT`,
     highlight: true,
@@ -45,8 +45,8 @@ const PLANS = [
   {
     name: "프로",
     description: "많은 레퍼런스 분석과 공유까지 필요한 팀용 플랜",
-    originalPrice: "₩33,000",
-    price: "₩19,800",
+    originalPrice: "₩49,900",
+    price: "₩29,900",
     priceSuffix: "/ 월",
     promoLabel: "정식 출시 이벤트 할인",
     discountRate: "40%",
@@ -70,7 +70,9 @@ function FeatureRow({ label, included }) {
       ) : (
         <X className="h-4 w-4 shrink-0 text-muted-foreground/50" />
       )}
-      <span className={cn(!included && "text-muted-foreground/60 line-through")}>
+      <span
+        className={cn(!included && "text-muted-foreground/60 line-through")}
+      >
         {label}
       </span>
     </li>
@@ -84,7 +86,7 @@ function PlanCard({ plan }) {
         "relative flex flex-col rounded-2xl border bg-card p-6 sm:p-8",
         plan.highlight
           ? "border-primary ring-1 ring-primary shadow-md"
-          : "border-border",
+          : "border-border"
       )}
     >
       {plan.badge && (
@@ -131,7 +133,7 @@ function PlanCard({ plan }) {
           "mt-6 block w-full rounded-lg py-2.5 text-center text-sm font-semibold transition-colors",
           plan.highlight
             ? "bg-primary text-primary-foreground hover:bg-primary/90"
-            : "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+            : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
         )}
       >
         {plan.cta}
