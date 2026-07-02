@@ -66,7 +66,7 @@ export default function RefundPage() {
       </Article>
 
       <Article title="6. 환불 처리">
-        <p>신청: contact@jojicompany.com</p>
+        <p>신청: 서비스 내 내 정보 &gt; 구독 &gt; 환불하기 또는 contact@jojicompany.com</p>
         <p>처리 기간: 영업일 기준 7일 이내</p>
         <p>환불 수단: 원 결제 수단으로 환불 (결제 수단에 따라 실제 환불까지 추가 기간이 소요될 수 있습니다)</p>
       </Article>
