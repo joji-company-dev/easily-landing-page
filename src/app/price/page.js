@@ -4,7 +4,7 @@ import { DASHBOARD_URL } from "../_consts/external_urls";
 
 // ──────────────────────────────────────────────────────────
 // 요금제 정책 (레이아웃은 참고 디자인, 색은 easily 주황 브랜드)
-// 모든 플랜 공통: 최대 영상 길이 5분
+// 모든 플랜 공통: 최대 영상 길이 5분. Vimeo 분석은 프로 전용.
 // ──────────────────────────────────────────────────────────
 // 대시보드(결제 페이지) 베이스 URL — 클릭 시 결제로 이동
 const PLANS = [
@@ -16,11 +16,17 @@ const PLANS = [
     cta: "무료로 시작",
     href: `${DASHBOARD_URL}/login`,
     highlight: false,
-    quotas: ["기획안 3개까지 생성", "유튜브 영상 분석 5분 / 월"],
+    quotas: ["기획안 3개까지 생성", "YouTube 영상 분석 5분 / 월"],
     features: [
-      { label: "720p 화질", included: true },
+      { label: "기본 스토리보드 편집", included: true },
+      { label: "컷 기반 레퍼런스 가져오기", included: true },
+      { label: "2분할 편집 레이아웃", included: true },
+      { label: "배경음악 추가", included: true },
+      { label: "직접 그리기 · 이미지 업로드", included: true },
+      { label: "720p 분석 화질", included: true },
       { label: "최대 영상 길이 5분", included: true },
-      { label: "공유하기", included: false },
+      { label: "Vimeo 레퍼런스 분석", included: false },
+      { label: "공유 링크 · 발견하기 게시", included: false },
       { label: "스토리보드 PDF 내보내기", included: false },
     ],
   },
@@ -36,11 +42,17 @@ const PLANS = [
     href: `${DASHBOARD_URL}/dashboard/billing?plan=LIGHT`,
     highlight: true,
     badge: "추천",
-    quotas: ["기획안 10개까지 생성", "유튜브 영상 분석 50분 / 월"],
+    quotas: ["기획안 10개까지 생성", "YouTube 영상 분석 50분 / 월"],
     features: [
-      { label: "1080p 화질", included: true },
+      { label: "AI 연출 분석 · PD 구성안 생성", included: true },
+      { label: "2분할 편집 레이아웃", included: true },
+      { label: "배경음악 추가", included: true },
+      { label: "직접 그리기 · 이미지 업로드", included: true },
+      { label: "사진 전체 ZIP 다운로드", included: true },
+      { label: "1080p 분석 화질", included: true },
       { label: "최대 영상 길이 5분", included: true },
-      { label: "공유하기", included: false },
+      { label: "Vimeo 레퍼런스 분석", included: false },
+      { label: "공유 링크 · 발견하기 게시", included: false },
       { label: "스토리보드 PDF 내보내기", included: false },
     ],
   },
@@ -55,11 +67,19 @@ const PLANS = [
     cta: "프로 시작하기",
     href: `${DASHBOARD_URL}/dashboard/billing?plan=PRO`,
     highlight: false,
-    quotas: ["기획안 무제한 생성", "유튜브 영상 분석 150분 / 월"],
+    quotas: ["기획안 무제한 생성", "YouTube · Vimeo 영상 분석 150분 / 월"],
     features: [
-      { label: "1080p 화질", included: true },
+      { label: "YouTube 레퍼런스 분석", included: true },
+      { label: "Vimeo 레퍼런스 분석", included: true },
+      { label: "AI 연출 분석 · PD 구성안 생성", included: true },
+      { label: "2분할 편집 레이아웃", included: true },
+      { label: "배경음악 추가", included: true },
+      { label: "직접 그리기 · 이미지 업로드", included: true },
+      { label: "PIP 영상 · 스크립트 타임라인", included: true },
+      { label: "사진 전체 ZIP 다운로드", included: true },
+      { label: "1080p 분석 화질", included: true },
       { label: "최대 영상 길이 5분", included: true },
-      { label: "공유하기", included: true },
+      { label: "공유 링크 · 발견하기 게시", included: true },
       { label: "스토리보드 PDF 내보내기", included: true },
     ],
   },

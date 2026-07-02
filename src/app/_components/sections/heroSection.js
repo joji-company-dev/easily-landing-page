@@ -34,11 +34,12 @@ export function HeroSection({ ...props }) {
 
           <div className="mt-5 flex flex-col gap-2">
             <p className="text-white text-2xl md:text-3xl font-medium opacity-90">
-              유튜브 링크만 넣으면 상세 씬과 샷 구성이{" "}
+              레퍼런스 링크만 넣으면 상세 씬과 샷 구성이{" "}
               <span className="font-bold text-3xl md:text-4xl">자동 정리</span>
             </p>
             <p className="text-white/80 text-lg md:text-xl">
-              컷 이미지, 앵글, 카메라 무빙, 자막·나레이션 메모까지 한 화면에서 편집하세요.
+              컷 이미지, 앵글, 카메라 무빙, 자막·나레이션 메모까지 한 화면에서
+              편집하세요.
             </p>
           </div>
           <div className="flex flex-col md:flex-row md:justify-center w-full md:w-4/5 gap-4 mt-6">
@@ -48,7 +49,8 @@ export function HeroSection({ ...props }) {
             </CTALink>
           </div>
           <p className="text-white/70 text-base md:text-lg">
-            분석 결과는 스토리보드 문서로 저장되고, 공유와 이미지 다운로드까지 이어집니다.
+            분석 결과는 스토리보드 문서로 저장되고, 공유와 이미지 다운로드까지
+            이어집니다.
           </p>
         </div>
         <div className="relative flex flex-col gap-4 mt-20">
